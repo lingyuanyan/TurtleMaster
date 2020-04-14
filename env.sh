@@ -19,3 +19,5 @@ sudo ln -s $PWD/django_nginx.conf /etc/nginx/sites-enabled/
 sudo rm /etc/uwsgi/apps-enabled/django_uwsgi.ini
 sudo ln -s $PWD/django_uwsgi.ini /etc/uwsgi/apps-enabled/
 
+sudo service uwsgi restart
+sudo service nginx restart
