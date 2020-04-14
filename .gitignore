@@ -3,3 +3,4 @@ venv_t
 *__pycache__*
 *.sock
 static/
+venv*/
