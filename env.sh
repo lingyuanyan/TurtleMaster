@@ -19,6 +19,11 @@ sudo rm /etc/nginx/sites-enabled/django_nginx.conf
 sudo ln -s $PWD/django_nginx.conf /etc/nginx/sites-enabled/
 sudo rm /etc/uwsgi/apps-enabled/django_uwsgi.ini
 sudo ln -s $PWD/django_uwsgi.ini /etc/uwsgi/apps-enabled/
-
+sudo rm /etc/systemd/system/gunicorn.service
+sudo ln -s $PWD/gunicorn.service /etc/systemd/system/
 sudo service uwsgi restart
 sudo service nginx restart
+sudo systemctl daemon-reload
+sudo systemctl restart gunicorn
+sudo systemctl enable gunicorn
+sudo systemctl status gunicorn
