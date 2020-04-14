@@ -3,11 +3,12 @@ export DBUSER="turtle_master_db_admin"
 export DBNAME="turtle_master_db"
 export DBPASS="covidhub@io"
 
-echo Please make sure the database $DBNAME has been created on $DBHOST
+echo Please make sure the database $DBNAME has been created on $DBHOSTi
 echo and db user $DBUSER has been set with pwd = $DBPASS
 echo Please run the following SQL to do so:
-echo CREATE DATABASE $DBNAME 
-echo CREATE ROLE $DBUSER WITH ENCRYPTED PASSWORD $DBPASS
+echo sudo -u postgres psql
+echo CREATE DATABASE $DBNAME ;
+echo CREATE ROLE $DBUSER WITH ENCRYPTED PASSWORD $DBPASS;
 echo ALTER ROLE $DBUSER WITH LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION;
 echo GRANT ALL PRIVILEGES ON DATABASE $DBNAME TO  $DBUSER;
 echo ALTER ROLE $DBUSER SET client_encoding TO 'utf8';
