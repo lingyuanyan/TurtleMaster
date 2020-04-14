@@ -13,3 +13,9 @@ echo GRANT ALL PRIVILEGES ON DATABASE $DBNAME TO  $DBUSER;
 echo ALTER ROLE $DBUSER SET client_encoding TO 'utf8';
 echo ALTER ROLE $DBUSER SET default_transaction_isolation TO 'read committed';
 echo ALTER ROLE $DBUSER SET timezone TO 'UTC';
+
+sudo rm /etc/nginx/sites-enabled/django_nginx.conf
+sudo ln -s $PWD/django_nginx.conf /etc/nginx/sites-enabled/
+sudo rm /etc/uwsgi/apps-enabled/django_uwsgi.ini
+sudo ln -s $PWD/django_uwsgi.ini /etc/uwsgi/apps-enabled/
+
