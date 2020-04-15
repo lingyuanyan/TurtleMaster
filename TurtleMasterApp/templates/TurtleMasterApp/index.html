@@ -1,6 +1,24 @@
+{% extends "TurtleMasterApp/base.html" %}
+
 <p>
   TurtleMaster
 </p>
-<p>
-  TurtleMaster Is UBER Awesome/Amazing/Mung. Turtles++!
-</p>
+
+{% block content %}
+
+<p>TurtleMaster Is UBER Awesome/Amazing/Mung. Turtles++!</p>
+{%for entry in infection_data %}
+<li>
+  <p>
+    {{entry.Country_Region |linebreaks}}
+  </p>
+  <p>
+    {{entry.Province_State |linebreaks}}
+  </p>
+  <p>
+    {{entry.Last_Update |linebreaks}}
+  </p>
+</li>
+{%empty%}
+{%endfor%}
+{% endblock content %}
