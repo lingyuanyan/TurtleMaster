@@ -1,24 +1,40 @@
 {% extends "TurtleMasterApp/base.html" %}
-
-<p>
-  TurtleMaster
-</p>
-
 {% block content %}
+<script type='text/javascript'>
+  var infection_json = {{ json_infection|safe }};
+</script>
 
-<p>TurtleMaster Is UBER Awesome/Amazing/Mung. Turtles++!</p>
-{%for entry in infection_data %}
-<li>
-  <p>
-    {{entry.Country_Region |linebreaks}}
-  </p>
-  <p>
-    {{entry.Province_State |linebreaks}}
-  </p>
-  <p>
-    {{entry.Last_Update |linebreaks}}
-  </p>
-</li>
-{%empty%}
-{%endfor%}
-{% endblock content %}
+<div id=app>
+
+    <p>[[ title ]]</p>
+
+    <ul>
+      <li v-for="record in infection_json">
+        <H4>province_state [[ record.province_state ]] confirmed [[record.confirmed]]</H4>
+      </li>
+    </ul>
+
+</div>
+
+<script>
+
+
+    new Vue({
+
+        delimiters: ['[[', ']]'],
+
+        el: '#app',
+
+        data: {
+
+            title: 'Welcome to Turtle Master',
+            infection_json: infection_json
+        }
+
+    })
+
+
+
+</script>
+
+{% endblock %}

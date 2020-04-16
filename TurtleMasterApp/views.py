@@ -2,10 +2,13 @@ from django.shortcuts import render
 from datetime import date
 import random
 import math
+import json
 from rest_framework import viewsets
 from rest_framework import permissions
 from TurtleMasterApp.serializers import InfectionDataUsSerializer
 from TurtleMasterApp.models import InfectionDataUs
+from django.http import JsonResponse
+
 def index(request):
     infection_data = []
     states = (
@@ -50,7 +53,11 @@ def index(request):
             "Hospitalization_Rate":random.randrange(0,1.0)
         }
         infection_data.append(infection_record)
-    context = {'infection_data': infection_data}
+ 
+    queryset = InfectionDataUs.objects.all().order_by('timestamp')
+    context1 = {'json_infection': JsonResponse(list(infection_data), safe=False)}
+    serializer = InfectionDataUsSerializer(queryset, many=True)
+    context = {'json_infection': json.dumps(serializer.data)}
     return render(request, 'TurtleMasterApp/index.html', context)
 
 class InfectionDataUsViewSet(viewsets.ModelViewSet):
