@@ -13,10 +13,11 @@ conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"], us
 cur = conn.cursor()
 
 cur.execute('''
-CREATE TABLE IF NOT EXISTS INFECTION_DATA (
-    province_state  TEXT PRIMARY KEY UNIQUE,
+CREATE TABLE IF NOT EXISTS INFECTION_DATA_US (
+    id SERIAL PRIMARY KEY,
+    province_state  TEXT,
     country_region  TEXT,
-    last_update  DATE,
+    last_update  DATE, 
     confirmed  INTEGER,
     deaths  INTEGER,
     lat  DOUBLE PRECISION,
@@ -31,7 +32,9 @@ CREATE TABLE IF NOT EXISTS INFECTION_DATA (
     UID BIGINT,
     ISO3 TEXT,
     testing_rate  DOUBLE PRECISION,
-    hospitalization_rate  DOUBLE PRECISION
+    hospitalization_rate  DOUBLE PRECISION,
+    timestamp timestamp default current_timestamp,
+    UNIQUE (province_state, last_update)
     )
 ''')
 
@@ -61,7 +64,7 @@ for line in fh:
     testing_rate = pieces[16] or  '0'
     hospitalization_rate = pieces[17] or  '0'
 
-    insert_sql = '''INSERT INTO INFECTION_DATA (
+    insert_sql = '''INSERT INTO INFECTION_DATA_US (
         province_state, 
         country_region, 
         last_update, 
@@ -82,7 +85,7 @@ for line in fh:
         hospitalization_rate
         ) 
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        ON CONFLICT (province_state) DO NOTHING
+        ON CONFLICT (province_state, last_update) DO NOTHING
         '''
 
     insert_val = (
@@ -105,11 +108,11 @@ for line in fh:
         testing_rate, 
         hospitalization_rate
         ) 
-
+    print(insert_val)
     cur.execute(insert_sql, insert_val)
 
     conn.commit()
-cur.execute('''SELECT * FROM INFECTION_DATA''')
+cur.execute('''SELECT * FROM INFECTION_DATA_US''')
 rows = cur.fetchall()
 for row in rows:
     print(row)
