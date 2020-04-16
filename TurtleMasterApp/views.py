@@ -2,7 +2,10 @@ from django.shortcuts import render
 from datetime import date
 import random
 import math
-
+from rest_framework import viewsets
+from rest_framework import permissions
+from TurtleMasterApp.serializers import InfectionDataUsSerializer
+from TurtleMasterApp.models import InfectionDataUs
 def index(request):
     infection_data = []
     states = (
@@ -49,4 +52,13 @@ def index(request):
         infection_data.append(infection_record)
     context = {'infection_data': infection_data}
     return render(request, 'TurtleMasterApp/index.html', context)
+
+class InfectionDataUsViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = InfectionDataUs.objects.all().order_by('timestamp')
+    serializer_class = InfectionDataUsSerializer
+    permission_classes = [permissions.AllowAny]
+
 # Create your views here.

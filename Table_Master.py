@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS INFECTION_DATA_US (
     last_update  DATE, 
     confirmed  INTEGER,
     deaths  INTEGER,
-    lat  DOUBLE PRECISION,
-    long_  DOUBLE PRECISION,
+    latitude  DOUBLE PRECISION,
+    longitude  DOUBLE PRECISION,
     recovered  INTEGER,
     active  INTEGER,
     FIPS  INTEGER,
@@ -48,8 +48,8 @@ for line in fh:
     province_state = pieces[0]
     country_region = pieces[1]
     last_update = pieces[2] or date.today().strftime("%m/%d/%Y %H:%M:%S")
-    lat = pieces[3]  or  '0.0'
-    long_ = pieces[4]  or  '0.0'
+    latitude = pieces[3]  or  '0.0'
+    longitude = pieces[4]  or  '0.0'
     confirmed = pieces[5] or  '0'
     deaths = pieces[6] or  '0'
     recovered = pieces[7] or  '0'
@@ -68,8 +68,8 @@ for line in fh:
         province_state, 
         country_region, 
         last_update, 
-        lat, 
-        long_, 
+        latitude, 
+        longitude, 
         confirmed, 
         deaths, 
         recovered, 
@@ -92,8 +92,8 @@ for line in fh:
         province_state, 
         country_region, 
         last_update, 
-        lat, 
-        long_, 
+        latitude, 
+        longitude, 
         confirmed, 
         deaths, 
         recovered, 
