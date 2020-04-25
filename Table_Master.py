@@ -42,6 +42,7 @@ def parser(fname):
     fh = open(fname, 'r')
     for line in fh:
         if(line.startswith('Province_State')): continue
+        if(line.startswith('Recovered')): continue
         pieces = line.rstrip().split(",")
         province_state = pieces[0]
         country_region = pieces[1]
@@ -50,8 +51,9 @@ def parser(fname):
         longitude = pieces[4]  or  '0.0'
         confirmed = pieces[5] or  '0'
         deaths = pieces[6] or  '0'
-        recovered = pieces[7] or  '0'
-        active = pieces[8] or  '0'
+        recovered = (pieces[7] or  '0').rstrip('.')
+        actp = (pieces[8] or  '0').strip(".")
+        active = actp[0]
         FIPS = pieces[9] or  '0'
         incident_rate = pieces[10] or  '0.0'
         people_tested = pieces[11] or  '0'
