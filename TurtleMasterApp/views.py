@@ -24,4 +24,15 @@ class InfectionDataUsViewSet(viewsets.ModelViewSet):
     serializer_class = InfectionDataUsSerializer
     permission_classes = [permissions.AllowAny]
 
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `province_state` query parameter in the URL.
+        """
+        queryset = InfectionDataUs.objects.all().order_by('timestamp')
+
+        province_state = self.request.query_params.get('province_state', None)
+        if province_state is not None:
+            queryset = queryset.filter(province_state=province_state)
+        return queryset
 # Create your views here.
