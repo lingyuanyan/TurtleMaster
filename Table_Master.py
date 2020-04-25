@@ -4,6 +4,7 @@ from django.conf import settings
 import os
 from datetime import date
 import sys
+import csv
 def parser(fname):
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     #conn = sqlite3.connect('WC.db.sqlite')]
@@ -40,10 +41,11 @@ def parser(fname):
 
 
     fh = open(fname, 'r')
-    for line in fh:
-        if(line.startswith('Province_State')): continue
-        if(line.startswith('Recovered')): continue
-        pieces = line.rstrip().split(",")
+    csv_reader = csv.reader(fh)
+    for line in csv_reader:
+        pieces = line
+        if(pieces[0] =='Province_State'): continue
+        if(pieces[0] =='Recovered'): continue
         province_state = pieces[0]
         country_region = pieces[1]
         last_update = pieces[2] or date.today().strftime("%m/%d/%Y %H:%M:%S")
@@ -112,10 +114,12 @@ def parser(fname):
         cur.execute(insert_sql, insert_val)
 
         conn.commit()
-    cur.execute('''SELECT * FROM INFECTION_DATA_US''')
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
+
+ #   cur.execute('''SELECT * FROM INFECTION_DATA_US''')
+ #   rows = cur.fetchall()
+ #   print(rows.)
+ #   for row in rows:
+ #       print(row)
     cur.close()
 
 
