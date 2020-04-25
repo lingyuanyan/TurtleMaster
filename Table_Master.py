@@ -119,7 +119,7 @@ def parser(fname):
     cur.close()
 
 
-default_folder = os.path.abspath(os.path.join(os.getcwd(), "..\\COVID-19\\csse_covid_19_data\\csse_covid_19_daily_reports_us"))
+default_folder = os.path.abspath(os.path.join(os.getcwd(), "../COVID-19/csse_covid_19_data/csse_covid_19_daily_reports_us"))
 directory = input("Enter folder name: ")
 if (len(directory) < 1):
     directory = default_folder
