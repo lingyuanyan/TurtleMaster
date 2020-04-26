@@ -7,7 +7,7 @@ import sys
 import csv
 
 
-def parser_us_data(fname):
+def parser_us_data(fname, drop_table):
     print("parse us data in file:", fname)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
@@ -16,6 +16,13 @@ def parser_us_data(fname):
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
+    if(drop_table == 'yes') :
+        cur.execute('''
+        DROP TABLE IF EXISTS INFECTION_DATA_US
+        ''')
+        cur.execute('''
+        DROP TABLE IF EXISTS INFECTION_DATA_US_STATISTICS
+        ''')
 
     cur.execute('''
     CREATE TABLE IF NOT EXISTS INFECTION_DATA_US (
@@ -40,6 +47,32 @@ def parser_us_data(fname):
         hospitalization_rate  DOUBLE PRECISION,
         timestamp timestamp default current_timestamp,
         UNIQUE (province_state, last_update)
+        )
+    ''')
+
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS INFECTION_DATA_US_STATISTICS (
+        id SERIAL PRIMARY KEY,
+        province_state  TEXT,
+        country_region  TEXT,
+        last_update  DATE,
+        confirmed  INTEGER,
+        deaths  INTEGER,
+        latitude  DOUBLE PRECISION,
+        longitude  DOUBLE PRECISION,
+        recovered  INTEGER,
+        active  INTEGER,
+        FIPS  INTEGER,
+        incident_rate  DOUBLE PRECISION,
+        people_tested  INTEGER,
+        people_hospitalized  INTEGER,
+        mortality_rate  DOUBLE PRECISION,
+        UID BIGINT,
+        ISO3 TEXT,
+        testing_rate  DOUBLE PRECISION,
+        hospitalization_rate  DOUBLE PRECISION,
+        timestamp timestamp default current_timestamp,
+        UNIQUE (province_state)
         )
     ''')
 
@@ -92,7 +125,6 @@ def parser_us_data(fname):
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (province_state, last_update) DO NOTHING
             '''
-
         insert_val = (
             province_state,
             country_region,
@@ -113,9 +145,79 @@ def parser_us_data(fname):
             testing_rate,
             hospitalization_rate
             )
+ 
+        insert_sql_stat = '''INSERT INTO INFECTION_DATA_US_STATISTICS (
+            province_state,
+            country_region,
+            last_update,
+            latitude,
+            longitude,
+            confirmed,
+            deaths,
+            recovered,
+            active,
+            FIPS,
+            incident_rate,
+            people_tested,
+            people_hospitalized,
+            mortality_rate,
+            UID,
+            ISO3,
+            testing_rate,
+            hospitalization_rate
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON CONFLICT (province_state) DO NOTHING
+            '''
+        update_sql_stat = '''   
+            UPDATE INFECTION_DATA_US_STATISTICS
+            SET 
+                country_region = %s, 
+                last_update = %s, 
+                latitude = %s, 
+                longitude = %s, 
+                confirmed = %s, 
+                deaths = %s, 
+                recovered = %s, 
+                active = %s, 
+                FIPS = %s, 
+                incident_rate = %s, 
+                people_tested = %s, 
+                people_hospitalized = %s, 
+                mortality_rate = %s,
+                UID = %s, 
+                ISO3 = %s, 
+                testing_rate= %s,
+                hospitalization_rate = %s
+            WHERE province_state = %s
+            '''
+
+        update_val_stat = (
+            country_region,
+            last_update,
+            latitude,
+            longitude,
+            confirmed,
+            deaths,
+            recovered,
+            active,
+            FIPS,
+            incident_rate,
+            people_tested,
+            people_hospitalized,
+            mortality_rate,
+            UID,
+            ISO3,
+            testing_rate,
+            hospitalization_rate,
+            province_state
+            )
+
         print(insert_val)
         cur.execute(insert_sql, insert_val)
-
+        cur.execute(insert_sql_stat, insert_val)
+        
+        cur.execute(update_sql_stat, update_val_stat)
         conn.commit()
 
  #   cur.execute('''SELECT * FROM INFECTION_DATA_US''')
@@ -126,7 +228,7 @@ def parser_us_data(fname):
     cur.close()
 
 
-def parser_world_data(fname):
+def parser_world_data(fname, drop_table):
     print("parse world data in file:", fname)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
@@ -135,6 +237,14 @@ def parser_world_data(fname):
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
+
+    if(drop_table == 'yes') :
+        cur.execute('''
+        DROP TABLE IF EXISTS INFECTION_DATA_WORLD
+        ''')
+        cur.execute('''
+        DROP TABLE IF EXISTS INFECTION_DATA_WORLD_STATISTICS
+        ''')
 
     cur.execute('''
     CREATE TABLE IF NOT EXISTS INFECTION_DATA_WORLD (
@@ -156,6 +266,25 @@ def parser_world_data(fname):
         )
     ''')
 
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS INFECTION_DATA_WORLD_STATISTICS (
+        id SERIAL PRIMARY KEY,
+        FIPS  INTEGER,
+        admin2 TEXT,
+        province_state  TEXT,
+        country_region  TEXT,
+        last_update  DATE,
+        confirmed  INTEGER,
+        deaths  INTEGER,
+        latitude  DOUBLE PRECISION,
+        longitude  DOUBLE PRECISION,
+        recovered  INTEGER,
+        active  INTEGER,
+        combined_Key TEXT,
+        timestamp timestamp default current_timestamp,
+        UNIQUE (province_state)
+        )
+    ''')
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
     key_pos_dic = {}
@@ -226,6 +355,59 @@ def parser_world_data(fname):
         print(insert_val)
         cur.execute(insert_sql, insert_val)
 
+        insert_sql_stat='''INSERT INTO INFECTION_DATA_WORLD_STATISTICS (
+            FIPS,
+            admin2,
+            province_state,
+            country_region,
+            last_update,
+            confirmed,
+            deaths,
+            latitude,
+            longitude,
+            recovered,
+            active,
+            combined_key
+           )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON CONFLICT (province_state) DO NOTHING
+            '''
+
+        update_sql_stat='''UPDATE INFECTION_DATA_WORLD_STATISTICS SET (
+            FIPS,
+            admin2,
+            country_region,
+            last_update,
+            confirmed,
+            deaths,
+            latitude,
+            longitude,
+            recovered,
+            active,
+            combined_key
+           )
+            = (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            WHERE province_state = %s
+            '''
+        update_val=(
+            FIPS,
+            admin2,
+            country_region,
+            last_update,
+            confirmed,
+            deaths,
+            latitude,
+            longitude,
+            recovered,
+            active,
+            combined_key,
+            province_state
+           )
+           
+        cur.execute(insert_sql_stat, insert_val)
+
+        cur.execute(update_sql_stat, update_val)
+
         conn.commit()
 
  #   cur.execute('''SELECT * FROM INFECTION_DATA_US''')
@@ -234,16 +416,16 @@ def parser_world_data(fname):
  #   for row in rows:
  #       print(row)
     cur.close()
-def iterate_files(folder_path, data_type):
+def iterate_files(folder_path, data_type, drop_table):
     print("Iterate in  ", folder_path)
     for filename in os.listdir(folder_path):
         fullpath=os.path.join(folder_path, filename)
         if not filename.startswith("_") and not filename.startswith(".") and filename.endswith(".csv"):
             try:
                 if(data_type == "us"):
-                    parser_us_data(fullpath)
+                    parser_us_data(fullpath, drop_table)
                 if(data_type == "world"):
-                    parser_world_data(fullpath)
+                    parser_world_data(fullpath, drop_table)
             except:
                 print(sys.exc_info()[0])
                 quit()
@@ -255,7 +437,8 @@ world_data_folder="csse_covid_19_daily_reports"
 
 root_directory=input("Enter folder name: ")
 if (len(root_directory) < 1): root_directory=default_folder
+if_drop_table = input("Drop all tables?: [No/yes]")
 us_data_full_path=os.path.join(root_directory, us_data_folder)
 world_data_full_path=os.path.join(root_directory, world_data_folder)
-iterate_files(us_data_full_path, "us")
-iterate_files(world_data_full_path, "world")
+iterate_files(us_data_full_path, "us", if_drop_table)
+iterate_files(world_data_full_path, "world", if_drop_table)
