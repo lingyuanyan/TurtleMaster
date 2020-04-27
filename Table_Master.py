@@ -191,7 +191,7 @@ def parser_us_data(fname, drop_table):
                 ISO3 = %s, 
                 testing_rate= %s,
                 hospitalization_rate = %s
-            WHERE province_state = %s
+            WHERE province_state = %s and last_update < %s
             '''
 
         update_val_stat = (
@@ -212,7 +212,8 @@ def parser_us_data(fname, drop_table):
             ISO3,
             testing_rate,
             hospitalization_rate,
-            province_state
+            province_state,
+            last_update
             )
 
         cur.execute(insert_sql, insert_val)
@@ -390,7 +391,7 @@ def parser_world_data(fname, drop_table):
             combined_key
            )
             = (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            WHERE province_state = %s
+            WHERE province_state = %s and last_update < %s
             '''
         update_val=(
             FIPS,
@@ -404,7 +405,8 @@ def parser_world_data(fname, drop_table):
             recovered,
             active,
             combined_key,
-            province_state
+            province_state,
+            last_update
            )
            
         cur.execute(insert_sql_stat, insert_val)
