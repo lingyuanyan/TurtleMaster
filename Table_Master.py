@@ -3,6 +3,7 @@ import psycopg2
 from django.conf import settings
 import os
 from datetime import date
+import time
 import sys
 import csv
 import re
@@ -12,7 +13,7 @@ def parser_us_data(fname, drop_table):
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
     dbsettings = settings.DATABASES['default']
-    print(dbsettings)
+ 
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
@@ -75,7 +76,7 @@ def parser_us_data(fname, drop_table):
         UNIQUE (province_state)
         )
     ''')
-
+    num_line = 0
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
     for line in csv_reader:
@@ -213,12 +214,12 @@ def parser_us_data(fname, drop_table):
             province_state
             )
 
-        print(insert_val)
         cur.execute(insert_sql, insert_val)
         cur.execute(insert_sql_stat, insert_val)
         
         cur.execute(update_sql_stat, update_val_stat)
         conn.commit()
+        num_line+=1
 
  #   cur.execute('''SELECT * FROM INFECTION_DATA_US''')
  #   rows = cur.fetchall()
@@ -226,14 +227,14 @@ def parser_us_data(fname, drop_table):
  #   for row in rows:
  #       print(row)
     cur.close()
-
+    print(num_line, " of lines has been processed")
 
 def parser_world_data(fname, drop_table):
     print("parse world data in file:", fname)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
     dbsettings = settings.DATABASES['default']
-    print(dbsettings)
+ 
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
@@ -285,6 +286,7 @@ def parser_world_data(fname, drop_table):
         UNIQUE (province_state)
         )
     ''')
+    num_line = 0
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
     key_pos_dic = {}
@@ -352,7 +354,6 @@ def parser_world_data(fname, drop_table):
             active,
             combined_key,
            )
-        print(insert_val)
         cur.execute(insert_sql, insert_val)
 
         insert_sql_stat='''INSERT INTO INFECTION_DATA_WORLD_STATISTICS (
@@ -409,6 +410,7 @@ def parser_world_data(fname, drop_table):
         cur.execute(update_sql_stat, update_val)
 
         conn.commit()
+        num_line += 1
 
  #   cur.execute('''SELECT * FROM INFECTION_DATA_US''')
  #   rows = cur.fetchall()
@@ -416,18 +418,24 @@ def parser_world_data(fname, drop_table):
  #   for row in rows:
  #       print(row)
     cur.close()
+    print(num_line, " of lines has been processed")
+
     
 def parser_time_series_data_us(fname, drop_table):
     print("parser_time_series_data_us: ", fname)
     file_suffix = "_US.csv"
-    if not fname.endswith(file_suffix) : return
+    if not fname.endswith(file_suffix) : 
+        print("not ", file_suffix, " ... skipped")
+        return
     update_key = "confirmed" if fname.lower().find("confirmed") else "deaths" if fname.lower().find("deaths") else None
-    if not update_key : return
+    if not update_key : 
+        print("not finding update key (confirmed | deaths | recovered) in file name...skipped")
+        return
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
     dbsettings = settings.DATABASES['default']
-    print(dbsettings)
+
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
@@ -457,6 +465,7 @@ def parser_time_series_data_us(fname, drop_table):
         UNIQUE (province_state, last_update)
         )
     ''')
+    num_line = 0
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
     key_pos_dic = {}
@@ -529,7 +538,6 @@ def parser_time_series_data_us(fname, drop_table):
                 '0',
                 '0'
             )
-            print(insert_val)
             cur.execute(insert_sql, insert_val)
 
             update_sql_stat='''UPDATE TIME_SERIES_DATA_US SET 
@@ -541,27 +549,33 @@ def parser_time_series_data_us(fname, drop_table):
                 province_state,
                 last_update
             )
-            print(update_val)
             cur.execute(update_sql_stat, update_val)
 
             conn.commit()
+            num_line += 1
     cur.close()
+    print(num_line, " of lines has been processed")
+
 
 def parser_time_series_data_global(fname, drop_table):
     print("parser_time_series_data_global: ", fname)
     file_suffix = "_global.csv"
-    if not fname.endswith(file_suffix) : return
+    if not fname.endswith(file_suffix) : 
+        print("not a ", file_suffix, " ...skipped")
+        return
 
     update_key = "confirmed" if fname.lower().find("confirmed") \
     else "deaths" if fname.lower().find("deaths") \
     else "recovered" if fname.lower().find("recovered") \
     else None
 
-    if not update_key : return
+    if not update_key : 
+        print("not finding update key (confirmed | deaths | recovered) in file name...skipped")
+        return
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
     dbsettings = settings.DATABASES['default']
-    print(dbsettings)
+
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
@@ -584,6 +598,7 @@ def parser_time_series_data_global(fname, drop_table):
         UNIQUE (province_state, last_update)
         )
     ''')
+    num_line = 0
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
     key_pos_dic = {}
@@ -635,7 +650,6 @@ def parser_time_series_data_global(fname, drop_table):
             "0",
             "0"
            )
-            print(insert_val)
             cur.execute(insert_sql, insert_val)
 
             update_sql_stat='''UPDATE TIME_SERIES_DATA_WORLD SET 
@@ -650,14 +664,16 @@ def parser_time_series_data_global(fname, drop_table):
             cur.execute(update_sql_stat, update_val)
 
             conn.commit()
+            num_line += 1
 
     cur.close()
+    print(num_line, " of lines has been processed")
 
 def do_statistics_view_data(drop_table):
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
     dbsettings = settings.DATABASES['default']
-    print(dbsettings)
+ 
     country_region_list = {
         "US" : ''' 
             SELECT 
@@ -800,7 +816,10 @@ if_drop_table = input("Drop all tables?: [No/yes]")
 us_data_full_path=os.path.join(root_directory, us_data_folder)
 world_data_full_path = os.path.join(root_directory, world_data_folder)
 time_series_data_full_path = os.path.join(root_directory, time_series_folder)
-#iterate_files(us_data_full_path, "us", if_drop_table)
-#iterate_files(world_data_full_path, "world", if_drop_table)
+start_time = time.time()
+iterate_files(us_data_full_path, "us", if_drop_table)
+iterate_files(world_data_full_path, "world", if_drop_table)
 iterate_files(time_series_data_full_path, "time_series", if_drop_table)
 do_statistics_view_data(if_drop_table)
+elapsed_time = time.time() - start_time
+print("elapsed_time:", time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))
