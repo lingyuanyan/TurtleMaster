@@ -5,6 +5,7 @@ import os
 from datetime import date
 import sys
 import csv
+import re
 
 def parser_us_data(fname, drop_table):
     print("parse us data in file:", fname)
@@ -418,9 +419,9 @@ def parser_world_data(fname, drop_table):
     
 def parser_time_series_data_us(fname, drop_table):
     print("parser_time_series_data_us: ", fname)
-    file_suffix = "_us.csv"
+    file_suffix = "_US.csv"
     if not fname.endswith(file_suffix) : return
-    update_key = "confirmed" if fname.lower().contains("confirmed") else "deaths" if fname.lower().contains("deaths") else None
+    update_key = "confirmed" if fname.lower().find("confirmed") else "deaths" if fname.lower().find("deaths") else None
     if not update_key : return
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
@@ -441,7 +442,7 @@ def parser_time_series_data_us(fname, drop_table):
         id SERIAL PRIMARY KEY,
         uid  INTEGER,
         iso2 TEXT,
-        iso2 TEXT,
+        iso3 TEXT,
         code3 INTEGER,
         admin2 TEXT,
         combined_key TEXT,
@@ -459,6 +460,7 @@ def parser_time_series_data_us(fname, drop_table):
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
     key_pos_dic = {}
+    date_key_dic = {}
     for line in csv_reader:
         pieces = line
         if(pieces[0].endswith('UID') or pieces[0].endswith('Province/State')):
@@ -474,92 +476,88 @@ def parser_time_series_data_us(fname, drop_table):
                 if key == 'combined key': key="combined_key"
                 if key == 'last update': key="last_update"
                 key_pos_dic[key]=index
+                date_key = re.search(r'(\d+(/|-){1}\d+(/|-){1}\d{2,4})',key)
+                if date_key is not None :  date_key_dic[key] = index
                 index += 1
             continue
         if(pieces[0] == 'Recovered'): continue
 
         country_region=pieces[key_pos_dic["country_region"]]
         province_state=pieces[key_pos_dic["province_state"]] or country_region
-        last_update=pieces[key_pos_dic["last_update"]] or date.today().strftime("%m/%d/%Y %H:%M:%S")
         latitude=pieces[key_pos_dic["latitude"]] or '0.0' if "latitude" in key_pos_dic else '0.0'
         longitude=pieces[key_pos_dic["longitude"]] or '0.0' if "longitude" in key_pos_dic else '0.0'
-        confirmed=pieces[key_pos_dic["confirmed"]] or '0' if "confirmed" in key_pos_dic else '0'
-        deaths=pieces[key_pos_dic["deaths"]] or '0' if "deaths" in key_pos_dic else '0'
-        FIPS=pieces[key_pos_dic["fips"]] or '0' if "fips" in key_pos_dic else '0'
         admin2=pieces[key_pos_dic["admin2"]] if "admin2" in key_pos_dic else ""
         combined_key=pieces[key_pos_dic["combined_key"]] if "combined_key" in key_pos_dic else ""
-        uid  = pieces[key_pos_dic["uid"]] or '0' if "uid" in key_pos_dic else '0'
+        uid  = (pieces[key_pos_dic["uid"]] or '0').split('.')[0] if "uid" in key_pos_dic else '0'
         iso2 =pieces[key_pos_dic["iso2"]] or '0' if "iso2" in key_pos_dic else ''
         iso3 =pieces[key_pos_dic["iso3"]] or '0' if "iso3" in key_pos_dic else ''
-        code3 =pieces[key_pos_dic["code3"]] or '0' if "code3" in key_pos_dic else '0'
+        code3 =(pieces[key_pos_dic["code3"]] or '0').split('.')[0] if "code3" in key_pos_dic else '0'
+        for date_key in date_key_dic :
+            last_update = date_key
+            updte_value = pieces[date_key_dic[date_key]]
+            insert_sql='''INSERT INTO TIME_SERIES_DATA_US (
+                uid,
+                iso2,
+                iso3,
+                code3,
+                admin2,
+                province_state,
+                country_region,
+                latitude,
+                longitude,
+                combined_key,
+                last_update,
+                confirmed,
+                deaths
+            )
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (province_state, last_update) DO NOTHING
+                '''
 
-        insert_sql='''INSERT INTO TIME_SERIES_DATA_US (
-            uid,
-            iso2,
-            iso3,
-            code3,
-            FIPS,
-            admin2,
-            province_state,
-            country_region,
-            latitude,
-            longitude,
-            combined_key,
-            last_update,
-            confirmed,
-            deaths
-           )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            ON CONFLICT (province_state, last_update) DO NOTHING
-            '''
+            insert_val=(
+                uid,
+                iso2,
+                iso3,
+                code3,
+                admin2,
+                province_state,
+                country_region,
+                latitude,
+                longitude,
+                combined_key,
+                last_update,
+                '0',
+                '0'
+            )
+            print(insert_val)
+            cur.execute(insert_sql, insert_val)
 
-        insert_val=(
-            uid,
-            iso2,
-            iso3,
-            code3,
-            FIPS,
-            admin2,
-            province_state,
-            country_region,
-            latitude,
-            longitude,
-            combined_key,
-            last_update,
-            confirmed,
-            deaths
-           )
-        print(insert_val)
-        cur.execute(insert_sql, insert_val)
+            update_sql_stat='''UPDATE TIME_SERIES_DATA_US SET 
+                {} = %s
+                WHERE province_state = %s and last_update = %s
+                '''.format(update_key)
+            update_val=(
+                updte_value,
+                province_state,
+                last_update
+            )
+            print(update_val)
+            cur.execute(update_sql_stat, update_val)
 
-        update_sql_stat='''UPDATE TIME_SERIES_DATA_US SET (
-            %s
-           )
-            = (%s)
-            WHERE province_state = %s and last_update = %s
-            '''
-        update_val=(
-            update_key,
-            confirmed if update_key == "confirmed" else deaths,
-            province_state,
-            last_update
-        )
-        cur.execute(update_sql_stat, update_val)
-
-        conn.commit()
+            conn.commit()
+    cur.close()
 
 def parser_time_series_data_global(fname, drop_table):
     print("parser_time_series_data_global: ", fname)
     file_suffix = "_global.csv"
     if not fname.endswith(file_suffix) : return
-    breakpoint()
+
     update_key = "confirmed" if fname.lower().find("confirmed") \
     else "deaths" if fname.lower().find("deaths") \
     else "recovered" if fname.lower().find("recovered") \
     else None
 
     if not update_key : return
-
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
     dbsettings = settings.DATABASES['default']
@@ -589,6 +587,7 @@ def parser_time_series_data_global(fname, drop_table):
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
     key_pos_dic = {}
+    date_key_dic = {}
     for line in csv_reader:
         pieces = line
         if(pieces[0].endswith('UID') or pieces[0].endswith('Province/State')):
@@ -604,19 +603,19 @@ def parser_time_series_data_global(fname, drop_table):
                 if key == 'combined key': key="combined_key"
                 if key == 'last update': key="last_update"
                 key_pos_dic[key]=index
+                date_key = re.search(r'(\d+(/|-){1}\d+(/|-){1}\d{2,4})',key)
+                if date_key is not None :  date_key_dic[key] = index
                 index += 1
             continue
         if(pieces[0] == 'Recovered'): continue
 
         country_region=pieces[key_pos_dic["country_region"]]
         province_state=pieces[key_pos_dic["province_state"]] or country_region
-        last_update=pieces[key_pos_dic["last_update"]] or date.today().strftime("%m/%d/%Y %H:%M:%S")
-        confirmed=pieces[key_pos_dic["confirmed"]] or '0' if "confirmed" in key_pos_dic else '0'
-        deaths=pieces[key_pos_dic["deaths"]] or '0' if "deaths" in key_pos_dic else '0'
-        recovered =pieces[key_pos_dic["recovered"]] or '0' if "recovered" in key_pos_dic else ''
-        update_value = pieces[key_pos_dic[update_key]] or '0' if update_key in key_pos_dic else '0'
 
-        insert_sql='''INSERT INTO TIME_SERIES_DATA_WORLD (
+        for date_key in date_key_dic :
+            last_update = date_key
+            update_value = pieces[date_key_dic[date_key]]
+            insert_sql='''INSERT INTO TIME_SERIES_DATA_WORLD (
             province_state,
             country_region,
             last_update,
@@ -628,32 +627,31 @@ def parser_time_series_data_global(fname, drop_table):
             ON CONFLICT (province_state, last_update) DO NOTHING
             '''
 
-        insert_val=(
+            insert_val=(
             province_state,
             country_region,
             last_update,
-            confirmed,
-            deaths,
-            recovered
+            "0",
+            "0",
+            "0"
            )
-        print(insert_val)
-        cur.execute(insert_sql, insert_val)
+            print(insert_val)
+            cur.execute(insert_sql, insert_val)
 
-        update_sql_stat='''UPDATE TIME_SERIES_DATA_WORLD SET (
-            %s
-           )
-            = (%s)
-            WHERE province_state = %s and last_update = %s
-            '''
-        update_val=(
-            update_key,
-            update_value,
-            province_state,
-            last_update
-        )
-        cur.execute(update_sql_stat, update_val)
+            update_sql_stat='''UPDATE TIME_SERIES_DATA_WORLD SET 
+                {} = %s
+                WHERE province_state = %s and last_update = %s
+                '''.format(update_key)
+            update_val=(
+                update_value,
+                province_state,
+                last_update
+            )
+            cur.execute(update_sql_stat, update_val)
 
-        conn.commit()
+            conn.commit()
+
+    cur.close()
 
 def do_statistics_view_data(drop_table):
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
@@ -802,7 +800,7 @@ if_drop_table = input("Drop all tables?: [No/yes]")
 us_data_full_path=os.path.join(root_directory, us_data_folder)
 world_data_full_path = os.path.join(root_directory, world_data_folder)
 time_series_data_full_path = os.path.join(root_directory, time_series_folder)
-iterate_files(us_data_full_path, "us", if_drop_table)
-iterate_files(world_data_full_path, "world", if_drop_table)
-#iterate_files(time_series_data_full_path, "time_series", if_drop_table)
+#iterate_files(us_data_full_path, "us", if_drop_table)
+#iterate_files(world_data_full_path, "world", if_drop_table)
+iterate_files(time_series_data_full_path, "time_series", if_drop_table)
 do_statistics_view_data(if_drop_table)
