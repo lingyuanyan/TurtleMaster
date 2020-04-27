@@ -1,4 +1,10 @@
-from TurtleMasterApp.models import InfectionDataUs, InfectionDataUsStatistics, InfectionDataWorld, InfectionDataWorldStatistics,ViewStatisticsData
+from TurtleMasterApp.models import InfectionDataUs
+from TurtleMasterApp.models import InfectionDataUsStatistics
+from TurtleMasterApp.models import InfectionDataWorld
+from TurtleMasterApp.models import InfectionDataWorldStatistics
+from TurtleMasterApp.models import TimeSeriesDataUs
+from TurtleMasterApp.models import TimeSeriesDataWorld
+from TurtleMasterApp.models import ViewStatisticsData
 from rest_framework import serializers
 
 
@@ -77,6 +83,36 @@ class InfectionDataWorldStatisticsSerializer(serializers.HyperlinkedModelSeriali
         'longitude', 
         'active', 
         'combined_key']
+
+class TimeSeriesDataUsSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = TimeSeriesDataUs
+        fields = [
+        'uid', 
+        'iso2', 
+        'iso3', 
+        'code3', 
+        'admin2', 
+        'combined_key', 
+        'province_state', 
+        'country_region', 
+        'last_update', 
+        'latitude', 
+        'longitude', 
+        'confirmed', 
+        'deaths']
+
+class TimeSeriesDataWorldSerializer(serializers.HyperlinkedModelSerializer):
+     class Meta:
+        model = TimeSeriesDataWorld
+        fields = [
+        'province_state', 
+        'country_region', 
+        'last_update', 
+        'confirmed', 
+        'deaths', 
+        'recovered' ]
+
 
 class ViewStatisticsDataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

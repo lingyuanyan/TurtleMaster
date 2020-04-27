@@ -9,11 +9,15 @@ from TurtleMasterApp.serializers import InfectionDataUsSerializer
 from TurtleMasterApp.serializers import InfectionDataUsStatisticsSerializer
 from TurtleMasterApp.serializers import InfectionDataWorldSerializer
 from TurtleMasterApp.serializers import InfectionDataWorldStatisticsSerializer
+from TurtleMasterApp.serializers import TimeSeriesDataUsSerializer
+from TurtleMasterApp.serializers import TimeSeriesDataWorldSerializer
 from TurtleMasterApp.serializers import ViewStatisticsDataSerializer
 from TurtleMasterApp.models import InfectionDataUs
 from TurtleMasterApp.models import InfectionDataUsStatistics
 from TurtleMasterApp.models import InfectionDataWorld
 from TurtleMasterApp.models import InfectionDataWorldStatistics
+from TurtleMasterApp.models import TimeSeriesDataUs
+from TurtleMasterApp.models import TimeSeriesDataWorld
 from TurtleMasterApp.models import ViewStatisticsData
 from django.http import JsonResponse
 
@@ -67,6 +71,22 @@ class InfectionDataWorldStatisticsViewSet(viewsets.ModelViewSet):
     """
     queryset = InfectionDataWorldStatistics.objects.all().order_by('timestamp')
     serializer_class = InfectionDataWorldStatisticsSerializer
+    permission_classes = [permissions.AllowAny]
+
+class TimeSeriesDataUsViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = TimeSeriesDataUs.objects.all().order_by('timestamp')
+    serializer_class = TimeSeriesDataUsSerializer
+    permission_classes = [permissions.AllowAny]
+
+class TimeSeriesDataWorldViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = TimeSeriesDataWorld.objects.all().order_by('timestamp')
+    serializer_class = TimeSeriesDataWorldSerializer
     permission_classes = [permissions.AllowAny]
 
 class ViewStatisticsDataViewSet(viewsets.ModelViewSet):
