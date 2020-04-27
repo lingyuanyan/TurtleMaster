@@ -6,7 +6,6 @@ from datetime import date
 import sys
 import csv
 
-
 def parser_us_data(fname, drop_table):
     print("parse us data in file:", fname)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
@@ -430,6 +429,125 @@ def iterate_files(folder_path, data_type, drop_table):
                 print(sys.exc_info()[0])
                 quit()
 
+
+def do_statistics_view_data(drop_table):
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
+    # conn = sqlite3.connect('WC.db.sqlite')]
+    dbsettings = settings.DATABASES['default']
+    print(dbsettings)
+    country_region_list = {
+        "US" : ''' 
+            SELECT 
+            max(last_update),
+            sum(confirmed),
+            sum(deaths),
+            sum(recovered)
+            FROM INFECTION_DATA_US_STATISTICS 
+            WHERE country_region = %s''',
+
+        "China" : '''
+            SELECT 
+            max(last_update),
+            sum(confirmed),
+            sum(deaths),
+            sum(recovered)
+            FROM INFECTION_DATA_WORLD_STATISTICS 
+            WHERE country_region = %s''',
+
+        "World" : '''
+            SELECT 
+            max(last_update),
+            sum(confirmed),
+            sum(deaths),
+            sum(recovered)
+            FROM INFECTION_DATA_WORLD_STATISTICS
+            ''',
+    
+    }
+    
+    conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
+                            user=dbsettings["USER"], password=dbsettings["PASSWORD"])
+    cur = conn.cursor()
+    if(drop_table == 'yes') :
+        cur.execute('''
+        DROP TABLE IF EXISTS VIEW_STATISTICS_DATA
+        ''')
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS VIEW_STATISTICS_DATA (
+        id SERIAL PRIMARY KEY,
+        country_region  TEXT,
+        last_update  DATE,
+        confirmed  INTEGER,
+        deaths  INTEGER,
+        recovered  INTEGER,
+        timestamp timestamp default current_timestamp,
+        UNIQUE (country_region)
+        )
+    ''')
+
+    insert_query = '''
+    INSERT INTO VIEW_STATISTICS_DATA (
+            country_region,
+            last_update,
+            confirmed,
+            deaths,
+            recovered
+           )
+            VALUES (%s, %s, %s, %s, %s)
+            ON CONFLICT (country_region) DO NOTHING'''
+
+    update_query = '''
+    UPDATE VIEW_STATISTICS_DATA SET (
+            last_update,
+            confirmed,
+            deaths,
+            recovered
+            ) = (%s, %s, %s, %s)
+            WHERE country_region = %s
+   
+    '''
+    for country_region in country_region_list:
+        last_update = date.today().strftime("%m/%d/%Y %H:%M:%S")
+        confirmed = 0
+        deaths = 0
+        recovered = 0
+        select_query = country_region_list[country_region]
+        select_value = (
+        country_region,
+        )
+
+        cur.execute(select_query,select_value)
+
+        rows = cur.fetchall()
+        for row in rows:
+            last_update = row[0]
+            confirmed += int(row[1])
+            deaths += int(row[2])
+            recovered += int(row[3])
+        insert_value = (
+            country_region,
+            last_update,
+            confirmed,
+            deaths,
+            recovered
+        )
+        cur.execute(insert_query,insert_value)
+        update_value = (
+            last_update,
+            confirmed,
+            deaths,
+            recovered,
+            country_region
+        )
+        print(update_value)
+        cur.execute(update_query, update_value)
+        conn.commit()
+ 
+    cur.close()
+
+
+
+
 default_folder=os.path.abspath(os.path.join(
     os.getcwd(), "../COVID-19/csse_covid_19_data/"))
 us_data_folder="csse_covid_19_daily_reports_us"
@@ -442,3 +560,5 @@ us_data_full_path=os.path.join(root_directory, us_data_folder)
 world_data_full_path=os.path.join(root_directory, world_data_folder)
 iterate_files(us_data_full_path, "us", if_drop_table)
 iterate_files(world_data_full_path, "world", if_drop_table)
+
+do_statistics_view_data(if_drop_table)
