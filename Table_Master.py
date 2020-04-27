@@ -7,6 +7,7 @@ import time
 import sys
 import csv
 import re
+import traceback
 
 def parser_us_data(fname, drop_table):
     print("parse us data in file:", fname)
@@ -220,6 +221,7 @@ def parser_us_data(fname, drop_table):
         cur.execute(update_sql_stat, update_val_stat)
         conn.commit()
         num_line+=1
+        print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
 
  #   cur.execute('''SELECT * FROM INFECTION_DATA_US''')
  #   rows = cur.fetchall()
@@ -411,6 +413,7 @@ def parser_world_data(fname, drop_table):
 
         conn.commit()
         num_line += 1
+        print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
 
  #   cur.execute('''SELECT * FROM INFECTION_DATA_US''')
  #   rows = cur.fetchall()
@@ -553,8 +556,9 @@ def parser_time_series_data_us(fname, drop_table):
 
             conn.commit()
             num_line += 1
+            print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
     cur.close()
-    print(num_line, " of lines has been processed")
+    print(num_line, " of lines has been processed", num_line)
 
 
 def parser_time_series_data_global(fname, drop_table):
@@ -665,6 +669,7 @@ def parser_time_series_data_global(fname, drop_table):
 
             conn.commit()
             num_line += 1
+            print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
 
     cur.close()
     print(num_line, " of lines has been processed")
@@ -799,6 +804,8 @@ def iterate_files(folder_path, data_type, drop_table):
                     parser_time_series_data_global(fullpath, if_drop_table)
 
             except:
+                track = traceback.format_exc()
+                print(track)
                 print(sys.exc_info()[0])
                 quit()
 
