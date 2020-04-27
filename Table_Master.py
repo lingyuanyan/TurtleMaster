@@ -220,7 +220,6 @@ def parser_us_data(fname, drop_table):
         cur.execute(insert_sql_stat, insert_val)
         
         cur.execute(update_sql_stat, update_val_stat)
-        conn.commit()
         num_line+=1
         print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
 
@@ -229,6 +228,7 @@ def parser_us_data(fname, drop_table):
  #   print(rows.)
  #   for row in rows:
  #       print(row)
+    conn.commit()
     cur.close()
     print(num_line, " of lines has been processed")
 
@@ -413,7 +413,6 @@ def parser_world_data(fname, drop_table):
 
         cur.execute(update_sql_stat, update_val)
 
-        conn.commit()
         num_line += 1
         print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
 
@@ -422,6 +421,7 @@ def parser_world_data(fname, drop_table):
  #   print(rows.)
  #   for row in rows:
  #       print(row)
+    conn.commit()
     cur.close()
     print(num_line, " of lines has been processed")
 
@@ -556,9 +556,9 @@ def parser_time_series_data_us(fname, drop_table):
             )
             cur.execute(update_sql_stat, update_val)
 
-            conn.commit()
             num_line += 1
             print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
+    conn.commit()
     cur.close()
     print(num_line, " of lines has been processed", num_line)
 
@@ -669,10 +669,10 @@ def parser_time_series_data_global(fname, drop_table):
             )
             cur.execute(update_sql_stat, update_val)
 
-            conn.commit()
             num_line += 1
             print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
 
+    conn.commit()
     cur.close()
     print(num_line, " of lines has been processed")
 
