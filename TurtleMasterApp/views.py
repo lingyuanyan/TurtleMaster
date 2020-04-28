@@ -23,9 +23,22 @@ from django.http import JsonResponse
 
 def index(request):
 
-    queryset = ViewStatisticsData.objects.all().order_by('timestamp')
-    serializer = ViewStatisticsDataSerializer(queryset, many=True)
-    context = {'json_infection': json.dumps(serializer.data)}
+    queryset_topline = ViewStatisticsData.objects.all().order_by('timestamp')
+    serializer_topeline = ViewStatisticsDataSerializer(queryset_topline, many=True)
+
+    queryset_us_statistics = InfectionDataUsStatistics.objects.all().order_by('timestamp')
+    serializer_us_statistics = InfectionDataUsStatisticsSerializer(queryset_us_statistics, many=True)
+
+    queryset_world_statistics = InfectionDataWorldStatistics.objects.all().order_by('timestamp')
+    serializer_world_statistics = InfectionDataWorldStatisticsSerializer(queryset_world_statistics, many=True)
+
+    context = {
+        'json_topline': json.dumps(serializer_topeline.data),
+        'json_us_statistics': json.dumps(serializer_us_statistics.data),
+        'json_world_statistics': json.dumps(serializer_world_statistics.data),
+    }
+
+
     return render(request, 'TurtleMasterApp/index.html', context)
 
 class InfectionDataUsViewSet(viewsets.ModelViewSet):
