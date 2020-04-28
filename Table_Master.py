@@ -191,7 +191,8 @@ def parser_us_data(fname, drop_table):
                 ISO3 = %s, 
                 testing_rate= %s,
                 hospitalization_rate = %s
-            WHERE province_state = %s and last_update < %s::date
+            WHERE province_state = %s and last_update < %s::date + '1 day'::interval
+            RETURNING last_update
             '''
 
         update_val_stat = (
@@ -219,7 +220,10 @@ def parser_us_data(fname, drop_table):
         cur.execute(insert_sql, insert_val)
         cur.execute(insert_sql_stat, insert_val)
         
-        cur.execute(update_sql_stat, update_val_stat)
+        if cur.rowcount == 0 : 
+            cur.execute(update_sql_stat, update_val_stat)
+
+        conn.commit()
         num_line+=1
         print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
 
@@ -228,7 +232,6 @@ def parser_us_data(fname, drop_table):
  #   print(rows.)
  #   for row in rows:
  #       print(row)
-    conn.commit()
     cur.close()
     print(num_line, " of lines has been processed")
 
@@ -391,7 +394,8 @@ def parser_world_data(fname, drop_table):
             combined_key
            )
             = (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            WHERE province_state = %s and last_update < %s::date
+            WHERE province_state = %s and last_update < %s::date + '1 day'::interval
+            RETURNING last_update
             '''
         update_val=(
             FIPS,
@@ -411,8 +415,9 @@ def parser_world_data(fname, drop_table):
            
         cur.execute(insert_sql_stat, insert_val)
 
-        cur.execute(update_sql_stat, update_val)
-
+        if cur.rowcount == 0 : 
+           cur.execute(update_sql_stat, update_val)
+        conn.commit()
         num_line += 1
         print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
 
@@ -421,7 +426,6 @@ def parser_world_data(fname, drop_table):
  #   print(rows.)
  #   for row in rows:
  #       print(row)
-    conn.commit()
     cur.close()
     print(num_line, " of lines has been processed")
 
@@ -547,7 +551,8 @@ def parser_time_series_data_us(fname, drop_table):
 
             update_sql_stat='''UPDATE TIME_SERIES_DATA_US SET 
                 {} = %s
-                WHERE province_state = %s and last_update = %s
+                WHERE province_state = %s and last_update = %s::date
+                RETURNING last_update
                 '''.format(update_key)
             update_val=(
                 updte_value,
@@ -660,13 +665,15 @@ def parser_time_series_data_global(fname, drop_table):
 
             update_sql_stat='''UPDATE TIME_SERIES_DATA_WORLD SET 
                 {} = %s
-                WHERE province_state = %s and last_update = %s
+                WHERE province_state = %s and last_update = %s::date
+                RETURNING last_update
                 '''.format(update_key)
             update_val=(
                 update_value,
                 province_state,
                 last_update
             )
+
             cur.execute(update_sql_stat, update_val)
 
             num_line += 1
@@ -793,7 +800,7 @@ def do_statistics_view_data(drop_table):
 
 def iterate_files(folder_path, data_type, drop_table):
     print("Iterate in  ", folder_path)
-    for filename in os.listdir(folder_path):
+    for filename in sorted(os.listdir(folder_path)):
         fullpath=os.path.join(folder_path, filename)
         if not filename.startswith("_") and not filename.startswith(".") and filename.endswith(".csv"):
             try:
