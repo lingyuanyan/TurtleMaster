@@ -767,9 +767,9 @@ def do_statistics_view_data(drop_table):
         rows = cur.fetchall()
         for row in rows:
             last_update = row[0]
-            confirmed += int(row[1]) if row[1] not None else 0
-            deaths += int(row[2]) if row[2] not None else 0
-            recovered += int(row[3])  if row[3] not None else 0
+            confirmed += (int(row[1]) if row[1] is not None else 0)
+            deaths += (int(row[2]) if row[2] is not None else 0)
+            recovered += (int(row[3])  if row[3] is not None else 0)
         insert_value = (
             country_region,
             last_update,
