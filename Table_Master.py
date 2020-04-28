@@ -191,7 +191,7 @@ def parser_us_data(fname, drop_table):
                 ISO3 = %s, 
                 testing_rate= %s,
                 hospitalization_rate = %s
-            WHERE province_state = %s and last_update < %s
+            WHERE province_state = %s and last_update < %s::date
             '''
 
         update_val_stat = (
@@ -391,7 +391,7 @@ def parser_world_data(fname, drop_table):
             combined_key
            )
             = (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            WHERE province_state = %s and last_update < %s
+            WHERE province_state = %s and last_update < %s::date
             '''
         update_val=(
             FIPS,
@@ -767,9 +767,9 @@ def do_statistics_view_data(drop_table):
         rows = cur.fetchall()
         for row in rows:
             last_update = row[0]
-            confirmed += int(row[1])
-            deaths += int(row[2])
-            recovered += int(row[3])
+            confirmed += int(row[1]) if row[1] not None else 0
+            deaths += int(row[2]) if row[2] not None else 0
+            recovered += int(row[3])  if row[3] not None else 0
         insert_value = (
             country_region,
             last_update,
