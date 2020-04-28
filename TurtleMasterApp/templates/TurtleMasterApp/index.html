@@ -8,11 +8,17 @@
 
     <p>[[ title ]]</p>
 
-    <ul>
-      <li v-for="record in infection_json">
-        <H4>country_region [[ record.country_region ]] confirmed [[record.confirmed]] deaths [[record.deaths]] recovered [[record.recovered]] last_update [[record.last_update]]</H4>
-      </li>
-    </ul>
+
+    <head>
+      <style>
+          table, th, td {border: 1px solid black;}
+      </style>
+    </head>
+
+        <table>
+          <tr><th>Confirmed<th><th>Deaths<th><th>Recovered<th></tr>
+          <tr v-for="record in infection_json">            <td>[[ record.country_region ]]-</td><td>confirmed [[record.confirmed]],</td><td>deaths [[record.deaths]], </td><td>recovered [[record.recovered]]</td></tr>
+        <table>
 
 </div>
 
