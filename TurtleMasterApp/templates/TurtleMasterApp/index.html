@@ -1,7 +1,9 @@
 {% extends "TurtleMasterApp/base.html" %}
 {% block content %}
 <script type='text/javascript'>
-  var infection_json = {{ json_infection|safe }};
+  var topline_json = {{ json_topline|safe }};
+  var us_satistics_json = {{ json_us_statistics|safe }};
+  var world_statistics_json = {{ json_world_statistics|safe }};
 </script>
 
 <div id=app>
@@ -17,10 +19,19 @@
 
         <table>
           <tr><th>Confirmed<th><th>Deaths<th><th>Recovered<th></tr>
-          <tr v-for="record in infection_json">            <td>[[ record.country_region ]]-</td><td>confirmed [[record.confirmed]],</td><td>deaths [[record.deaths]], </td><td>recovered [[record.recovered]]</td></tr>
+          <tr v-for="record in topline_json">            <td>[[ record.country_region ]]-</td><td>confirmed [[record.confirmed]],</td><td>deaths [[record.deaths]], </td><td>recovered [[record.recovered]]</td></tr>
         <table>
 
-</div>
+          <table>
+            <tr><th>Confirmed<th><th>Deaths<th><th>Recovered<th></tr>
+            <tr v-for="record in us_satistics_json">            <td>[[ record.province_state ]]-</td><td>confirmed [[record.confirmed]],</td><td>deaths [[record.deaths]], </td><td>recovered [[record.recovered]]</td></tr>
+          <table>
+
+            <table>
+              <tr><th>Confirmed<th><th>Deaths<th><th>Recovered<th></tr>
+              <tr v-for="record in world_statistics_json">            <td>[[ record.country_region ]]-[[ record.province_state ]]-</td><td>confirmed [[record.confirmed]],</td><td>deaths [[record.deaths]], </td><td>recovered [[record.recovered]]</td></tr>
+            <table>
+    </div>
 
 <script>
 
@@ -34,7 +45,9 @@
         data: {
 
             title: 'Welcome to Turtle Master',
-            infection_json: infection_json
+            topline_json: topline_json,
+            us_satistics_json: us_satistics_json,
+            world_statistics_json: world_statistics_json,
         }
 
     })
