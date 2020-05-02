@@ -42,3 +42,8 @@ sudo systemctl status gunicorn_TurtleMaster.service
 #sudo supervisorctl reread
 #sudo supervisorctl update
 sudo service nginx restart
+
+echo pleas note nginx is configed to server traffic for 'covidhub.test' for this website
+echo consider add '127.0.0.1 covidhub.test' into your /etc/hosts
+echo and edit /etc/nsswitch.conf to 'hosts: files mdns4_minimal [NOTFOUND=return] dns'
+echo so you can use the domain name to test
