@@ -1,3 +1,5 @@
+source venv_t/bin/activate
+
 export DBHOST="localhost"
 export DBUSER="turtle_master_db_admin"
 export DBNAME="turtle_master_db"
@@ -17,15 +19,21 @@ echo ALTER ROLE $DBUSER SET timezone TO 'UTC'\;
 
 python manage.py collectstatic
 
-sudo rm /etc/nginx/sites-enabled/django_nginx.conf
-sudo ln -s $PWD/django_nginx.conf /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/django_nginx_turtle_master.conf
+sudo rm /etc/nginx/sites-available/django_nginx_turtle_master.conf
+sudo ln -s $PWD/django_nginx.conf /etc/nginx/sites-available/django_nginx_turtle_master.conf
+sudo ln -s $PWD/django_nginx.conf /etc/nginx/sites-enabled/django_nginx_turtle_master.conf
 #sudo rm /etc/uwsgi/apps-enabled/django_uwsgi.ini
 #sudo ln -s $PWD/django_uwsgi.ini /etc/uwsgi/apps-enabled/
-sudo rm /etc/systemd/system/gunicorn.service
-sudo ln -s $PWD/gunicorn.service /etc/systemd/system/
+#sudo rm /etc/systemd/system/gunicorn.service
+#sudo ln -s $PWD/gunicorn.service /etc/systemd/system/
 #sudo service uwsgi restart
+#sudo systemctl daemon-reload
+#sudo systemctl restart gunicorn
+#sudo systemctl enable gunicorn
+#sudo systemctl status gunicorn
+sudo rm /etc/supervisor/conf.d/TurtleMaster.conf
+sudo ln -s $PWD/supervisor.conf /etc/supervisor/conf.d/TurtleMaster.conf
+sudo supervisorctl reread
+sudo supervisorctl update
 sudo service nginx restart
-sudo systemctl daemon-reload
-sudo systemctl restart gunicorn
-sudo systemctl enable gunicorn
-sudo systemctl status gunicorn

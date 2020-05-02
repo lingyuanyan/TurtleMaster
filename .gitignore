@@ -4,3 +4,4 @@ venv_t
 *.sock
 static/
 venv*/
+*.swp
