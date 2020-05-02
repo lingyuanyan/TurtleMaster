@@ -1,5 +1,6 @@
 [Unit]
-Description=gunicorn daemon
+Description=Turtle Master gunicorn daemon
+Requires=gunicorn_TurtleMaster.socket
 After=network.target
 
 [Service]
@@ -10,3 +11,4 @@ ExecStart=/home/wwwadmin/TurtleMaster/venv_t/bin/gunicorn --access-logfile - --w
 
 [Install]
 WantedBy=multi-user.target
+

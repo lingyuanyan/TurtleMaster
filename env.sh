@@ -25,15 +25,20 @@ sudo ln -s $PWD/django_nginx.conf /etc/nginx/sites-available/django_nginx_turtle
 sudo ln -s $PWD/django_nginx.conf /etc/nginx/sites-enabled/django_nginx_turtle_master.conf
 #sudo rm /etc/uwsgi/apps-enabled/django_uwsgi.ini
 #sudo ln -s $PWD/django_uwsgi.ini /etc/uwsgi/apps-enabled/
-#sudo rm /etc/systemd/system/gunicorn.service
-#sudo ln -s $PWD/gunicorn.service /etc/systemd/system/
+sudo rm /etc/systemd/system/gunicorn_TurtleMaster.socket
+sudo ln -s $PWD/gunicorn_TurtleMaster.socket /etc/systemd/system/
+sudo rm /etc/systemd/system/gunicorn_TurtleMaster.service
+sudo ln -s $PWD/gunicorn_TurtleMaster.service /etc/systemd/system/
 #sudo service uwsgi restart
-#sudo systemctl daemon-reload
-#sudo systemctl restart gunicorn
-#sudo systemctl enable gunicorn
-#sudo systemctl status gunicorn
-sudo rm /etc/supervisor/conf.d/TurtleMaster.conf
-sudo ln -s $PWD/supervisor.conf /etc/supervisor/conf.d/TurtleMaster.conf
-sudo supervisorctl reread
-sudo supervisorctl update
+sudo systemctl daemon-reload
+sudo systemctl restart gunicorn_TurtleMaster.socket
+sudo systemctl enable gunicorn_TurtleMaster.socket
+sudo systemctl restart gunicorn_TurtleMaster.service
+sudo systemctl enable gunicorn_TurtleMaster.service
+sudo systemctl status gunicorn_TurtleMaster.socket
+sudo systemctl status gunicorn_TurtleMaster.service
+#sudo rm /etc/supervisor/conf.d/TurtleMaster.conf
+#sudo ln -s $PWD/supervisor.conf /etc/supervisor/conf.d/TurtleMaster.conf
+#sudo supervisorctl reread
+#sudo supervisorctl update
 sudo service nginx restart

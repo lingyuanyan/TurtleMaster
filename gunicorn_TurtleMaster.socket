@@ -1,0 +1,6 @@
+[Unit]
+Description=TurtleMaster socket
+[Socket]
+ListenStream= /home/wwwadmin/TurtleMaster/TurtleMaster.sock 
+[Install]
+WantedBy=sockets.target
