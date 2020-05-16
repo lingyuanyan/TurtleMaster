@@ -1,46 +1,80 @@
 {% extends "TurtleMasterApp/base.html" %}
 {% block content %}
 <script type='text/javascript'>
-  var topline_json = {{ json_topline|safe }};
-  var us_satistics_json = {{ json_us_statistics|safe }};
-  var world_statistics_json = {{ json_world_statistics|safe }};
+  var topline_json = {
+    {
+      json_topline | safe
+    }
+  };
+  var us_satistics_json = {
+    {
+      json_us_statistics | safe
+    }
+  };
+  var world_statistics_json = {
+    {
+      json_world_statistics | safe
+    }
+  };
 </script>
 
 <div id=app>
 
-    <p>[[ title ]]</p>
+  <p>[[ title ]]</p>
 
-          <table>
-            <tr><th>Confirmed</th><th>Deaths</th><th>Recovered</th></tr>
-            <tr v-for="record in topline_json">            <td>[[ record.country_region ]]-</td><td>confirmed [[record.confirmed]],</td><td>deaths [[record.deaths]], </td><td>recovered [[record.recovered]]</td><td>Last Update [[record.last_update]]</td></tr>
-            <tr><th>US</th></tr>
-            <tr v-for="record in us_satistics_json">            <td>[[ record.province_state ]]-</td><td>confirmed [[record.confirmed]],</td><td>deaths [[record.deaths]], </td><td>recovered [[record.recovered]]</td><td>Last Update [[record.last_update]]</td></tr>
-            <tr><th>World</th></tr>
-            <tr v-for="record in world_statistics_json">            <td>[[ record.country_region ]]-[[ record.province_state ]]-</td><td>confirmed [[record.confirmed]],</td><td>deaths [[record.deaths]], </td><td>recovered [[record.last_update]]</td><td>Last Update [[record.last_update]]</td></tr>
-          <table>
-    </div>
+  <table>
+    <tr>
+      <th>Confirmed</th>
+      <th>Deaths</th>
+      <th>Recovered</th>
+      <th>Last Update</th>
+    </tr>
+    <tr v-for="record in topline_json">
+      <td>[[ record.country_region ]]-</td>
+      <td>confirmed [[record.confirmed]],</td>
+      <td>deaths [[record.deaths]], </td>
+      <td>recovered [[record.recovered]]</td>
+      <td>Last Update [[record.last_update]]</td>
+    </tr>
+    <tr>
+      <th>US</th>
+    </tr>
+    <tr v-for="record in us_satistics_json">
+      <td>[[ record.province_state ]]-</td>
+      <td>confirmed [[record.confirmed]],</td>
+      <td>deaths [[record.deaths]], </td>
+      <td>recovered [[record.recovered]]</td>
+      <td>Last Update [[record.last_update]]</td>
+    </tr>
+    <tr>
+      <th>World</th>
+    </tr>
+    <tr v-for="record in world_statistics_json">
+      <td>[[ record.country_region ]]-[[ record.province_state ]]-</td>
+      <td>confirmed [[record.confirmed]],</td>
+      <td>deaths [[record.deaths]], </td>
+      <td>recovered [[record.last_update]]</td>
+      <td>Last Update [[record.last_update]]</td>
+    </tr>
+    <table>
+</div>
 
 <script>
+  new Vue({
 
+    delimiters: ['[[', ']]'],
 
-    new Vue({
+    el: '#app',
 
-        delimiters: ['[[', ']]'],
+    data: {
 
-        el: '#app',
+      title: 'Welcome to Turtle Master',
+      topline_json: topline_json,
+      us_satistics_json: us_satistics_json,
+      world_statistics_json: world_statistics_json,
+    }
 
-        data: {
-
-            title: 'Welcome to Turtle Master',
-            topline_json: topline_json,
-            us_satistics_json: us_satistics_json,
-            world_statistics_json: world_statistics_json,
-        }
-
-    })
-
-
-
+  })
 </script>
 
 {% endblock %}
