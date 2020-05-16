@@ -1,21 +1,9 @@
 {% extends "TurtleMasterApp/base.html" %}
 {% block content %}
 <script type='text/javascript'>
-  var topline_json = {
-    {
-      json_topline | safe
-    }
-  };
-  var us_satistics_json = {
-    {
-      json_us_statistics | safe
-    }
-  };
-  var world_statistics_json = {
-    {
-      json_world_statistics | safe
-    }
-  };
+  var topline_json = {{json_topline | safe}};
+  var us_satistics_json = {{json_us_statistics | safe}};
+  var world_statistics_json = {{json_world_statistics | safe}};
 </script>
 
 <div id=app>
