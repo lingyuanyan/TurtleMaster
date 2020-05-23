@@ -1,3 +1,38 @@
 td, th{
-  border: 1px solid black;
+  border: 1px solid #70b024;
+}
+.LMC_Logo{
+  position: fixed;
+  right:15px;
+  top:15px;
+}
+.white_space{
+  background-color: #9d2727;
+}
+.TM_Logo{
+  position: fixed;
+  left:15px;
+  top:15px;
+}
+div div{
+ position:fixed;
+ background-color:#97d64e;
+ border: 3px solid #318835;
+ width: 100%;
+top: 0px;
+left:0px;
+}
+img{
+  border: solid #619862;
+}
+table{
+  background-color:#c4dbaa;
+  top: 50px;
+  margin:auto;
+}
+h1{
+  text-align:center;
+}
+body{
+  background-color:#61b065;
 }

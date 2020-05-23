@@ -7,11 +7,31 @@
 </script>
 
 <div id=app>
+  <div calss=head>
+    <h1>Welcome to TurtleMaster</h1>
+    {% load static %}
+    <img src="{% static 'TurtleMasterApp/LMC_Logo.jpg' %}" alt="Little Master's Club Logo"  width="50px" height="50px" class="LMC_Logo">
+    <img src="{% static 'TurtleMasterApp/InkedTurtleMaster_Logo.jpg' %}" alt="TurtleMaster Logo"  width="50px" height="50px" class="TM_Logo">
+  </div>
+  <p>"
 
-  <p>[[ title ]]</p>
 
+
+
+
+
+    "</p>
+    <p>"
+
+
+
+
+
+
+      "</p>
   <table>
     <tr>
+      <th>         </th class=white_space>
       <th>Confirmed</th>
       <th>Deaths</th>
       <th>Recovered</th>
@@ -26,6 +46,10 @@
     </tr>
     <tr>
       <th>US</th>
+      <th>         </th class=white_space>
+      <th>         </th class=white_space>
+      <th>         </th class=white_space>
+      <th>         </th class=white_space>
     </tr>
     <tr v-for="record in us_satistics_json">
       <td>[[ record.province_state ]]-</td>
@@ -36,6 +60,10 @@
     </tr>
     <tr>
       <th>World</th>
+      <th>         </th class=white_space>
+      <th>         </th class=white_space>
+      <th>         </th class=white_space>
+      <th>         </th class=white_space>
     </tr>
     <tr v-for="record in world_statistics_json">
       <td>[[ record.country_region ]]-[[ record.province_state ]]-</td>
@@ -56,7 +84,6 @@
 
     data: {
 
-      title: 'Welcome to Turtle Master',
       topline_json: topline_json,
       us_satistics_json: us_satistics_json,
       world_statistics_json: world_statistics_json,
