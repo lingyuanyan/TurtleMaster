@@ -4,6 +4,7 @@
   var topline_json = {{json_topline | safe}};
   var us_satistics_json = {{json_us_statistics | safe}};
   var world_statistics_json = {{json_world_statistics | safe}};
+  alert("Please Remember to stay home and stay safe. It's important not to get infected for your lives are at stake. Please wash you hands daily and use soap and water. Thanks.")
 </script>
 
 <div id=app>
@@ -11,9 +12,15 @@
     <h1>Welcome to TurtleMaster</h1>
     {% load static %}
     <img src="{% static 'TurtleMasterApp/LMC_Logo.jpg' %}" alt="Little Master's Club Logo"  width="50px" height="50px" class="LMC_Logo">
-    <img src="{% static 'TurtleMasterApp/InkedTurtleMaster_Logo.jpg' %}" alt="TurtleMaster Logo"  width="50px" height="50px" class="TM_Logo">
+    <img src="{% static 'TurtleMasterApp/TurtleMaster_Logo.jpg' %}" alt="TurtleMaster Logo"  width="50px" height="50px" class="TM_Logo">
+    <nav>
+      <a href="history.html">Home</a>
+      <a href="history.html"  class="active">Info</a>
+      <a href="history.html">About Us</a>
+      <a href="history.html">Websites on Covid-19</a>
+    </nav>
   </div>
-  <p>"
+  <p class="white_space">"
 
 
 
@@ -21,7 +28,7 @@
 
 
     "</p>
-    <p>"
+    <p class="white_space">"
 
 
 
@@ -29,13 +36,14 @@
 
 
       "</p>
+
   <table>
     <tr>
-      <th>         </th class=white_space>
-      <th>Confirmed</th>
-      <th>Deaths</th>
-      <th>Recovered</th>
-      <th>Last Update</th>
+      <th class="th">Location</th>
+      <th class="th">Confirmed</th>
+      <th class="th">Deaths</th>
+      <th class="th">Recovered</th>
+      <th class="th">Last Update</th>
     </tr>
     <tr v-for="record in topline_json">
       <td>[[ record.country_region ]]-</td>
@@ -46,10 +54,10 @@
     </tr>
     <tr>
       <th>US</th>
-      <th>         </th class=white_space>
-      <th>         </th class=white_space>
-      <th>         </th class=white_space>
-      <th>         </th class=white_space>
+      <th>         </th>
+      <th>         </th>
+      <th>         </th>
+      <th>         </th>
     </tr>
     <tr v-for="record in us_satistics_json">
       <td>[[ record.province_state ]]-</td>
@@ -60,10 +68,10 @@
     </tr>
     <tr>
       <th>World</th>
-      <th>         </th class=white_space>
-      <th>         </th class=white_space>
-      <th>         </th class=white_space>
-      <th>         </th class=white_space>
+      <th>         </th>
+      <th>         </th>
+      <th>         </th>
+      <th>         </th>
     </tr>
     <tr v-for="record in world_statistics_json">
       <td>[[ record.country_region ]]-[[ record.province_state ]]-</td>
@@ -73,8 +81,12 @@
       <td>Last Update [[record.last_update]]</td>
     </tr>
     <table>
-</div>
+    <p>
 
+
+    </p>
+    <footer>By Lingyuan</footer>
+</div>
 <script>
   new Vue({
 

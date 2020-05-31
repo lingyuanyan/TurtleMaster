@@ -17,10 +17,11 @@ td, th{
 div div{
  position:fixed;
  background-color:#97d64e;
- border: 3px solid #318835;
+ border: 3px solid #8BC34A;
  width: 100%;
-top: 0px;
-left:0px;
+ top: 0px;
+ left:0px;
+ height:75px
 }
 img{
   border: solid #619862;
@@ -32,7 +33,48 @@ table{
 }
 h1{
   text-align:center;
-}
+  font-size: 25px;
+  }
 body{
-  background-color:#61b065;
+  background-color:#62a219;
+}
+footer{
+  background-color:#0abf12;
+  border:1px solid #64794d;
+  font-family: cursive;
+  position:fixed;
+  bottom: 0px;
+  width: 100%;
+  left: 0px;
+}
+nav a{
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 5px;
+  display: inline;
+  margin-top: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  top:5px;
+  background-color:#4a810c;
+  text-align:center;
+  font-family: cursive ;
+  color:white
+}
+nav{
+  position:relative;
+  text-align:center;
+  bottom:12px;
+}
+.active{
+  background-color:#5f4238;
+}
+.th{
+  font-size: 20px;
+}
+tr:hover{
+  background-color:#bccd12;
+}
+a:hover{
+  background-color:#8b6152
 }
