@@ -92,9 +92,8 @@ def parser_us_data(fname, drop_table):
         longitude = pieces[4] or '0.0'
         confirmed = pieces[5] or '0'
         deaths = pieces[6] or '0'
-        recovered = (pieces[7] or '0').rstrip('.')
-        actp = (pieces[8] or '0').strip(".")
-        active = actp[0]
+        recovered = str(int(float((pieces[7] or '0'))))
+        active = str(int(float((pieces[8] or '0'))))
         FIPS = pieces[9] or '0'
         incident_rate = pieces[10] or '0.0'
         people_tested = pieces[11] or '0'
