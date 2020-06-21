@@ -1,3 +1,4 @@
+breakpoint()
 import sqlite3
 import psycopg2
 from django.conf import settings
@@ -819,7 +820,7 @@ def iterate_files(folder_path, data_type, drop_table):
                 quit()
 
 
-breakpoint()
+
 default_folder=os.path.abspath(os.path.join(
     os.getcwd(), "../COVID-19/csse_covid_19_data/"))
 us_data_folder="csse_covid_19_daily_reports_us"
