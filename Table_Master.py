@@ -1,4 +1,3 @@
-breakpoint()
 import sqlite3
 import psycopg2
 from django.conf import settings
@@ -15,7 +14,7 @@ def parser_us_data(fname, drop_table):
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
     dbsettings = settings.DATABASES['default']
- 
+
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
@@ -99,7 +98,7 @@ def parser_us_data(fname, drop_table):
         people_tested = pieces[11] or '0'
         people_hospitalized = pieces[12] or '0'
         mortality_rate = pieces[13] or '0.0'
-        UID = pieces[14]
+        UID = str(int(float((pieces[14] or '0'))))
         ISO3 = pieces[15]
         testing_rate = pieces[16] or '0'
         hospitalization_rate = pieces[17] or '0'
@@ -147,7 +146,7 @@ def parser_us_data(fname, drop_table):
             testing_rate,
             hospitalization_rate
             )
- 
+
         insert_sql_stat = '''INSERT INTO INFECTION_DATA_US_STATISTICS (
             province_state,
             country_region,
@@ -171,24 +170,24 @@ def parser_us_data(fname, drop_table):
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (province_state) DO NOTHING
             '''
-        update_sql_stat = '''   
+        update_sql_stat = '''
             UPDATE INFECTION_DATA_US_STATISTICS
-            SET 
-                country_region = %s, 
-                last_update = %s, 
-                latitude = %s, 
-                longitude = %s, 
-                confirmed = %s, 
-                deaths = %s, 
-                recovered = %s, 
-                active = %s, 
-                FIPS = %s, 
-                incident_rate = %s, 
-                people_tested = %s, 
-                people_hospitalized = %s, 
+            SET
+                country_region = %s,
+                last_update = %s,
+                latitude = %s,
+                longitude = %s,
+                confirmed = %s,
+                deaths = %s,
+                recovered = %s,
+                active = %s,
+                FIPS = %s,
+                incident_rate = %s,
+                people_tested = %s,
+                people_hospitalized = %s,
                 mortality_rate = %s,
-                UID = %s, 
-                ISO3 = %s, 
+                UID = %s,
+                ISO3 = %s,
                 testing_rate= %s,
                 hospitalization_rate = %s
             WHERE province_state = %s and last_update < %s::date + '1 day'::interval
@@ -219,8 +218,8 @@ def parser_us_data(fname, drop_table):
 
         cur.execute(insert_sql, insert_val)
         cur.execute(insert_sql_stat, insert_val)
-        
-        if cur.rowcount == 0 : 
+
+        if cur.rowcount == 0 :
             cur.execute(update_sql_stat, update_val_stat)
 
         conn.commit()
@@ -240,7 +239,7 @@ def parser_world_data(fname, drop_table):
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
     dbsettings = settings.DATABASES['default']
- 
+
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
@@ -412,10 +411,10 @@ def parser_world_data(fname, drop_table):
             province_state,
             last_update
            )
-           
+
         cur.execute(insert_sql_stat, insert_val)
 
-        if cur.rowcount == 0 : 
+        if cur.rowcount == 0 :
            cur.execute(update_sql_stat, update_val)
         conn.commit()
         num_line += 1
@@ -429,15 +428,15 @@ def parser_world_data(fname, drop_table):
     cur.close()
     print(num_line, " of lines has been processed")
 
-    
+
 def parser_time_series_data_us(fname, drop_table):
     print("parser_time_series_data_us: ", fname)
     file_suffix = "_US.csv"
-    if not fname.endswith(file_suffix) : 
+    if not fname.endswith(file_suffix) :
         print("not ", file_suffix, " ... skipped")
         return
     update_key = "confirmed" if fname.lower().find("confirmed") else "deaths" if fname.lower().find("deaths") else None
-    if not update_key : 
+    if not update_key :
         print("not finding update key (confirmed | deaths | recovered) in file name...skipped")
         return
 
@@ -549,7 +548,7 @@ def parser_time_series_data_us(fname, drop_table):
             )
             cur.execute(insert_sql, insert_val)
 
-            update_sql_stat='''UPDATE TIME_SERIES_DATA_US SET 
+            update_sql_stat='''UPDATE TIME_SERIES_DATA_US SET
                 {} = %s
                 WHERE province_state = %s and last_update = %s::date
                 RETURNING last_update
@@ -571,7 +570,7 @@ def parser_time_series_data_us(fname, drop_table):
 def parser_time_series_data_global(fname, drop_table):
     print("parser_time_series_data_global: ", fname)
     file_suffix = "_global.csv"
-    if not fname.endswith(file_suffix) : 
+    if not fname.endswith(file_suffix) :
         print("not a ", file_suffix, " ...skipped")
         return
 
@@ -580,7 +579,7 @@ def parser_time_series_data_global(fname, drop_table):
     else "recovered" if fname.lower().find("recovered") \
     else None
 
-    if not update_key : 
+    if not update_key :
         print("not finding update key (confirmed | deaths | recovered) in file name...skipped")
         return
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
@@ -595,7 +594,7 @@ def parser_time_series_data_global(fname, drop_table):
         cur.execute('''
         DROP TABLE IF EXISTS TIME_SERIES_DATA_WORLD
         ''')
- 
+
     cur.execute('''
     CREATE TABLE IF NOT EXISTS TIME_SERIES_DATA_WORLD (
         id SERIAL PRIMARY KEY,
@@ -663,7 +662,7 @@ def parser_time_series_data_global(fname, drop_table):
            )
             cur.execute(insert_sql, insert_val)
 
-            update_sql_stat='''UPDATE TIME_SERIES_DATA_WORLD SET 
+            update_sql_stat='''UPDATE TIME_SERIES_DATA_WORLD SET
                 {} = %s
                 WHERE province_state = %s and last_update = %s::date
                 RETURNING last_update
@@ -687,37 +686,37 @@ def do_statistics_view_data(drop_table):
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
     dbsettings = settings.DATABASES['default']
- 
+
     country_region_list = {
-        "US" : ''' 
-            SELECT 
+        "US" : '''
+            SELECT
             max(last_update),
             sum(confirmed),
             sum(deaths),
             sum(recovered)
-            FROM INFECTION_DATA_US_STATISTICS 
+            FROM INFECTION_DATA_US_STATISTICS
             WHERE country_region = %s''',
 
         "China" : '''
-            SELECT 
+            SELECT
             max(last_update),
             sum(confirmed),
             sum(deaths),
             sum(recovered)
-            FROM INFECTION_DATA_WORLD_STATISTICS 
+            FROM INFECTION_DATA_WORLD_STATISTICS
             WHERE country_region = %s''',
 
         "World" : '''
-            SELECT 
+            SELECT
             max(last_update),
             sum(confirmed),
             sum(deaths),
             sum(recovered)
             FROM INFECTION_DATA_WORLD_STATISTICS
             ''',
-    
+
     }
-    
+
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
@@ -757,7 +756,7 @@ def do_statistics_view_data(drop_table):
             recovered
             ) = (%s, %s, %s, %s)
             WHERE country_region = %s
-   
+
     '''
     for country_region in country_region_list:
         last_update = date.today().strftime("%m/%d/%Y %H:%M:%S")
@@ -795,7 +794,7 @@ def do_statistics_view_data(drop_table):
         print(update_value)
         cur.execute(update_query, update_value)
         conn.commit()
- 
+
     cur.close()
 
 def iterate_files(folder_path, data_type, drop_table):
