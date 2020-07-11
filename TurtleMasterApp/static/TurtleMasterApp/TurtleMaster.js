@@ -9,6 +9,7 @@ var topline_vue = new Vue({
   el: '#topline',
   data: {
     topline_json:topline_json,
+    time_series_us_json: time_series_us_json,
   },
 });
 var data_list_vue = new Vue({

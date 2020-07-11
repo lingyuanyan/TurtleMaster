@@ -32,10 +32,14 @@ def index(request):
     queryset_world_statistics = InfectionDataWorldStatistics.objects.all().order_by('timestamp')
     serializer_world_statistics = InfectionDataWorldStatisticsSerializer(queryset_world_statistics, many=True)
 
+    queryset_time_series_us = TimeSeriesDataUs.objects.all().order_by('timestamp')
+    serializer_time_series_us = TimeSeriesDataUsSerializer(queryset_time_series_us, many=True)
+
     context = {
         'json_topline': json.dumps(serializer_topeline.data),
         'json_us_statistics': json.dumps(serializer_us_statistics.data),
         'json_world_statistics': json.dumps(serializer_world_statistics.data),
+        'json_time_series_us':json.dumps(serializer_time_series_us.data),
     }
 
 
