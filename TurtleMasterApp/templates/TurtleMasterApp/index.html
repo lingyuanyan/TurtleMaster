@@ -1,33 +1,45 @@
 {% extends "TurtleMasterApp/base.html" %}
 {% block content %}
 <script type='text/javascript'>
-  var topline_json = {{json_topline | safe}};
-  var us_satistics_json = {{json_us_statistics | safe}};
-  var world_statistics_json = {{json_world_statistics | safe}};
+  var topline_json = {{ json_topline | safe}};
+  var us_satistics_json = {{ json_us_statistics | safe}};
+  var world_statistics_json = {{ json_world_statistics | safe}};
   alert("Please Remember to stay home and stay safe during these troubeling times. It's important not to get infected for your lives and many others lives are at stake. Please wash you hands daily and use soap and water. Thank You from the TurtleMaster Team.")
 </script>
-
 <div id=app>
-  <div calss=head>
+  <div id="banner" calss=head>
     <h1>Welcome to TurtleMaster</h1>
     {% load static %}
-    <img src="{% static 'TurtleMasterApp/LMC_Logo.jpg' %}" alt="Little Master's Club Logo"  width="50px" height="50px" class="LMC_Logo">
-    <img src="{% static 'TurtleMasterApp/TurtleMaster_Logo.jpg' %}" alt="TurtleMaster Logo"  width="50px" height="50px" class="TM_Logo">
+    <img src="{% static 'TurtleMasterApp/LMC_Logo.jpg' %}" alt="Little Master's Club Logo" width="50px" height="50px"
+      class="LMC_Logo">
+    <img src="{% static 'TurtleMasterApp/TurtleMaster_Logo.jpg' %}" alt="TurtleMaster Logo" width="50px" height="50px"
+      class="TM_Logo">
     <nav>
       <a href="history.html">Home</a>
-      <a href="history.html"  class="active">Info</a>
+      <a href="history.html" class="active">Info</a>
       <a href="history.html">About Us</a>
       <a href="history.html">Websites on Covid-19</a>
     </nav>
   </div>
-  <p class="white_space">"
+  <div id="topline">
+    <tr v-for="record in topline_json">
+      <td>[[ record.country_region ]]-</td>
+      <td>confirmed [[record.confirmed]],</td>
+      <td>deaths [[record.deaths]], </td>
+      <td>recovered [[record.recovered]]</td>
+      <td>Last Update [[record.last_update]]</td>
+    </tr>
+  </div>
+  <div id="data-list">
+
+    <p class="white_space">"
 
 
 
 
 
 
-    "</p>
+      "</p>
     <p class="white_space">"
 
 
@@ -37,71 +49,120 @@
 
       "</p>
 
-  <table>
-    <tr>
-      <th class="th">Location</th>
-      <th class="th">Confirmed</th>
-      <th class="th">Deaths</th>
-      <th class="th">Recovered</th>
-      <th class="th">Last Update</th>
-    </tr>
-    <tr v-for="record in topline_json">
-      <td>[[ record.country_region ]]-</td>
-      <td>confirmed [[record.confirmed]],</td>
-      <td>deaths [[record.deaths]], </td>
-      <td>recovered [[record.recovered]]</td>
-      <td>Last Update [[record.last_update]]</td>
-    </tr>
-    <tr>
-      <th>US</th>
-      <th>         </th>
-      <th>         </th>
-      <th>         </th>
-      <th>         </th>
-    </tr>
-    <tr v-for="record in us_satistics_json">
-      <td>[[ record.province_state ]]-</td>
-      <td>confirmed [[record.confirmed]],</td>
-      <td>deaths [[record.deaths]], </td>
-      <td>recovered [[record.recovered]]</td>
-      <td>Last Update [[record.last_update]]</td>
-    </tr>
-    <tr>
-      <th>World</th>
-      <th>         </th>
-      <th>         </th>
-      <th>         </th>
-      <th>         </th>
-    </tr>
-    <tr v-for="record in world_statistics_json">
-      <td>[[ record.country_region ]]-[[ record.province_state ]]-</td>
-      <td>confirmed [[record.confirmed]],</td>
-      <td>deaths [[record.deaths]], </td>
-      <td>recovered [[record.last_update]]</td>
-      <td>Last Update [[record.last_update]]</td>
-    </tr>
     <table>
+      <tr>
+        <th class="th">Location</th>
+        <th class="th">Confirmed</th>
+        <th class="th">Deaths</th>
+        <th class="th">Recovered</th>
+        <th class="th">Last Update</th>
+      </tr>
+      <tr>
+        <th>US</th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+      </tr>
+      <tr v-for="record in us_satistics_json">
+        <td>[[ record.province_state ]]-</td>
+        <td>confirmed [[record.confirmed]],</td>
+        <td>deaths [[record.deaths]], </td>
+        <td>recovered [[record.recovered]]</td>
+        <td>Last Update [[record.last_update]]</td>
+      </tr>
+      <tr>
+        <th>World</th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+      </tr>
+      <tr v-for="record in world_statistics_json">
+        <td>[[ record.country_region ]]-[[ record.province_state ]]-</td>
+        <td>confirmed [[record.confirmed]],</td>
+        <td>deaths [[record.deaths]], </td>
+        <td>recovered [[record.last_update]]</td>
+        <td>Last Update [[record.last_update]]</td>
+      </tr>
+      <table>
+  </div>
+  <div id="information-hub">
+
+  </div>
+  <div id="footer">
     <p>
 
 
     </p>
     <footer>By Lingyuan, Samuel, Florence</footer>
+
+  </div>
 </div>
 <script>
-  new Vue({
+
+  var banner_vue = new Vue({
 
     delimiters: ['[[', ']]'],
 
-    el: '#app',
+    el: '#banner',
 
     data: {
 
-      topline_json: topline_json,
+    }
+
+  })
+
+  var topline_vue = new Vue({
+
+    delimiters: ['[[', ']]'],
+
+    el: '#topline',
+
+    data: {
+
+    }
+
+  })
+
+  var data_list_vue = new Vue({
+
+    delimiters: ['[[', ']]'],
+
+    el: '#data-list',
+
+    data: {
+
       us_satistics_json: us_satistics_json,
       world_statistics_json: world_statistics_json,
     }
 
   })
+
+  var infomation_hub_vue = new Vue({
+
+    delimiters: ['[[', ']]'],
+
+    el: '#information-hub',
+
+    data: {
+
+    }
+
+  })
+
+  var footer_vue = new Vue({
+
+    delimiters: ['[[', ']]'],
+
+    el: '#footer',
+
+    data: {
+
+    }
+
+  })
+
 </script>
 
 {% endblock %}
