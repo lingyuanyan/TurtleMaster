@@ -23,6 +23,14 @@
   </div>
   <div id="topline">
     <table>
+      <tr>
+        <th class="th">Location</th>
+        <th class="th">Confirmed</th>
+        <th class="th">Deaths</th>
+        <th class="th">Recovered</th>
+        <th class="th">Last Update</th>
+      </tr>
+      
       <tr v-for="record in topline_json">
         <td>[[ record.country_region ]]-</td>
         <td>confirmed [[record.confirmed]],</td>
@@ -34,13 +42,7 @@
   </div>
   <div id="data-list">
     <table>
-      <tr>
-        <th class="th">Location</th>
-        <th class="th">Confirmed</th>
-        <th class="th">Deaths</th>
-        <th class="th">Recovered</th>
-        <th class="th">Last Update</th>
-      </tr>
+
       <tr>
         <th>US</th>
         <th> </th>
