@@ -78,3 +78,7 @@ tr:hover{
 a:hover{
   background-color:#8b6152
 }
+#banner, #topline, #data-list, #information-hub{
+  border: 1px solid black;
+  display: block;
+}

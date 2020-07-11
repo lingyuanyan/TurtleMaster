@@ -6,7 +6,7 @@
   var world_statistics_json = {{ json_world_statistics | safe}};
   alert("Please Remember to stay home and stay safe during these troubeling times. It's important not to get infected for your lives and many others lives are at stake. Please wash you hands daily and use soap and water. Thank You from the TurtleMaster Team.")
 </script>
-<div id=app>
+<div id="app">
   <div id="banner" calss=head>
     <h1>Welcome to TurtleMaster</h1>
     {% load static %}
@@ -22,13 +22,15 @@
     </nav>
   </div>
   <div id="topline">
-    <tr v-for="record in topline_json">
-      <td>[[ record.country_region ]]-</td>
-      <td>confirmed [[record.confirmed]],</td>
-      <td>deaths [[record.deaths]], </td>
-      <td>recovered [[record.recovered]]</td>
-      <td>Last Update [[record.last_update]]</td>
-    </tr>
+    <table>
+      <tr v-for="record in topline_json">
+        <td>[[ record.country_region ]]-</td>
+        <td>confirmed [[record.confirmed]],</td>
+        <td>deaths [[record.deaths]], </td>
+        <td>recovered [[record.recovered]]</td>
+        <td>Last Update [[record.last_update]]</td>
+      </tr>
+    </table>
   </div>
   <div id="data-list">
 
@@ -85,7 +87,7 @@
         <td>recovered [[record.last_update]]</td>
         <td>Last Update [[record.last_update]]</td>
       </tr>
-      <table>
+    </table>
   </div>
   <div id="information-hub">
 
@@ -99,70 +101,5 @@
 
   </div>
 </div>
-<script>
-
-  var banner_vue = new Vue({
-
-    delimiters: ['[[', ']]'],
-
-    el: '#banner',
-
-    data: {
-
-    }
-
-  })
-
-  var topline_vue = new Vue({
-
-    delimiters: ['[[', ']]'],
-
-    el: '#topline',
-
-    data: {
-
-    }
-
-  })
-
-  var data_list_vue = new Vue({
-
-    delimiters: ['[[', ']]'],
-
-    el: '#data-list',
-
-    data: {
-
-      us_satistics_json: us_satistics_json,
-      world_statistics_json: world_statistics_json,
-    }
-
-  })
-
-  var infomation_hub_vue = new Vue({
-
-    delimiters: ['[[', ']]'],
-
-    el: '#information-hub',
-
-    data: {
-
-    }
-
-  })
-
-  var footer_vue = new Vue({
-
-    delimiters: ['[[', ']]'],
-
-    el: '#footer',
-
-    data: {
-
-    }
-
-  })
-
-</script>
-
+<script src="{% static 'TurtleMasterApp/TurtleMaster.js' %}"></script>
 {% endblock %}
