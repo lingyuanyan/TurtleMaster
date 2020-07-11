@@ -14,7 +14,7 @@ td, th{
   left:15px;
   top:15px;
 }
-div div{
+#banner{
  position:fixed;
  background-color:#97d64e;
  border: 3px solid #8BC34A;
@@ -77,8 +77,4 @@ tr:hover{
 }
 a:hover{
   background-color:#8b6152
-}
-#banner, #topline, #data-list, #information-hub{
-  border: 1px solid black;
-  display: block;
 }
