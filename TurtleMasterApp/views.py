@@ -43,7 +43,7 @@ def index(request):
     }
 
 
-    return render(request, 'TurtleMasterApp/index.html', context)
+    return render(request, 'index.html', context)
 
 class InfectionDataUsViewSet(viewsets.ModelViewSet):
     """
