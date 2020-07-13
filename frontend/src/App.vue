@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Banner msg="Welcome to Your Vue.js App" />
+    <TopLine />
+    <DataList />
+    <Information />
+    <Post />
+    <Footer />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Banner from "./components/banner.vue";
+import TopLine from "./components/topline.vue";
+import DataList from "./components/datalist.vue";
+import Information from "./components/information.vue";
+import Post from "./components/post.vue";
+import Footer from "./components/footer.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Banner,
+    TopLine,
+    DataList,
+    Information,
+    Post,
+    Footer
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
