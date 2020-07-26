@@ -1,43 +1,43 @@
 <template>
-  <div class="datalist">
-    <table>
-      <tr>
-        <th class="th">Location</th>
-        <th class="th">Confirmed</th>
-        <th class="th">Deaths</th>
-        <th class="th">Recovered</th>
-        <th class="th">Last Update</th>
-      </tr>
-      <tr>
-        <th>US</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr v-for="record in us_satistics_json" :key="record.province_state">
-        <td>{{ record.province_state }}-</td>
-        <td>confirmed {{record.confirmed}},</td>
-        <td>deaths {{record.deaths}},</td>
-        <td>recovered {{record.recovered}}</td>
-        <td>Last Update {{record.last_update}}</td>
-      </tr>
-      <tr>
-        <th>World</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr v-for="record in world_statistics_json" :key="record.province_state">
-        <td>{{ record.country_region }}-{{ record.province_state }}-</td>
-        <td>confirmed {{record.confirmed}},</td>
-        <td>deaths {{record.deaths}},</td>
-        <td>recovered {{record.last_update}}</td>
-        <td>Last Update {{record.last_update}}</td>
-      </tr>
-    </table>
-  </div>
+<div class="datalist">
+  <table>
+    <tr>
+      <th class="th">Location</th>
+      <th class="th">Confirmed</th>
+      <th class="th">Deaths</th>
+      <th class="th">Recovered</th>
+      <th class="th">Last Update</th>
+    </tr>
+    <tr>
+      <th>US</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr v-for="record in us_satistics_json" :key="record.province_state">
+      <td>{{ record.province_state }}-</td>
+      <td>confirmed {{record.confirmed}},</td>
+      <td>deaths {{record.deaths}},</td>
+      <td>recovered {{record.recovered}}</td>
+      <td>Last Update {{record.last_update}}</td>
+    </tr>
+    <tr>
+      <th>World</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr v-for="record in world_statistics_json" :key="record.province_state">
+      <td>{{ record.country_region }}-{{ record.province_state }}-</td>
+      <td>confirmed {{record.confirmed}},</td>
+      <td>deaths {{record.deaths}},</td>
+      <td>recovered {{record.last_update}}</td>
+      <td>Last Update {{record.last_update}}</td>
+    </tr>
+  </table>
+</div>
 </template>
 
 <script>
