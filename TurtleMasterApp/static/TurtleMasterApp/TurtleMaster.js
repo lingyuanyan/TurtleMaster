@@ -1,3 +1,4 @@
+var data =
 var banner_vue = new Vue({
   delimiters: ['[[', ']]'],
   el: '#banner',

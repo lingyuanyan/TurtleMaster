@@ -98,6 +98,23 @@ class TimeSeriesDataUsViewSet(viewsets.ModelViewSet):
     serializer_class = TimeSeriesDataUsSerializer
     permission_classes = [permissions.AllowAny]
 
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `province_state` query parameter in the URL.
+        """
+        distinct_on = self.request.query_params.get('distinct_on', None)
+        province_state = self.request.query_params.get('province_state', None)
+        if distinct_on is not None:
+            queryset = TimeSeriesDataUs.objects.all().order_by(distinct_on).distinct(distinct_on)
+        else:
+            queryset = TimeSeriesDataUs.objects.all().order_by('timestamp')
+
+        if province_state is not None:
+            queryset = queryset.filter(province_state = province_state)
+
+        return queryset
+
 class TimeSeriesDataWorldViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
