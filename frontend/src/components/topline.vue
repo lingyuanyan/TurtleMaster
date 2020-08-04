@@ -9,7 +9,8 @@
         <td>Last Update {{record.last_update}}</td>
       </tr>
     </table>
-    <table>
+    <v-select label="state" :options="time_serise_us_states" v-model="current_state" @input="onStateSelected"></v-select>
+     <table>
       <tr v-for="record in time_series_us_json" :key="record.country_region">
         <td>{{ record.country_region }}-</td>
         <td>state {{record.province_state}},</td>
@@ -18,6 +19,7 @@
         <td>Last Update {{record.last_update}}</td>
       </tr>
     </table>
+    <svg><path></path></svg>
   </div>
 </template>
 
@@ -33,16 +35,17 @@ export default {
     return {
       topline_json: null,
       time_series_us_json: null,
-      time_serise_us_states:null,
+      time_serise_us_states:[],
       trending_chart_width: 300,
       trending_chart_height: 400,
+      current_state:"Washington",
     };
   },
   created() {
   },
   mounted(){
     this.fetchTopline();
-    this.fetchTimeSeriesUs("Florida");
+    this.fetchTimeSeriesUsStates();
 
   },
   methods: {
@@ -68,8 +71,10 @@ export default {
       covidhubAxios
         .get("/api/TimeSeriesDataUs/?distinct_on=province_state")
         .then(response => (
-          this.time_serise_us_states = response.data.results, 
-          this.buildTrendingChart()
+          response.data.results.forEach(element => {
+            this.time_serise_us_states.push(element.province_state)
+          }),
+          this.fetchTimeSeriesUs(this.current_state)
           ))
         .catch(error => console.log(error));
     },
@@ -89,17 +94,21 @@ export default {
                           .curve(d3.curveLinear);
       console.log(lineFun(data));
       var svg = d3.select(containerId)
-                            .append("svg")
+                            .select("svg")
                             .attr("width", w)
                             .attr("height", h);
 
       // eslint-disable-next-line no-unused-vars                    
-      var vix = svg.append("path")
+      var vix = svg.select("path")
                             .attr("d", lineFun(data))
                             .attr("stroke", "purple")
                             .attr("stroke-width", 2)
                             .attr("fill", "none");
 
+      },
+
+      onStateSelected(value) {
+          this.fetchTimeSeriesUs(value);
       }
   },
 }
