@@ -268,7 +268,7 @@ def parser_world_data(fname, drop_table):
         active  INTEGER,
         combined_Key TEXT,
         timestamp timestamp default current_timestamp,
-        UNIQUE (province_state, last_update)
+        UNIQUE (combined_Key, last_update)
         )
     ''')
 
@@ -288,7 +288,7 @@ def parser_world_data(fname, drop_table):
         active  INTEGER,
         combined_Key TEXT,
         timestamp timestamp default current_timestamp,
-        UNIQUE (province_state)
+        UNIQUE (combined_Key)
         )
     ''')
     num_line = 0
@@ -342,7 +342,7 @@ def parser_world_data(fname, drop_table):
             combined_key
            )
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            ON CONFLICT (province_state, last_update) DO NOTHING
+            ON CONFLICT (combined_Key, last_update) DO NOTHING
             '''
 
         insert_val=(
@@ -376,12 +376,13 @@ def parser_world_data(fname, drop_table):
             combined_key
            )
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            ON CONFLICT (province_state) DO NOTHING
+            ON CONFLICT (combined_Key) DO NOTHING
             '''
 
         update_sql_stat='''UPDATE INFECTION_DATA_WORLD_STATISTICS SET (
             FIPS,
             admin2,
+            province_state,
             country_region,
             last_update,
             confirmed,
@@ -389,16 +390,16 @@ def parser_world_data(fname, drop_table):
             latitude,
             longitude,
             recovered,
-            active,
-            combined_key
+            active
            )
             = (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            WHERE province_state = %s and last_update < %s::date + '1 day'::interval
+            WHERE combined_Key = %s and last_update < %s::date + '1 day'::interval
             RETURNING last_update
             '''
         update_val=(
             FIPS,
             admin2,
+            province_state,
             country_region,
             last_update,
             confirmed,
@@ -408,7 +409,6 @@ def parser_world_data(fname, drop_table):
             recovered,
             active,
             combined_key,
-            province_state,
             last_update
            )
 
@@ -470,7 +470,7 @@ def parser_time_series_data_us(fname, drop_table):
         confirmed  INTEGER,
         deaths  INTEGER,
         timestamp timestamp default current_timestamp,
-        UNIQUE (province_state, last_update)
+        UNIQUE (combined_key, last_update)
         )
     ''')
     num_line = 0
@@ -528,7 +528,7 @@ def parser_time_series_data_us(fname, drop_table):
                 deaths
             )
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                ON CONFLICT (province_state, last_update) DO NOTHING
+                ON CONFLICT (combined_key, last_update) DO NOTHING
                 '''
 
             insert_val=(
@@ -550,12 +550,12 @@ def parser_time_series_data_us(fname, drop_table):
 
             update_sql_stat='''UPDATE TIME_SERIES_DATA_US SET
                 {} = %s
-                WHERE province_state = %s and last_update = %s::date
+                WHERE combined_key = %s and last_update = %s::date
                 RETURNING last_update
                 '''.format(update_key)
             update_val=(
                 updte_value,
-                province_state,
+                combined_key,
                 last_update
             )
             cur.execute(update_sql_stat, update_val)
