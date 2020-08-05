@@ -9,17 +9,18 @@ from TurtleMasterApp.serializers import InfectionDataUsSerializer
 from TurtleMasterApp.serializers import InfectionDataUsStatisticsSerializer
 from TurtleMasterApp.serializers import InfectionDataWorldSerializer
 from TurtleMasterApp.serializers import InfectionDataWorldStatisticsSerializer
-from TurtleMasterApp.serializers import TimeSeriesDataUsSerializer
+from TurtleMasterApp.serializers import TimeSeriesDataUsSerializer, TimeSeriesDataUsByStateSerializer
 from TurtleMasterApp.serializers import TimeSeriesDataWorldSerializer
 from TurtleMasterApp.serializers import ViewStatisticsDataSerializer
 from TurtleMasterApp.models import InfectionDataUs
 from TurtleMasterApp.models import InfectionDataUsStatistics
 from TurtleMasterApp.models import InfectionDataWorld
 from TurtleMasterApp.models import InfectionDataWorldStatistics
-from TurtleMasterApp.models import TimeSeriesDataUs
+from TurtleMasterApp.models import TimeSeriesDataUs,TimeSeriesDataUsByState
 from TurtleMasterApp.models import TimeSeriesDataWorld
 from TurtleMasterApp.models import ViewStatisticsData
 from django.http import JsonResponse
+from django.db.models import Sum
 
 def index(request):
 
@@ -115,6 +116,33 @@ class TimeSeriesDataUsViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+class TimeSeriesDataUsByStateViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = TimeSeriesDataUsByState.objects.all().order_by('timestamp')
+    serializer_class = TimeSeriesDataUsByStateSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `province_state` query parameter in the URL.
+        """
+        distinct_on = self.request.query_params.get('distinct_on', None)
+        province_state = self.request.query_params.get('province_state', None)
+        if distinct_on is not None:
+            queryset = TimeSeriesDataUsByState.objects\
+                .all().order_by(distinct_on).distinct(distinct_on)
+        else:
+            queryset = TimeSeriesDataUsByState.objects\
+                .values('province_state','last_update')\
+                    .annotate(confirmed = Sum('confirmed'), deaths = Sum('deaths'))
+
+        if province_state is not None:
+            queryset = queryset.filter(province_state = province_state)
+
+        return queryset
 class TimeSeriesDataWorldViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.

@@ -435,7 +435,7 @@ def parser_time_series_data_us(fname, drop_table):
     if not fname.endswith(file_suffix) :
         print("not ", file_suffix, " ... skipped")
         return
-    update_key = "confirmed" if fname.lower().find("confirmed") else "deaths" if fname.lower().find("deaths") else None
+    update_key = "confirmed" if fname.lower().find("confirmed") >= 0 else "deaths" if fname.lower().find("deaths") >= 0 else None
     if not update_key :
         print("not finding update key (confirmed | deaths | recovered) in file name...skipped")
         return
@@ -448,7 +448,7 @@ def parser_time_series_data_us(fname, drop_table):
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
 
-    if(drop_table == 'yes') :
+    if(drop_table == 'yes' and update_key == 'confirmed') :
         cur.execute('''
         DROP TABLE IF EXISTS TIME_SERIES_DATA_US
         ''')

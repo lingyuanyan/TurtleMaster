@@ -102,6 +102,15 @@ class TimeSeriesDataUsSerializer(serializers.HyperlinkedModelSerializer):
         'confirmed', 
         'deaths']
 
+class TimeSeriesDataUsByStateSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = TimeSeriesDataUs
+        fields = [
+        'province_state', 
+        'last_update', 
+        'confirmed', 
+        'deaths']
+
 class TimeSeriesDataWorldSerializer(serializers.HyperlinkedModelSerializer):
      class Meta:
         model = TimeSeriesDataWorld

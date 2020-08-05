@@ -24,6 +24,7 @@ router.register(r'InfectionDataUsStatistics', views.InfectionDataUsStatisticsVie
 router.register(r'InfectionDataWorld', views.InfectionDataWorldViewSet)
 router.register(r'InfectionDataWorldStatistics', views.InfectionDataWorldStatisticsViewSet)
 router.register(r'TimeSeriesDataUs', views.TimeSeriesDataUsViewSet)
+router.register(r'TimeSeriesDataUsByState', views.TimeSeriesDataUsByStateViewSet)
 router.register(r'TimeSeriesDataWorld', views.TimeSeriesDataWorldViewSet)
 router.register(r'ViewStatisticsData', views.ViewStatisticsDataViewSet)
 

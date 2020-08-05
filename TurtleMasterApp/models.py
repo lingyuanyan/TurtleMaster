@@ -70,7 +70,7 @@ class InfectionDataWorld(models.Model):
     class Meta:
         managed = False
         db_table = 'infection_data_world'
-        unique_together = (('province_state', 'last_update'),)
+        unique_together = (('combined_key', 'last_update'),)
 
 
 class InfectionDataWorldStatistics(models.Model):
@@ -111,7 +111,19 @@ class TimeSeriesDataUs(models.Model):
     class Meta:
         managed = False
         db_table = 'time_series_data_us'
+        unique_together = (('combined_key', 'last_update'),)
+
+class TimeSeriesDataUsByState(models.Model):
+    province_state = models.TextField(blank=True, null=True)
+    last_update = models.DateField(blank=True, null=True)
+    confirmed = models.IntegerField(blank=True, null=True)
+    deaths = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'time_series_data_us'
         unique_together = (('province_state', 'last_update'),)
+
 
 
 class TimeSeriesDataWorld(models.Model):
