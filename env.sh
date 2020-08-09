@@ -17,6 +17,10 @@ echo ALTER ROLE $DBUSER SET client_encoding TO 'utf8'\;
 echo ALTER ROLE $DBUSER SET default_transaction_isolation TO 'read committed'\;
 echo ALTER ROLE $DBUSER SET timezone TO 'UTC'\;
 
+pushd frontend
+npm install
+npm run build
+popd
 python manage.py collectstatic
 
 sudo rm /etc/nginx/sites-enabled/django_nginx_turtle_master.conf
