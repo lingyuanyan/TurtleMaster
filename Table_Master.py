@@ -93,10 +93,10 @@ def parser_us_data(fname, drop_table):
         deaths = pieces[6] or '0'
         recovered = str(int(float((pieces[7] or '0'))))
         active = str(int(float((pieces[8] or '0'))))
-        FIPS = pieces[9] or '0'
+        FIPS = str(int(float((pieces[9] or '0'))))
         incident_rate = pieces[10] or '0.0'
-        people_tested = pieces[11] or '0'
-        people_hospitalized = pieces[12] or '0'
+        people_tested = str(int(float((pieces[11] or '0'))))
+        people_hospitalized = str(int(float((pieces[12] or '0'))))
         mortality_rate = pieces[13] or '0.0'
         UID = str(int(float((pieces[14] or '0'))))
         ISO3 = pieces[15]

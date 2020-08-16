@@ -120,7 +120,7 @@ class TimeSeriesDataUsByStateViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = TimeSeriesDataUsByState.objects.all().order_by('timestamp')
+    queryset = TimeSeriesDataUsByState.objects.all().order_by('last_update')
     serializer_class = TimeSeriesDataUsByStateSerializer
     permission_classes = [permissions.AllowAny]
 
