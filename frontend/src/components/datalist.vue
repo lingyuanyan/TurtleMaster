@@ -77,9 +77,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.datalist {
+  right: 0%;
+}
 table {
   background-color: #c4dbaa;
   top: 50px;
   margin: auto;
+}
+.th{
+  font-size: 20px;
+}
+td, th{
+  border: 1px solid #70b024;
+}
+tr:hover{
+  background-color:#bccd12;
 }
 </style>

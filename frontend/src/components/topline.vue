@@ -1,5 +1,7 @@
 <template>
+
   <div id="toplineContainer" class="topline">
+      <p class = "white"></p>
     <table>
       <tr v-for="record in topline_json" :key="record.country_region">
         <td>{{record.country_region}} -</td>
@@ -125,7 +127,7 @@ export default {
       }
       confirmedVix
         .attr("d", lineConfirmed(data))
-        .attr("stroke", "purple")
+        .attr("stroke", "blue")
         .attr("stroke-width", 2)
         .attr("fill", "none");
 
@@ -138,7 +140,7 @@ export default {
 
       deathsVix
         .attr("d", lineDeaths(data))
-        .attr("stroke", "purple")
+        .attr("stroke", "red")
         .attr("stroke-width", 2)
         .attr("fill", "none");
     },
@@ -153,11 +155,35 @@ export default {
 <style scoped>
 .topline {
   top: 275px;
+  text-align: center;
 }
 
 table {
   background-color: #c4dbaa;
-  top: 650px;
-  margin: auto;
+  right: 0px;
+  text-align: center;
+}
+#toplineContainer {
+  background-color: #E8E8E8;
+  width: 50%;
+  text-align: center;
+  right: 0%;
+  border-radius: 15px/15px;
+  border: 2px solid black;
+}
+#deaths {
+  color: red;
+}
+.th{
+  font-size: 20px;
+}
+td, th{
+  border: 1px solid #70b024;
+}
+tr:hover{
+  background-color:#bccd12;
+}
+.white {
+  height: 80px;
 }
 </style>

@@ -40,9 +40,6 @@ export default {
   right: 15px;
   top: 15px;
 }
-.white_space {
-  background-color: #9d2727;
-}
 .tm_logo {
   position: fixed;
   left: 15px;
@@ -50,6 +47,9 @@ export default {
 }
 .active {
   background-color: #5f4238;
+}
+a:hover{
+  background-color:#8b6152
 }
 nav a {
   text-decoration: none;
@@ -79,5 +79,9 @@ nav {
   top: 0px;
   left: 0px;
   height: 75px;
+}
+h1 {
+  text-align: center;
+  top: 2px;
 }
 </style>
