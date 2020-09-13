@@ -77,7 +77,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.datalist {
+do_statistics_view_data {
   right: 0%;
 }
 table {

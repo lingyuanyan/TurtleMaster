@@ -1,5 +1,13 @@
 <template>
   <div class="post">
+    <details>
+      <summary>Comments</summary>
+      <form action="/action_page.php">
+        <textarea name="message" rows="10" cols="30" placeholder="This Site is superb"></textarea>
+
+        <input type="submit">
+      </form>
+    </details>
   </div>
 </template>
 
@@ -14,4 +22,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+details {
+  text-align: center;
+}
 </style>

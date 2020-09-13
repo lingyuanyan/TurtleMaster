@@ -314,18 +314,18 @@ def parser_world_data(fname, drop_table):
             continue
         if(pieces[0] == 'Recovered'): continue
 
-        country_region=pieces[key_pos_dic["country_region"]]
-        province_state=pieces[key_pos_dic["province_state"]] or country_region
-        last_update=pieces[key_pos_dic["last_update"]] or date.today().strftime("%m/%d/%Y %H:%M:%S")
-        latitude=pieces[key_pos_dic["latitude"]] or '0.0' if "latitude" in key_pos_dic else '0.0'
-        longitude=pieces[key_pos_dic["longitude"]] or '0.0' if "longitude" in key_pos_dic else '0.0'
-        confirmed=pieces[key_pos_dic["confirmed"]] or '0' if "confirmed" in key_pos_dic else '0'
-        deaths=pieces[key_pos_dic["deaths"]] or '0' if "deaths" in key_pos_dic else '0'
-        recovered=(pieces[key_pos_dic["recovered"]] or '0').split('.')[0] if "recovered" in key_pos_dic else '0'
-        active=(pieces[key_pos_dic["active"]] or '0').split(".")[0] if "active" in key_pos_dic else '0'
-        FIPS=pieces[key_pos_dic["fips"]] or '0' if "fips" in key_pos_dic else '0'
-        admin2=pieces[key_pos_dic["admin2"]] if "admin2" in key_pos_dic else ""
-        combined_key=pieces[key_pos_dic["combined_key"]] if "combined_key" in key_pos_dic else ""
+        country_region = pieces[key_pos_dic["country_region"]]
+        province_state = pieces[key_pos_dic["province_state"]] or country_region
+        last_update = pieces[key_pos_dic["last_update"]] or date.today().strftime("%m/%d/%Y %H:%M:%S")
+        latitude = pieces[key_pos_dic["latitude"]] or '0.0' if "latitude" in key_pos_dic else '0.0'
+        longitude = pieces[key_pos_dic["longitude"]] or '0.0' if "longitude" in key_pos_dic else '0.0'
+        confirmed = pieces[key_pos_dic["confirmed"]] or '0' if "confirmed" in key_pos_dic else '0'
+        deaths = pieces[key_pos_dic["deaths"]] or '0' if "deaths" in key_pos_dic else '0'
+        recovered = (pieces[key_pos_dic["recovered"]] or '0').split('.')[0] if "recovered" in key_pos_dic else '0'
+        active = (pieces[key_pos_dic["active"]] or '0').split(".")[0] if "active" in key_pos_dic else '0'
+        FIPS = str(int(float(pieces[key_pos_dic["fips"]] or '0' if "fips" in key_pos_dic else '0')))
+        admin2 = pieces[key_pos_dic["admin2"]] if "admin2" in key_pos_dic else ""
+        combined_key = pieces[key_pos_dic["combined_key"]] if "combined_key" in key_pos_dic else ""
 
         insert_sql='''INSERT INTO INFECTION_DATA_WORLD (
             FIPS,
@@ -805,7 +805,7 @@ def iterate_files(folder_path, data_type, drop_table):
             try:
                 if(data_type == "us"):
                     parser_us_data(fullpath, drop_table)
-                if(data_type == "world"):
+                if (data_type == "world"):
                     parser_world_data(fullpath, drop_table)
                 if(data_type == "time_series"):
                     parser_time_series_data_us(fullpath, if_drop_table)
