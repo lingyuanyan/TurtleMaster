@@ -70,7 +70,6 @@ nav {
   text-align: center;
   bottom: 12px;
 }
-
 .banner {
   position: fixed;
   background-color: #97d64e;
