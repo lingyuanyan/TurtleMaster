@@ -37,8 +37,8 @@ new Vue ({
       this.Mattack()
     },
     Heal: function() {
-    	var max = 10;
-      var min = 5;
+    	var max = 300;
+      var min = 50;
       var heal = Math.max(Math.floor(Math.random() * max) + 1, min);
       this.Yhealth += heal;
 
