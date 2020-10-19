@@ -1,34 +1,30 @@
 <!DOCTYPE html>
-
-<html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
-  <title>Turtle Master</title>
-  {% load static %}
+  <title>TurtleMaster</title>
   <link rel="stylesheet" type="text/css" href="{% static 'TurtleMasterApp/TurtleMaster.css' %}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
-
-
-
 <body>
-  <p><a href="https://www.youtube.com/watch?v=n6QwnzbRUyA" target = "blank">Click here to learn how to lower your risk of getting covid.</a></p>
-  {% block content %} {% endblock %}
-
+  <div>{% load static %}</div>
+  <section class="Videos">
+    <p><a href="https://www.youtube.com/watch?v=n6QwnzbRUyA" target = "blank">Click here to learn how to lower your risk of getting covid.</a></p>
+    <p><a href="https://www.youtube.com/watch?v=FVIGhz3uwuQ" target = "blank">Click here to learn covid vs the flu.</a></p>
+    <p><a href="https://www.youtube.com/watch?v=r6ewlQs8CAQ" target = "blank">Click here to learn what the US did wrong about testing covid.</a></p>
+    <p><a href="https://www.youtube.com/watch?v=-LKVUarhtvE" target = "blank">Click here to learn about soap vs covid.</a></p>
+    <p><a href="https://www.youtube.com/watch?v=O-3Mlj3MQ_Q" target = "blank">Click here to learn about covid charts misleading us.</a></p>
+    <p><a href="https://www.youtube.com/watch?v=421fmflQX0E" target = "blank">Click here to learn about the look of covid</a></p>
+    <p><a href="https://www.youtube.com/watch?v=v_kq8_Z4LXQ" target = "blank">Click here to learn about the symptoms</a></p>
+  </section>
+  <div>{% block content %} {% endblock %}</div>
 </body>
-
-
-
 </html>
