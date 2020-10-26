@@ -25,7 +25,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  a{
+  section.videos a{
   display: block;
   text-decoration: none;
   color: #8080ff;
@@ -47,7 +47,7 @@ export default {
   height: 5vh;
   }
 
-  a:hover{
+  section.videos a:hover{
   color: #bfbfff;
   border-radius: 0;
   -webkit-border-radius: 0;
