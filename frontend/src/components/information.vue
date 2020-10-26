@@ -100,18 +100,17 @@ Cove your sneeze with you elbow
 Do not touch your face because your eyes nose and mouth because they are like the one point on the death star that is week.
 To clean your hands the best use both hand sanitizer and soap and water. This is because Hand sanitizer will get rid of Rhinovirus which is stronger than the shell of covid. So, Hand sanitizer will get rid of most of the germs. Then if you use soap and water this will get rid of the other germs that the hand sanitizer did not get.
 Your lungs can get infected. When this happens
+The cases that are reported are the people that hwere tested not everyone is being tested daily.
 =======
   <div class="information">
     <section class="videos">
       <h1>Videos</h1>
-      <a href="https://www.youtube.com/watch?v=n6QwnzbRUyA" target="_blank">click here to learn how to lower your risk of getting covid.</a><br/>
-      <a href="https://www.youtube.com/watch?v=FVIGhz3uwuQ" target="_blank">click here to learn covid vs the flu.</a><br/>
-      <a href="https://www.youtube.com/watch?v=r6ewlQs8CAQ" target="_blank">click here to learn what the US did wrong about testing covid.</a><br/>
-      <a href="https://www.youtube.com/watch?v=-LKVUarhtvE" target="_blank">click here to learn about soap vs covid.</a><br/>
-      <a href="https://www.youtube.com/watch?v=O-3Mlj3MQ_Q" target="_blank">click here to learn about covid charts misleading us.</a><br/>
-      <a href="https://www.youtube.com/watch?v=421fmflQX0E" target="_blank">click here to learn about the look of covid.</a><br/>
-      <a href="https://www.youtube.com/watch?v=U8r3oTVMtQ0" target="_blank">click here to learn about the symptoms</a><br/>
-      <a href="https://www.youtube.com/watch?v=x7KKkElpyKQ" target="_blank">click here to learn about soap vs. hand sanitizer</a>
+      <a href="https://www.youtube.com/watch?v=n6QwnzbRUyA" target="_blank">How to lower your chances of getting Covid. </a><br/>
+      <a href="https://www.youtube.com/watch?v=FVIGhz3uwuQ" target="_blank">Covid vs Flu (Hint: there very diffrent. ) </a><br/>
+      <a href="https://www.youtube.com/watch?v=-LKVUarhtvE" target="_blank">soap vs covid.</a><br/>
+      <a href="https://www.youtube.com/watch?v=O-3Mlj3MQ_Q" target="_blank">Misleading data on Covid. </a><br/>
+      <a href="https://www.youtube.com/watch?v=U8r3oTVMtQ0" target="_blank">Symptoms of Covid</a><br/>
+      <a href="https://www.youtube.com/watch?v=x7KKkElpyKQ" target="_blank">soap vs. hand sanitizer</a>
     </section>
 >>>>>>> 52f97e3ca6f03bad7e52f2f46efe0be4e7f7371b
   </div>
