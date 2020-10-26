@@ -93,7 +93,7 @@ cotton x2 is best kind of face mask.
 Avoid social activities in person if you are or a loved one is classified as at risk
 Use both hand sanitizer and soap and water when possible.
 When on the go use hand sanitizer for a long as possible rubbing it whole hand.
-When using soap and water also cover your whole hand.
+When using soap and water also cover your whole hand and nails. 
 Do both for 20 seconds.
 When using hand sanitizer use it until your hand are dry.
 Cove your sneeze with you elbow
