@@ -3,7 +3,7 @@
     <details>
       <summary>Comments</summary>
       <form action="/action_page.php">
-        <textarea name="message" rows="10" cols="30" placeholder="This Site is superb"></textarea>
+        <textarea name="message" rows="10" cols="30" placeholder="Your review"></textarea>
 
         <input type="submit">
       </form>
