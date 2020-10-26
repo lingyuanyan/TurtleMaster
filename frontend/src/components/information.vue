@@ -26,33 +26,33 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   section.videos a{
-  display: block;
-  text-decoration: none;
-  color: #8080ff;
-  transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
-  -webkit-transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
-  -moz-transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
-  -o-transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
-  -ms-transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
-  background-color: #000;
-  margin: 5px;
-  padding: 1vh 1vw;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -o-border-radius: 50%;
-  -ms-border-radius: 50%;
-  text-align: center;
-  width: 95vw;
-  height: 5vh;
+    display: block;
+    text-decoration: none;
+    color: #8080ff;
+    transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
+    -webkit-transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
+    -moz-transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
+    -o-transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
+    -ms-transition: all 0.3s cubic-bezier(0.93, 0.43, 0.66, 0.29);
+    background-color: #000;
+    margin: 5px;
+    padding: 1vh 1vw;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    text-align: center;
+    width: 95vw;
+    height: 5vh;
   }
 
   section.videos a:hover{
-  color: #bfbfff;
-  border-radius: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
-  -ms-border-radius: 0;
+    color: #bfbfff;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    -ms-border-radius: 0;
   }
 </style>
