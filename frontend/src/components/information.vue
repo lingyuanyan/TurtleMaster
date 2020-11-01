@@ -89,7 +89,7 @@
 
     Day 5 trouble breathing
 
-    Seven days to go to hospital. 
+    Seven days to go to hospital.
 
     Some will recover after 7 days.
 
@@ -100,14 +100,13 @@
     Stay home when you are sick.
     </div>
 </template>
-
 <script>
-export default {
-  name: 'Information.vue',
-  props: {
-    msg: String
-  }
-}
+    export default {
+        name: 'Information.vue',
+        props: {
+            msg: String
+        }
+    }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
