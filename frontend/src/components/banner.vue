@@ -20,7 +20,6 @@
       <a href="history.html" class="active">Info</a>
       <a href="history.html">About Us</a>
       <a href="history.html">Websites on Covid-19</a>
-      <a href="history.html">Videos</a>
     </nav>
   </div>
 </template>
