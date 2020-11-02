@@ -37,31 +37,6 @@ img[src="../assets/turtlemaster_logo.jpg"] {
   left: 15px;
   top: 15px;
 }
-.active {
-  background-color: #5f4238;
-}
-a:hover{
-  background-color:#8b6152
-}
-nav a {
-  text-decoration: none;
-  border-radius: 12px;
-  padding: 5px;
-  display: inline;
-  margin-top: 3px;
-  margin-left: auto;
-  margin-right: auto;
-  top: 5px;
-  background-color: #4a810c;
-  text-align: center;
-  font-family: cursive;
-  color: white;
-}
-nav {
-  position: relative;
-  text-align: center;
-  bottom: 12px;
-}
 .banner {
   position: fixed;
   background-color: #97d64e;
