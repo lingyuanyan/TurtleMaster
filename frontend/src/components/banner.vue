@@ -6,7 +6,6 @@
       alt="Little Master's Club Logo"
       width="50px"
       height="50px"
-      class="lmc_logo"
     />
     <img
       src="../assets/turtlemaster_logo.jpg"
@@ -29,12 +28,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.lmc_logo {
+img[src="../assets/lmc_logo.jpg"] {
   position: fixed;
   right: 15px;
   top: 15px;
 }
-.tm_logo {
+img[src="../assets/turtlemaster_logo.jpg"] {
   position: fixed;
   left: 15px;
   top: 15px;
