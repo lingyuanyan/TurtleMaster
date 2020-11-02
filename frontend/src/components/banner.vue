@@ -15,12 +15,6 @@
       height="50px"
       class="tm_logo"
     />
-    <nav>
-      <a href="history.html">Home</a>
-      <a href="history.html" class="active">Info</a>
-      <a href="history.html">About Us</a>
-      <a href="history.html">Websites on Covid-19</a>
-    </nav>
   </div>
 </template>
 
