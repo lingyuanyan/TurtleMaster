@@ -47,17 +47,17 @@
        <li>Inability to wake or stay awake</li>
        <li>Bluish lips or face</li>
        <li>Pneumonia</li>
-       <h3>What happens after you have been infected.</h3>
+     </ul>
 
 
-
+<ul>
     <h3>Isolate yourself if u have done these things with someone who has covid in the last 3 months</h3>
-    <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.
-    <li>Isolate yourself provided care at home to someone who is sick with COVID-19
-    <li>Isolate yourself had direct physical contact with the person (hugged or kissed them)
-    <li>Isolate yourself shared eating or drinking utensils
-    <li>Isolate yourself sneezed, coughed, or somehow got respiratory droplets on you
-
+    <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.</li>
+    <li>Isolate yourself provided care at home to someone who is sick with COVID-19</li>
+    <li>Isolate yourself had direct physical contact with the person (hugged or kissed them)</li>
+    <li>Isolate yourself shared eating or drinking utensils</li>
+    <li>Isolate yourself sneezed, coughed, or somehow got respiratory droplets on you</li>
+</ul>
 
 
 

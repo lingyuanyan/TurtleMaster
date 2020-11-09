@@ -33,7 +33,7 @@
       <td>{{ record.country_region }}-{{ record.province_state }}-</td>
       <td>confirmed {{record.confirmed}},</td>
       <td>deaths {{record.deaths}},</td>
-      <td>recovered {{record.recoverd}}</td>
+      <td>recovered {{record.recovered}}</td>
       <td>Last Update {{record.last_update}}</td>
     </tr>
   </table>
