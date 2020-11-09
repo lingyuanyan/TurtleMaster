@@ -13,6 +13,10 @@
       width="50px"
       height="50px"
     />
+    <nav>
+      <a href="#us">US</a>
+      <a href="#world">World</a>
+    </nav>
   </div>
 </template>
 
@@ -49,5 +53,11 @@ img[src="../assets/turtlemaster_logo.jpg"] {
 h1 {
   text-align: center;
   top: 2px;
+}
+nav a {
+  background-color: #4a810c;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
 }
 </style>
