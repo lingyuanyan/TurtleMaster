@@ -48,22 +48,25 @@
        <li>Bluish lips or face</li>
        <li>Pneumonia</li>
        <h3>What happens after you have been infected.</h3>
+     </ul>
 
 
 
-    <h3>Isolate yourself if u have done these things with someone who has covid in the last 3 months</h3>
-    <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.
-    <li>Isolate yourself provided care at home to someone who is sick with COVID-19
-    <li>Isolate yourself had direct physical contact with the person (hugged or kissed them)
-    <li>Isolate yourself shared eating or drinking utensils
-    <li>Isolate yourself sneezed, coughed, or somehow got respiratory droplets on you
+    <h3>Isolate yourself if you have done these things with someone who has covid in the last 3 months</h3>
+    <ul>
+      <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.
+      <li>Isolate yourself provided care at home to someone who is sick with COVID-19
+      <li>Isolate yourself had direct physical contact with the person (hugged or kissed them)
+      <li>Isolate yourself shared eating or drinking utensils
+      <li>Isolate yourself sneezed, coughed, or somehow got respiratory droplets on you
+    </ul>
 
 
 
 
     Soap vs. Hand sanitizer
 
-    https://www.youtube.com/watch?v=U8r3oTVMtQ0
+    <a href="https://www.youtube.com/watch?v=U8r3oTVMtQ0">https://www.youtube.com/watch?v=U8r3oTVMtQ0</a>
     Correction. Using hand sanitizer first
     then soap
 
@@ -74,7 +77,7 @@
 
      you and objects
 
-    https://www.youtube.com/watch?v=x7KKkElpyKQ
+    <a href="https://www.youtube.com/watch?v=x7KKkElpyKQ">https://www.youtube.com/watch?v=x7KKkElpyKQ</a>
 
      soap is better because it also gets rid of dirt that could be hiding
 
@@ -85,19 +88,15 @@
     When using hand sanitizer use it until your hand are dry.
 
     <h3>What happens arfter you have been infected.</h3>
-    First day feels like the flu.
-
-    Day 5 trouble breathing
-
-    Seven days to go to hospital.
-
-    Some will recover after 7 days.
-
-    Others will go to the hospital
-
-    If you go to the hospital you will probably have Pneumonia.
-
-    Stay home when you are sick.
+    <ul>
+      <li>First day feels like the flu.</li>
+      <li>Day 5 trouble breathing</li>
+      <li>Seven days to go to hospital.</li>
+      <li>Some will recover after 7 days.</li>
+      <li>Others will go to the hospital</li>
+      <li>If you go to the hospital you will probably have Pneumonia.</li>
+      <li>Stay home when you are sick.</li>
+    </ul>
     </div>
 </template>
 <script>
