@@ -14,8 +14,8 @@
       height="50px"
     />
     <nav>
-      <a href="#us">US</a>
-      <a href="#world">World</a>
+      <a href="#us">us</a>
+      <a href="#world">world</a>
     </nav>
   </div>
 </template>
