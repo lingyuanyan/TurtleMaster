@@ -86,6 +86,7 @@
     When using soap and water also cover your whole hand. Do both for about 20 seconds.
 
     When using hand sanitizer use it until your hand are dry.
+    While Soap and Water cna get rid of all dirt that might hide viruses it is not as effective against othe viruses that have a harder outer shell that isn't as easy to penetrate. So when possible use hand sanitizer then use the soap and water as the ultimite solution. 
 
     <h3>What happens arfter you have been infected.</h3>
     <ul>
