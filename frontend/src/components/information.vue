@@ -54,11 +54,11 @@
 
     <h3>Isolate yourself if you have done these things with someone who has covid in the last 3 months</h3>
     <ul>
-      <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.
-      <li>Isolate yourself provided care at home to someone who is sick with COVID-19
-      <li>Isolate yourself had direct physical contact with the person (hugged or kissed them)
-      <li>Isolate yourself shared eating or drinking utensils
-      <li>Isolate yourself sneezed, coughed, or somehow got respiratory droplets on you
+      <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.</li>
+      <li>Isolate yourself provided care at home to someone who is sick with COVID-19</li>
+      <li>Isolate yourself had direct physical contact with the person (hugged or kissed them)</li>
+      <li>Isolate yourself shared eating or drinking utensils</li>
+      <li>Isolate yourself sneezed, coughed, or somehow got respiratory droplets on you</li>
     </ul>
 
 
@@ -86,9 +86,9 @@
     When using soap and water also cover your whole hand. Do both for about 20 seconds.
 
     When using hand sanitizer use it until your hand are dry.
-    While Soap and Water cna get rid of all dirt that might hide viruses it is not as effective against othe viruses that have a harder outer shell that isn't as easy to penetrate. So when possible use hand sanitizer then use the soap and water as the ultimite solution.
+    While Soap and Water can get rid of all dirt that might hide viruses it is not as effective against other viruses that have a harder outer shell that isn't as easy to penetrate. So when possible use hand sanitizer then use the soap and water as the ultimite solution.
 
-    <h3>What happens arfter you have been infected.</h3>
+    <h3>What happens after you have been infected.</h3>
     <ul>
       <li>First day feels like the flu.</li>
       <li>Day 5 trouble breathing</li>
