@@ -96,6 +96,8 @@
       <li>Some will recover after 7 days.</li>
       <li>Others will go to the hospital</li>
       <li>If you go to the hospital you will probably have Pneumonia.</li>
+      <li>Days 12-14 if people die this is most times. </li>
+      <li>Day 18 is when most at tisk patients die. </li>
       <li>Stay home when you are sick.</li>
     </ul>
   </div>
