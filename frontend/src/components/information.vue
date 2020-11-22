@@ -54,11 +54,9 @@
 
     <h3>Isolate yourself if you have done these things with someone who has covid in the last 3 months</h3>
     <ul>
-      <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.</li>
-      <li>Isolate yourself provided care at home to someone who is sick with COVID-19</li>
-      <li>Isolate yourself had direct physical contact with the person (hugged or kissed them)</li>
-      <li>Isolate yourself shared eating or drinking utensils</li>
-      <li>Isolate yourself sneezed, coughed, or somehow got respiratory droplets on you</li>
+      <li>Isolate yourself if you were with someone who has COVID-19.</li>
+      <li>Isolate yourself provide care at home to someone who is sick with COVID-19</li>
+      <li>Isolate yourself if you shared eating or drinking utensils</li>
     </ul>
 
 
@@ -81,13 +79,12 @@
 
      soap is better because it also gets rid of dirt that could be hiding
 
-    When on the go use hand sanitizer for a long as possible rubbing it whole hand.
+    When on the go use hand sanitizer for a long as possible rubbing it over the whole hand.
 
     When using soap and water also cover your whole hand. Do both for about 20 seconds.
 
     When using hand sanitizer use it until your hand are dry.
-    While Soap and Water can get rid of all dirt that might hide viruses it is not as effective against other viruses that have a harder outer shell that isn't as easy to penetrate. So when possible use hand sanitizer then use the soap and water as the ultimite solution.
-
+    While Soap and Water can get rid of all dirt that might hide viruses it is not as effective against other viruses called Rhinoviruses that don't have as many weak points that the soap and take advantage of while the Hand sanatizer will still work in destabilizing the virus. So when possibel use sanitizer and then use soap and water to get rid of dirt.
     <h3>What happens after you have been infected.</h3>
     <ul>
       <li>First day feels like the flu.</li>
