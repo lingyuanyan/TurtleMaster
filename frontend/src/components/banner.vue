@@ -17,8 +17,9 @@
     />
     <nav>
       <a href="#us">us</a>
-      <a href="#ch">world</a>
+      <a href="#ch">china</a>
       <a href="#world">world</a>
+      <a href="#info">information</a>
     </nav>
   </div>
 </template>

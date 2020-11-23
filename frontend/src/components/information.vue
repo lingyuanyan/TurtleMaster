@@ -1,5 +1,5 @@
 <template>
-  <div class="information.vue">
+  <div class="information.vue" id="info">
     <h3>If you think you are infected.</h3>
     <ol>
         <li>Isolate yourself and stay away from others</li>
