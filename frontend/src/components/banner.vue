@@ -17,6 +17,7 @@
     />
     <nav>
       <a href="#us">us</a>
+      <a href="#ch">world</a>
       <a href="#world">world</a>
     </nav>
   </div>
@@ -62,6 +63,7 @@ h1 {
 
 nav a {
   background-color: #4a810c;
+  color: #a1c891;
   border-radius: 100%;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;

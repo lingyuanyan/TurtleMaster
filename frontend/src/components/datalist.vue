@@ -22,6 +22,16 @@
       <td>recovered {{record.recovered}}</td>
       <td>Last Update {{record.last_update}}</td>
     </tr>
+    <tr>
+      <th>China</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+
+    </tr>
     <tr id="world">
       <th>World</th>
       <th></th>
