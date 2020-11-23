@@ -15,8 +15,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 footer{
-  background-color:#00aeff;
-  border:1px solid #00aeff;
+  background: #20f030;
+  border:1px solid #008000;
   font-family: cursive;
   position:fixed;
   bottom: 0px;
