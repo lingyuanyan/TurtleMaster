@@ -87,7 +87,7 @@ class InfectionDataWorldStatisticsViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = InfectionDataWorldStatistics.objects.all().order_by('timestamp')
+    queryset = InfectionDataWorldStatistics.objects.all().order_by('timestamp').exclude(country_region = 'US')
     serializer_class = InfectionDataWorldStatisticsSerializer
     permission_classes = [permissions.AllowAny]
 

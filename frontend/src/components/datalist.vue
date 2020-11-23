@@ -1,7 +1,7 @@
 <template>
 <div class="datalist">
   <table>
-    <tr>
+    <tr id="us">
       <th class="th">Location</th>
       <th class="th">Confirmed</th>
       <th class="th">Deaths</th>
@@ -9,37 +9,33 @@
       <th class="th">Last Update</th>
     </tr>
     <tr>
-      <div id="us">
-        <th>US</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr v-for="record in us_satistics_json" :key="record.province_state">
-        <td>{{ record.province_state }}-</td>
-        <td>confirmed {{record.confirmed}},</td>
-        <td>deaths {{record.deaths}},</td>
-        <td>recovered {{record.recovered}}</td>
-        <td>Last Update {{record.last_update}}</td>
-      </tr>
-    </div>
-    <div id="world">
-      <tr>
-        <th>World</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr v-for="(record, i) in world_statistics_json" :key="i">
-        <td>{{ record.country_region }}-{{ record.province_state }}-</td>
-        <td>confirmed {{record.confirmed}},</td>
-        <td>deaths {{record.deaths}},</td>
-        <td>recovered {{record.recoverd}}</td>
-        <td>Last Update {{record.last_update}}</td>
-      </tr>
-    </div>
+      <th>US</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr v-for="record in us_satistics_json" :key="record.province_state">
+      <td>{{ record.province_state }}-</td>
+      <td>confirmed {{record.confirmed}},</td>
+      <td>deaths {{record.deaths}},</td>
+      <td>recovered {{record.recovered}}</td>
+      <td>Last Update {{record.last_update}}</td>
+    </tr>
+    <tr id="world">
+      <th>World</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr v-for="(record, i) in world_statistics_json" :key="i">
+      <td>{{ record.country_region }}-{{ record.province_state }}-</td>
+      <td>confirmed {{record.confirmed}},</td>
+      <td>deaths {{record.deaths}},</td>
+      <td>recovered {{record.recovered}}</td>
+      <td>Last Update {{record.last_update}}</td>
+    </tr>
   </table>
 </div>
 </template>
