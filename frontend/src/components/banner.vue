@@ -65,6 +65,7 @@ nav a {
   border-radius: 100%;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
+  width: 25%;
 }
 
 nav {
