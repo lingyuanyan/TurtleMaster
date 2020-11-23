@@ -6,12 +6,14 @@
       alt="Little Master's Club Logo"
       width="50px"
       height="50px"
+      class="little_masters_logo"
     />
     <img
       src="../assets/turtlemaster_logo.jpg"
       alt="TurtleMaster Logo"
       width="50px"
       height="50px"
+      class="turtle_master_logo"
     />
     <nav>
       <a href="#us">us</a>
@@ -31,16 +33,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-img[src="../assets/lmc_logo.jpg"] {
+.little_masters_logo {
   position: fixed;
   right: 15px;
   top: 15px;
 }
-img[src="../assets/turtlemaster_logo.jpg"] {
+
+.turtle_master_logo {
   position: fixed;
   left: 15px;
   top: 15px;
 }
+
 .banner {
   position: fixed;
   background-color: #97d64e;
@@ -50,14 +54,20 @@ img[src="../assets/turtlemaster_logo.jpg"] {
   left: 0px;
   height: 75px;
 }
+
 h1 {
   text-align: center;
   top: 2px;
 }
+
 nav a {
   background-color: #4a810c;
   border-radius: 100%;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
+}
+
+nav {
+  text-align: center;
 }
 </style>

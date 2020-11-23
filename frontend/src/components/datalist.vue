@@ -1,7 +1,7 @@
 <template>
 <div class="datalist">
   <table>
-    <tr>
+    <tr id="us">
       <th class="th">Location</th>
       <th class="th">Confirmed</th>
       <th class="th">Deaths</th>
@@ -22,7 +22,7 @@
       <td>recovered {{record.recovered}}</td>
       <td>Last Update {{record.last_update}}</td>
     </tr>
-    <tr>
+    <tr id="world">
       <th>World</th>
       <th></th>
       <th></th>
