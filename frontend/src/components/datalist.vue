@@ -85,7 +85,7 @@ do_statistics_view_data {
   right: 0%;
 }
 table {
-  background-color: #c4dbaa;
+  background-color: #33ff00;
   top: 50px;
   margin: auto;
 }
@@ -93,9 +93,9 @@ table {
   font-size: 20px;
 }
 td, th{
-  border: 1px solid #70b024;
+  border: 1px solid #33ff00;
 }
 tr:hover{
-  background-color:#bccd12;
+  background-color:#33ff00;
 }
 </style>
