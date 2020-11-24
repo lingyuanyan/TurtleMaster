@@ -25,6 +25,12 @@
        <li>cover your mouth or nose whenever you sneeze or cough.</li>
        <li>avid touching surfaces outside.</li>
        <li>clean everything as many times as possible to keep germs from sticking onto them</li>
+       <li>NOte that </li>
+       <li>When indoors and eating avoid sitting next to the air conditioning as this will keep the Covid in the air.</li>
+       <li>To when know that the pandemic is mostly over is when the infection can no longer be spread not when a vaccine comes out.</li>
+       <li>The other health way for a pandemic to end is when most people die from it and other people that don't die have immunity hopefully this is not the way Covid ends.</li>
+       <li>Covid could also "end" with people getting sick of staying home and going outside because there got tired of quarintine. </li>
+       <li></li>
      </ul>
      <h3>Symptoms of Covid-19</h3>
      <ul>
@@ -73,7 +79,7 @@
 
      What better soap or hand sanitizer. IT says that in general soap is better. This is because they keep the cell completely apart
 
-     you and objects
+     disinfect you and objects
 
     <a href="https://www.youtube.com/watch?v=x7KKkElpyKQ">https://www.youtube.com/watch?v=x7KKkElpyKQ</a>
 
@@ -94,8 +100,17 @@
       <li>Others will go to the hospital</li>
       <li>If you go to the hospital you will probably have Pneumonia.</li>
       <li>Days 12-14 if people die this is most times. </li>
-      <li>Day 18 is when most at tisk patients die. </li>
+      <li>Day 18 is when most at risk patients die. </li>
       <li>Stay home when you are sick.</li>
+    </ul>
+    <ul>
+        <li>If and when a vaccine comes out don't think that just because there are weaker verisons or dead verisons of C</li>
+
+
+
+
+
+
     </ul>
   </div>
 </template>
