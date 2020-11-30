@@ -10,7 +10,7 @@
 
      <h3>How to avoid Infection</h3>
      <ul>
-       <li>Avoid touching any surface when outside.<li>
+       <li>Avoid touching any surface when outside.</li>
        <li>Limit outside activity.</li>
        <li>Wear a mask whenever you go outside or when you are going to be around infected people.</li>
        <li>Try to social distance with as many people as possible. (6ft away ,2 yards. 1.8288 meters)</li>
@@ -25,12 +25,14 @@
        <li>cover your mouth or nose whenever you sneeze or cough.</li>
        <li>avid touching surfaces outside.</li>
        <li>clean everything as many times as possible to keep germs from sticking onto them</li>
-       <li>Note that <br>
-       When indoors and eating avoid sitting next to the air conditioning as this will keep the Covid in the air.</li>
-       <li>To when know that the pandemic is mostly over is when the infection can no longer be spread not when a vaccine comes out.</li>
-       <li>The other health way for a pandemic to end is when most people die from it and other people that don't die have immunity hopefully this is not the way Covid ends.</li>
-       <li>Covid could also "end" with people getting sick of staying home and going outside because there got tired of quarintine. </li>
-       <li></li>
+       <li>Note that... 
+          <ul>
+            <li>When indoors and eating avoid sitting next to the air conditioning as this will keep the Covid in the air.</li>
+            <li>To when know that the pandemic is mostly over is when the infection can no longer be spread not when a vaccine comes out.</li>
+            <li>The other health way for a pandemic to end is when most people die from it and other people that don't die have immunity hopefully this is not the way Covid ends.</li>
+            <li>Covid could also "end" with people getting sick of staying home and going outside because there got tired of quarintine. </li>
+          </ul>
+        </li>
      </ul>
      <h3>Symptoms of Covid-19</h3>
      <ul>
@@ -57,7 +59,7 @@
 
 
 
-    <h3>Isolate yourself if u have done these things with someone who has covid in the last 3 months</h3>
+    <h3>Isolate yourself if you have done these things with someone who has covid in the last 3 months</h3>
 <ul>
     <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.</li>
     <li>Isolate yourself provided care at home to someone who is sick with COVID-19</li>
@@ -105,12 +107,6 @@
     </ul>
     <ul>
         <li>If and when a vaccine comes out don't think that just because there are weaker verisons or dead verisons of C</li>
-
-
-
-
-
-
     </ul>
   </div>
 </template>
@@ -127,5 +123,8 @@
 <style scoped>
   * {
       color: #008000;
+  }
+  a {
+    color: #0000ff;
   }
 </style>
