@@ -69,6 +69,7 @@ nav a {
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   width: 25%;
+  padding: 0.5%;
 }
 
 nav {

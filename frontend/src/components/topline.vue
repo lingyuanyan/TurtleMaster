@@ -172,7 +172,7 @@ table {
   border: 2px solid black;
 }
 #deaths {
-  color: red;
+  color: #f00;
 }
 .th{
   font-size: 20px;
@@ -185,5 +185,8 @@ tr:hover{
 }
 .white {
   height: 80px;
+}
+#toplineContainer {
+  margin: 0 auto;
 }
 </style>
