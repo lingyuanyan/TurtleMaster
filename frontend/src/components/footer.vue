@@ -21,6 +21,8 @@ export default {
   border: 5px groove #5eac64;
   font-family: 'Dancing Script', 'Great Vibes', cursive, serif, monospace, sans-serif;
   width: 100%;
+  position: fixed;
+  bottom: 0px;
   left: 0px;
   text-align: center;
 }
