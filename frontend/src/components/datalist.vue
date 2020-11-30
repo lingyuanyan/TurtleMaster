@@ -10,10 +10,10 @@
     </tr>
     <tr>
       <th>US</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>confirmed 13506766,</th>
+      <th>deaths 270520,</th>
+      <th>recovered 6564563</th>
+      <th>Last Update 2020-11-30</th>
     </tr>
     <tr v-for="record in us_satistics_json" :key="record.province_state">
       <td>{{ record.province_state }}-</td>
@@ -24,20 +24,20 @@
     </tr>
     <tr id="ch">
       <th>China</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>confirmed 86530,</th>
+      <th>deaths 4634,</th>
+      <th>recovered 81619</th>
+      <th>Last Update 2020-11-30</th>
     </tr>
     <tr>
 
     </tr>
     <tr id="world">
       <th>World</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>confirmed 62787929</th>
+      <th>deaths 1460179,</th>
+      <th>recovered 40168970</th>
+      <th>Last Update 11-30-2020</th>
     </tr>
     <tr v-for="(record, i) in world_statistics_json" :key="i">
       <td>{{ record.country_region }}-{{ record.province_state }}-</td>
@@ -97,6 +97,7 @@ table {
 }
 .th{
   font-size: 20px;
+  font-weight: 800;
 }
 td, th{
   border: 1px solid #bf3;

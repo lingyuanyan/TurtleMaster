@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    
+    Stay safe from COVID-19
   </div>
 </template>
 
@@ -18,11 +18,10 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&display=swap');
 .footer{
   background: #20f030;
-  border: 5px groove #659269;
+  border: 5px groove #5eac64;
   font-family: 'Dancing Script', 'Great Vibes', cursive, serif, monospace, sans-serif;
-  position: absolute;
-  bottom: 0px;
   width: 100%;
   left: 0px;
+  text-align: center;
 }
 </style>
