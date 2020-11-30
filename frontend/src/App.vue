@@ -36,5 +36,6 @@ export default {
 <style>
 #app {
   background-color: #cafbb6;
+  padding-bottom: 15px;
 }
 </style>
