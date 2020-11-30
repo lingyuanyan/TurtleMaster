@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <img alt="TurtleMaster Logo" class="game-link" />Here is a game you can play <a href="">Monster Slayer</a>
+    
   </div>
 </template>
 
