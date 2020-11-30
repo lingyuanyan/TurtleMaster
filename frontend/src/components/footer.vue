@@ -25,14 +25,4 @@ export default {
   width: 100%;
   left: 0px;
 }
-
-.game-link {
-  color: #4040ff;
-  text-decoration: none;
-}
-
-.game-link:hover, .game-link:focus {
-  color: #0000bf;
-  text-decoration: underline;
-}
 </style>
