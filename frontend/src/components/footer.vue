@@ -19,7 +19,7 @@ export default {
 .footer{
   background: #20f030;
   border: 5px groove #38f576;
-  font-family: 'Dancing Script', 'Great Vibes', cursive, fantasy, serif, monospace, sans-serif;
+  font-family: 'Dancing Script', 'Great Vibes', cursive, serif, monospace, sans-serif;
   position: absolute;
   bottom: 0px;
   width: 100%;

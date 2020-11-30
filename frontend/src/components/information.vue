@@ -25,8 +25,8 @@
        <li>cover your mouth or nose whenever you sneeze or cough.</li>
        <li>avid touching surfaces outside.</li>
        <li>clean everything as many times as possible to keep germs from sticking onto them</li>
-       <li>NOte that </li>
-       <li>When indoors and eating avoid sitting next to the air conditioning as this will keep the Covid in the air.</li>
+       <li>Note that <br>
+       When indoors and eating avoid sitting next to the air conditioning as this will keep the Covid in the air.</li>
        <li>To when know that the pandemic is mostly over is when the infection can no longer be spread not when a vaccine comes out.</li>
        <li>The other health way for a pandemic to end is when most people die from it and other people that don't die have immunity hopefully this is not the way Covid ends.</li>
        <li>Covid could also "end" with people getting sick of staying home and going outside because there got tired of quarintine. </li>
@@ -77,7 +77,7 @@
 
 
 
-     What better soap or hand sanitizer. IT says that in general soap is better. This is because they keep the cell completely apart
+     What better soap or hand sanitizer. It says that in general soap is better. This is because they keep the cell completely apart
 
      disinfect you and objects
 
