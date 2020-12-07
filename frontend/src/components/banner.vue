@@ -1,6 +1,12 @@
 <template>
   <div class="banner">
-    <h1>Welcome to TurtleMaster</h1>
+    <div id = "title">
+      <h1>Welcome to TurtleMaster</h1>
+      <nav>
+        <a href="#us">us</a>
+        <a href="#world">world</a>
+      </nav>
+    </div>
     <img
       src="../assets/lmc_logo.jpg"
       alt="Little Master's Club Logo"
@@ -9,7 +15,7 @@
       class="little_masters_logo"
     />
     <img
-      src="../assets/turtlemaster_logo.jpg"
+      src="../assets/TurtleMaster_Logo.png"
       alt="TurtleMaster Logo"
       width="50px"
       height="50px"
@@ -21,9 +27,8 @@
       <a href="#world">world</a>
       <a href="#info">information</a>
     </nav>
-  </div>
+</div>
 </template>
-
 <script>
 export default {
   name: "Banner",
@@ -32,7 +37,6 @@ export default {
   }
 };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .little_masters_logo {
@@ -40,13 +44,11 @@ export default {
   right: 15px;
   top: 15px;
 }
-
 .turtle_master_logo {
   position: fixed;
   left: 15px;
   top: 15px;
 }
-
 .banner {
   position: fixed;
   background-color: #97d64e;
@@ -56,12 +58,10 @@ export default {
   left: 0px;
   height: 75px;
 }
-
 h1 {
   text-align: center;
-  top: 2px;
+  height:40px;
 }
-
 nav a {
   background-color: #4a810c;
   color: #a1c891;
@@ -74,5 +74,6 @@ nav a {
 
 nav {
   text-align: center;
+  height: 30px;
 }
 </style>
