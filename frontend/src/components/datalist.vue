@@ -104,9 +104,5 @@ td, th{
 }
 tr:hover{
   background-color:#bccd12;
-  border: 1px solid rgb(0, 0, 0);
-}
-tr:hover{
-  background-color:rgb(0, 225, 255);
 }
 </style>
