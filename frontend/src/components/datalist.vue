@@ -91,7 +91,11 @@ do_statistics_view_data {
   right: 0%;
 }
 table {
+<<<<<<< HEAD
   background-color: #c4dbaa;
+=======
+  background-color: rgb(0, 238, 255);
+>>>>>>> 62360e01cf650f076c5105554e112da6dbf58c27
   top: 50px;
   margin: auto;
 }
@@ -100,9 +104,16 @@ table {
   font-weight: 800;
 }
 td, th{
+<<<<<<< HEAD
   border: 1px solid #70b024;
 }
 tr:hover{
   background-color:#bccd12;
+=======
+  border: 1px solid rgb(0, 0, 0);
+}
+tr:hover{
+  background-color:rgb(0, 225, 255);
+>>>>>>> 62360e01cf650f076c5105554e112da6dbf58c27
 }
 </style>
