@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Banner msg="Welcome to Your Vue.js App" />
+    <Information />
     <TopLine />
     <DataList />
-    <Information />
     <Footer />
   </div>
 </template>
@@ -11,8 +11,8 @@
 <script>
 import Banner from "./components/banner.vue";
 import TopLine from "./components/topline.vue";
-import DataList from "./components/datalist.vue";
 import Information from "./components/information.vue";
+import DataList from "./components/datalist.vue";
 import Footer from "./components/footer.vue";
 
 export default {

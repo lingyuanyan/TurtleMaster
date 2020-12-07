@@ -30,9 +30,9 @@
       <th></th>
     </tr>
     <tr v-for="(record, i) in world_statistics_json" :key="i">
-      <td>{{ record.country_region }}-{{ record.province_state }}-</td>
+      <td>{{ record.country_region }}-{{ record.province_state }}</td>
       <td>confirmed {{record.confirmed}},</td>
-      <td>deaths {{record.deaths}},</td>
+      <td>deaths {{record.deaths}}</td>
       <td>recovered {{record.recovered}}</td>
       <td>Last Update {{record.last_update}}</td>
     </tr>

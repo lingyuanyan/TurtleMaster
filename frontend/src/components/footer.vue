@@ -1,5 +1,9 @@
 <template>
   <div class="footer">
+    <p>More sites on Covid-19</p>
+    <a href="https://www.cdc.gov/coronavirus/2019-ncov
+">CDC.gov</a>
+<a href="https://coronavirus.jhu.edu/map.html">Johns Hopkins</a>
   </div>
 </template>
 
@@ -18,7 +22,6 @@ footer{
   background-color:#00aeff;
   border:1px solid #00aeff;
   font-family: cursive;
-  position:fixed;
   bottom: 0px;
   width: 100%;
   left: 0px;
