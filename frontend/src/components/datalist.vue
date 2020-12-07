@@ -91,7 +91,7 @@ do_statistics_view_data {
   right: 0%;
 }
 table {
-  background-color: #3f0;
+  background-color: #62a219;
   top: 50px;
   margin: auto;
 }

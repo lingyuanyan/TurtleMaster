@@ -26,7 +26,7 @@
        <li>avid touching surfaces outside.</li>
        <li>clean everything as many times as possible to keep germs from sticking onto them</li>
      </ul>
-       <h3>Note that...<h3>
+       <h3>Note that...</h3>
       <ul>
         <li>When indoors and eating avoid sitting next to the air conditioning as this will keep the Covid in the air.</li>
         <li>To when know that the pandemic is mostly over is when the infection can no longer be spread not when a vaccine comes out.</li>
