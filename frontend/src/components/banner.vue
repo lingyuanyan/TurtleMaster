@@ -2,10 +2,6 @@
   <div class="banner">
     <div id = "title">
       <h1>Welcome to TurtleMaster</h1>
-      <nav>
-        <a href="#us">us</a>
-        <a href="#world">world</a>
-      </nav>
     </div>
     <img
       src="../assets/lmc_logo.jpg"
@@ -27,12 +23,7 @@
       <a href="#world">world</a>
       <a href="#info">information</a>
     </nav>
-<<<<<<< HEAD
-
   </div>
-=======
-</div>
->>>>>>> 89c676c144c6c8606d67022cc8b2b62e7c6eabac
 </template>
 <script>
 export default {
