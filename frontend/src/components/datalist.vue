@@ -10,10 +10,10 @@
     </tr>
     <tr>
       <th>US</th>
-      <th>confirmed 13506766,</th>
-      <th>deaths 270520,</th>
-      <th>recovered 6564563</th>
-      <th>Last Update 2020-11-30</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
     <tr v-for="record in us_satistics_json" :key="record.province_state">
       <td>{{ record.province_state }}-</td>
@@ -24,10 +24,10 @@
     </tr>
     <tr id="ch">
       <th>China</th>
-      <th>confirmed 86530,</th>
-      <th>deaths 4634,</th>
-      <th>recovered 81619</th>
-      <th>Last Update 2020-11-30</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
     <tr>
 
@@ -91,7 +91,7 @@ do_statistics_view_data {
   right: 0%;
 }
 table {
-  background-color: rgb(0, 238, 255);
+  background-color: #c4dbaa;
   top: 50px;
   margin: auto;
 }
@@ -100,9 +100,9 @@ table {
   font-weight: 800;
 }
 td, th{
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid #70b024;
 }
 tr:hover{
-  background-color:rgb(0, 225, 255);
+  background-color:#bccd12;
 }
 </style>
