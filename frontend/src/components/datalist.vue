@@ -10,10 +10,10 @@
     </tr>
     <tr>
       <th>US</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>confirmed 13506766,</th>
+      <th>deaths 270520,</th>
+      <th>recovered 6564563</th>
+      <th>Last Update 2020-11-30</th>
     </tr>
     <tr v-for="record in us_satistics_json" :key="record.province_state">
       <td>{{ record.province_state }}-</td>
@@ -22,12 +22,22 @@
       <td>recovered {{record.recovered}}</td>
       <td>Last Update {{record.last_update}}</td>
     </tr>
+    <tr id="ch">
+      <th>China</th>
+      <th>confirmed 86530,</th>
+      <th>deaths 4634,</th>
+      <th>recovered 81619</th>
+      <th>Last Update 2020-11-30</th>
+    </tr>
+    <tr>
+
+    </tr>
     <tr id="world">
       <th>World</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>confirmed 62787929</th>
+      <th>deaths 1460179,</th>
+      <th>recovered 40168970</th>
+      <th>Last Update 2020-11-30</th>
     </tr>
     <tr v-for="(record, i) in world_statistics_json" :key="i">
       <td>{{ record.country_region }}-{{ record.province_state }}</td>
@@ -81,17 +91,18 @@ do_statistics_view_data {
   right: 0%;
 }
 table {
-  background-color: #c4dbaa;
+  background-color: #3f0;
   top: 50px;
   margin: auto;
 }
 .th{
   font-size: 20px;
+  font-weight: 800;
 }
 td, th{
-  border: 1px solid #70b024;
+  border: 1px solid #bf3;
 }
 tr:hover{
-  background-color:#bccd12;
+  background-color:#9f6;
 }
 </style>

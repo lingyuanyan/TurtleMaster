@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Entertainments",
+    "\\Entertainments\\Game",
+    "\\Entertainments\\Game\\css",
+    "\\frontend",
+    "\\frontend\\public",
+    "\\frontend\\src",
+    "\\frontend\\src\\assets",
+    "\\frontend\\src\\components",
+    "\\TurtleMaster"
+  ],
+  "SelectedNode": "\\TurtleMaster\\wsgi.py",
+  "PreviewInSolutionExplorer": false
+}
