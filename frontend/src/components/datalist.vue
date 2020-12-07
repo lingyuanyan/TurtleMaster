@@ -10,10 +10,10 @@
     </tr>
     <tr>
       <th>US</th>
-      <th>confirmed 13506766,</th>
-      <th>deaths 270520,</th>
-      <th>recovered 6564563</th>
-      <th>Last Update 2020-11-30</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
     <tr v-for="record in us_satistics_json" :key="record.province_state">
       <td>{{ record.province_state }}-</td>
@@ -24,10 +24,10 @@
     </tr>
     <tr id="ch">
       <th>China</th>
-      <th>confirmed 86530,</th>
-      <th>deaths 4634,</th>
-      <th>recovered 81619</th>
-      <th>Last Update 2020-11-30</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
     <tr>
 
