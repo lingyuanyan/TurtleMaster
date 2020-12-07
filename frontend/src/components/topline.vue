@@ -160,7 +160,7 @@ export default {
 
 table {
   background-color: #c4dbaa;
-  right: 0px;
+  float:right;
   text-align: center;
 }
 #toplineContainer {

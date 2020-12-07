@@ -21,15 +21,13 @@
       height="50px"
       class="turtle_master_logo"
     />
-<<<<<<< HEAD
-=======
     <nav>
       <a href="#us">us</a>
       <a href="#ch">china</a>
       <a href="#world">world</a>
       <a href="#info">information</a>
     </nav>
->>>>>>> 412e5745d2d62c4118301d6bd4a376cc82d9a44f
+
   </div>
 </template>
 <script>
@@ -67,16 +65,13 @@ h1 {
 }
 nav a {
   background-color: #4a810c;
-<<<<<<< HEAD
   border-radius: 15%;
-=======
   color: #a1c891;
   border-radius: 100%;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   width: 25%;
   padding: 0.5%;
->>>>>>> 412e5745d2d62c4118301d6bd4a376cc82d9a44f
 }
 
 nav {

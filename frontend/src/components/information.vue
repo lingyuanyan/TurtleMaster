@@ -25,7 +25,7 @@
        <li>cover your mouth or nose whenever you sneeze or cough.</li>
        <li>avid touching surfaces outside.</li>
        <li>clean everything as many times as possible to keep germs from sticking onto them</li>
-       <li>Note that... 
+       <li>Note that...
           <ul>
             <li>When indoors and eating avoid sitting next to the air conditioning as this will keep the Covid in the air.</li>
             <li>To when know that the pandemic is mostly over is when the infection can no longer be spread not when a vaccine comes out.</li>
@@ -121,6 +121,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.information.vue {
+      float:left;
+    }
   * {
       color: #008000;
   }
