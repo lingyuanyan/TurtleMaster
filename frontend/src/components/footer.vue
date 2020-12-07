@@ -13,11 +13,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&display=swap');
 .footer{
   background: #20f030;
   border: 2.5px solid #4db956;
-  font-family: 'Dancing Script', 'Great Vibes', cursive, serif, monospace, sans-serif;
+  font-family: cursive, monospace, sans-serif;
   width: 100%;
   position: fixed;
   bottom: 0px;
