@@ -1,16 +1,10 @@
 <template>
   <div id="app">
-    <header>
-      <Banner msg="Welcome to Your Vue.js App" />
-    </header>
-    <main>
-      <TopLine />
-      <DataList />
-      <Information />
-    </main>
-    <footer>
-      <Footer />
-    </footer>
+    <Banner msg="Welcome to Your Vue.js App" />
+    <TopLine />
+    <DataList />
+    <Information />
+    <Footer />
   </div>
 </template>
 
