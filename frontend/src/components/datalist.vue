@@ -91,7 +91,7 @@ do_statistics_view_data {
   right: 0%;
 }
 table {
-  background-color: #3f0;
+  background-color: #c4dbaa;
   top: 50px;
   margin: auto;
 }
@@ -100,9 +100,9 @@ table {
   font-weight: 800;
 }
 td, th{
-  border: 1px solid #bf3;
+  border: 1px solid #70b024;
 }
 tr:hover{
-  background-color:#9f6;
+  background-color:#bccd12;
 }
 </style>

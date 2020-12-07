@@ -29,7 +29,7 @@ export default {
 
 <style>
 #app {
-  background-color: #cafbb6;
+  background-color: #62a219;
   padding-bottom: 15px;
 }
 </style>

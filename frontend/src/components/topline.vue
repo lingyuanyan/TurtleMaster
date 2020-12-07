@@ -178,10 +178,10 @@ table {
   font-size: 20px;
 }
 td, th{
-  border: 1px solid #33ff00;
+  border: 1px solid #8bc34a;
 }
 tr:hover{
-  background-color:#33ff00;
+  background-color:#bccd12;
 }
 .white {
   height: 80px;
