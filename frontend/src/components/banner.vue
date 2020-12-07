@@ -27,8 +27,12 @@
       <a href="#world">world</a>
       <a href="#info">information</a>
     </nav>
+<<<<<<< HEAD
 
   </div>
+=======
+</div>
+>>>>>>> 89c676c144c6c8606d67022cc8b2b62e7c6eabac
 </template>
 <script>
 export default {
