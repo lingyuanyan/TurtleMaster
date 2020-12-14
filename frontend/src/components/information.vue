@@ -107,13 +107,6 @@
     <ul>
         <li>If and when a vaccine comes out don't think that just because there are weaker verisons or dead verisons of C</li>
         <li>Another problem is that later Covid might mutate and will need a new vaccine</li>
-        <li></li>
-
-
-
-
-
-
     </ul>
   </div>
 </template>
@@ -130,8 +123,14 @@
 <style scoped>
 .information.vue {
       float:left;
-    }
-  * {
-      color: #008000;
-  }
+}
+ * {
+    color: #008000;
+}
+
+#info {
+  background: #c4dbaa;
+  margin-top: 75px;
+  padding: 25px 25px 0;
+}
 </style>
