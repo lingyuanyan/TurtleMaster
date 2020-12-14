@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Banner msg="Welcome to Your Vue.js App" />
+    <Information />
     <TopLine />
     <DataList />
-    <Information />
     <Footer />
   </div>
 </template>
@@ -20,8 +20,8 @@ export default {
   components: {
     Banner,
     TopLine,
-    DataList,
     Information,
+    DataList,
     Footer
   }
 };

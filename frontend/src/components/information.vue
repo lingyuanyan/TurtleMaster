@@ -130,8 +130,9 @@
 <style scoped>
 .information.vue {
       float:left;
-    }
-  * {
-      color: #008000;
+      color: darkgreen;
+      border: 1px solid lightgreen;
+      border-radius: 5px;
+      width: 60%;
   }
 </style>
