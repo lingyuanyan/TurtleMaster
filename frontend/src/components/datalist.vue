@@ -34,10 +34,10 @@
     </tr>
     <tr id="world">
       <th>World</th>
-      <th>confirmed 62787929</th>
-      <th>deaths 1460179,</th>
-      <th>recovered 40168970</th>
-      <th>Last Update 2020-11-30</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
     <tr v-for="(record, i) in world_statistics_json" :key="i">
       <td>{{ record.country_region }}-{{ record.province_state }}</td>
