@@ -121,14 +121,9 @@
 <style scoped>
 .information.vue {
       float:left;
-}
- * {
-    color: #008000;
-}
-
-#info {
-  background: #c4dbaa;
-  margin-top: 75px;
-  padding: 25px 25px 0;
-}
+      color: darkgreen;
+      border: 1px solid lightgreen;
+      border-radius: 5px;
+      width: 60%;
+  }
 </style>

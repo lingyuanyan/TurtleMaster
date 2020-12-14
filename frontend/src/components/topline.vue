@@ -165,7 +165,7 @@ table {
 }
 #toplineContainer {
   background-color: #E8E8E8;
-  width: 50%;
+  width: 40vw;
   text-align: center;
   right: 0%;
   border-radius: 15px/15px;
