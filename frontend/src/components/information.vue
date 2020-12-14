@@ -72,9 +72,7 @@
     Soap vs. Hand sanitizer
 
     <a href="https://www.youtube.com/watch?v=U8r3oTVMtQ0">https://www.youtube.com/watch?v=U8r3oTVMtQ0</a>
-    Correction. Using hand sanitizer first
-    then soap
-
+    
 
 
 
