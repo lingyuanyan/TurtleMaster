@@ -1,5 +1,10 @@
 <template>
   <div class="footer">
+    Made by the TurtleMaster Group<br />
+    <h2>Other sites on covid 19</h2>
+    <ul>
+      
+    </ul>
   </div>
 </template>
 

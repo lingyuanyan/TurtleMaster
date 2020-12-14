@@ -122,7 +122,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .information.vue {
-      float:left;
       color: darkgreen;
       border: 1px solid lightgreen;
       border-radius: 5px;
