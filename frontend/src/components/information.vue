@@ -107,13 +107,6 @@
     <ul>
         <li>If and when a vaccine comes out don't think that just because there are weaker verisons or dead verisons of C</li>
         <li>Another problem is that later Covid might mutate and will need a new vaccine</li>
-        <li></li>
-
-
-
-
-
-
     </ul>
   </div>
 </template>
