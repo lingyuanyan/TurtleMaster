@@ -76,7 +76,7 @@
 
 
 
-     What better soap or hand sanitizer. IT says that in general soap is better. This is because they keep the cell completely apart
+     What is better soap or . In general soap is better. This is because they keep the cell completely apart
 
      disinfect you and objects
 
@@ -103,8 +103,7 @@
       <li>Stay home when you are sick.</li>
     </ul>
     <ul>
-        <li>If and when a vaccine comes out don't think that just because there are weaker verisons or dead verisons of C</li>
-        <li>Another problem is that later Covid might mutate and will need a new vaccine</li>
+        <li>As vaccines grow closer to public use and mass public use be ready to be vaccinated and also relizing that vaccination may lead to side effects like flu like symptoms. You should note that this is normal and does not mean that you are getting covid. </li>
     </ul>
   </div>
 </template>
@@ -120,9 +119,15 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .information.vue {
-      color: darkgreen;
-      border: 1px solid lightgreen;
-      border-radius: 5px;
-      width: 60%;
-  }
+      float:left;
+}
+ * {
+    color: #008000;
+}
+
+#info {
+  background: #c4dbaa;
+  margin-top: 75px;
+  padding: 25px 25px 0;
+}
 </style>
