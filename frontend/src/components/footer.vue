@@ -1,9 +1,9 @@
 <template>
   <div class="footer">
     Made by the TurtleMaster Group<br />
-    <h2>Other sites on covid 19</h2>
+    Other sites on health
     <ul>
-      
+      <li><a href="https://www.cdc.gov/" target="_blank">cdc.gov</a></li>
     </ul>
   </div>
 </template>
