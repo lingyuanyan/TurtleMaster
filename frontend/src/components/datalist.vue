@@ -97,7 +97,6 @@ table {
 }
 .th{
   font-size: 20px;
-  font-weight: 800;
 }
 td, th{
   border: 1px solid #70b024;

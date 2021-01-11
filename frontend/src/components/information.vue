@@ -60,7 +60,7 @@
 
 
 
-    <h3>Isolate yourself if u have done these things with someone who has covid in the last 3 months</h3>
+    <h3>Isolate yourself if you have done these things with someone who has covid in the last 3 months</h3>
 <ul>
     <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.</li>
     <li>Isolate yourself provided care at home to someone who is sick with COVID-19</li>
@@ -71,14 +71,14 @@
 
 
 
-    Soap vs. Hand sanitizer
+    <h3>Soap vs. Hand sanitizer</h3>
 
     <a href="https://www.youtube.com/watch?v=U8r3oTVMtQ0">https://www.youtube.com/watch?v=U8r3oTVMtQ0</a>
 
 
 
 
-     What is better soap or . In general soap is better. This is because they keep the cell completely apart
+     What is better soap or hand santizer. In general soap is better. This is because they keep the cell completely apart
 
      disinfect you and objects
 
@@ -129,5 +129,7 @@
       width: 100%;
   }
 
-
+a {
+  color: #33a;
+}
 </style>
