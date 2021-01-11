@@ -1,7 +1,21 @@
 <template>
-
-  <div id="toplineContainer" class="topline">
-      <p class = "white"></p>
+  <div>
+    <div id="topline">
+    <div>
+    <p id="placeholder"></p>
+    <div id="toplineContainer" class="topline">
+      <svg>
+        <path id="deaths"/>
+      </svg>
+      <select name="state" id="states" v-model="current_state" @change="onStateSelected">
+        <option
+          v-for="(option,i) in time_serise_us_states"
+          v-bind:value="option"
+          :key="i"
+        >{{ option }}</option>
+      </select>
+      <span>Selected: {{ current_state }}</span>
+    </div>
     <table>
       <tr v-for="record in topline_json" :key="record.country_region">
         <td>{{record.country_region}} -</td>
@@ -10,18 +24,10 @@
         <td>recovered {{record.recovered}}</td>
         <td>Last Update {{record.last_update}}</td>
       </tr>
-    </table>
-    <svg>
-      <path id="deaths" />
-    </svg>
-    <select name="state" id="states" v-model="current_state" @change="onStateSelected">
-      <option
-        v-for="(option,i) in time_serise_us_states"
-        v-bind:value="option"
-        :key="i"
-      >{{ option }}</option>
-    </select>
-    <span>Selected: {{ current_state }}</span>
+  </table>
+</div>
+
+  </div>
   </div>
 </template>
 
@@ -153,6 +159,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#topline {
+
+}
 .topline {
   top: 275px;
   text-align: center;
@@ -161,15 +170,15 @@ export default {
 table {
   background-color: #c4dbaa;
   float:right;
-  text-align: center;
+
 }
 #toplineContainer {
   background-color: #E8E8E8;
-  width: 40vw;
+  width: auto;
   text-align: center;
-  right: 0%;
   border-radius: 15px/15px;
   border: 2px solid black;
+  text-align: center;
 }
 #deaths {
   color: #f00;
@@ -186,7 +195,8 @@ tr:hover{
 .white {
   height: 80px;
 }
-#toplineContainer {
-  margin: 0 auto;
+
+#placeholder {
+  height: 60px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Banner msg="Welcome to Your Vue.js App" />
-    <Information />
     <TopLine />
+    <Information />
     <DataList />
     <Footer />
   </div>

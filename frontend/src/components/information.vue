@@ -1,6 +1,30 @@
 <template>
-  <div class="information.vue" id="info">
-    <h3>If you think you are infected.</h3>
+
+  <div id="information.vue">
+    <h3>Symptoms of Covid-19</h3>
+   <ul>
+     <li>Fever</li>
+     <li>chills</li>
+     <li>Coughs</li>
+     <li>Shortness of breath or difficulty breathing</li>
+     <li>Fatigue</li>
+     <li>if Muscle or body aches</li>
+     <li>Headache</li>
+     <li>loss of taste or smell</li>
+     <li>Sore throat</li>
+     <li>Congestion</li>
+     <li>runny nose</li>
+     <li>Nausea</li>
+     <li>vomiting</li>
+     <li>Diarrhea</li>
+     <li>Persistent pain or pressure in the chest</li>
+     <li>confusion</li>
+     <li>Inability to wake or stay awake</li>
+     <li>Bluish lips or face</li>
+     <li>Pneumonia</li>
+   </ul>
+
+    <h3>If you think you maybe infected.</h3>
     <ol>
         <li>Isolate yourself and stay away from others</li>
         <li>Contact a Doctor and ask him or her what to do.</li>
@@ -10,7 +34,7 @@
 
      <h3>How to avoid Infection</h3>
      <ul>
-       <li>Avoid touching any surface when outside.<li>
+       <li>Avoid touching any surface when outside.</li>
        <li>Limit outside activity.</li>
        <li>Wear a mask whenever you go outside or when you are going to be around infected people.</li>
        <li>Try to social distance with as many people as possible. (6ft away ,2 yards. 1.8288 meters)</li>
@@ -33,28 +57,6 @@
         <li>The other health way for a pandemic to end is when most people die from it and other people that don't die have immunity hopefully this is not the way Covid ends.</li>
         <li>Covid could also "end" with people getting sick of staying home and going outside because there got tired of quarintine. </li>
       </ul>
-      <h3>Symptoms of Covid-19</h3>
-     <ul>
-       <li>Fever</li>
-       <li>chills</li>
-       <li>Coughs</li>
-       <li>Shortness of breath or difficulty breathing</li>
-       <li>Fatigue</li>
-       <li>if Muscle or body aches</li>
-       <li>Headache</li>
-       <li>loss of taste or smell</li>
-       <li>Sore throat</li>
-       <li>Congestion</li>
-       <li>runny nose</li>
-       <li>Nausea</li>
-       <li>vomiting</li>
-       <li>Diarrhea</li>
-       <li>Persistent pain or pressure in the chest</li>
-       <li>confusion</li>
-       <li>Inability to wake or stay awake</li>
-       <li>Bluish lips or face</li>
-       <li>Pneumonia</li>
-     </ul>
 
 
 
@@ -72,11 +74,11 @@
     Soap vs. Hand sanitizer
 
     <a href="https://www.youtube.com/watch?v=U8r3oTVMtQ0">https://www.youtube.com/watch?v=U8r3oTVMtQ0</a>
-    
 
 
 
-     What better soap or hand sanitizer. IT says that in general soap is better. This is because they keep the cell completely apart
+
+     What is better soap or . In general soap is better. This is because they keep the cell completely apart
 
      disinfect you and objects
 
@@ -103,8 +105,7 @@
       <li>Stay home when you are sick.</li>
     </ul>
     <ul>
-        <li>If and when a vaccine comes out don't think that just because there are weaker verisons or dead verisons of C</li>
-        <li>Another problem is that later Covid might mutate and will need a new vaccine</li>
+        <li>As vaccines grow closer to public use and mass public use be ready to be vaccinated and also relizing that vaccination may lead to side effects like flu like symptoms. You should note that this is normal and does not mean that you are getting covid. </li>
     </ul>
   </div>
 </template>
@@ -119,10 +120,14 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.information.vue {
+#information.vue {
+      right: 5%;
       color: darkgreen;
       border: 1px solid lightgreen;
       border-radius: 5px;
-      width: 60%;
+      margin-top: 50px;
+      width: 100%;
   }
+
+
 </style>
