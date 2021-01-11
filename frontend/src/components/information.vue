@@ -96,8 +96,8 @@
     <ul>
       <li>First day feels like the flu.</li>
       <li>Day 5 trouble breathing</li>
-      <li>Seven days to go to hospital.</li>
-      <li>Some will recover after 7 days.</li>
+      <li>After seven days to go to hospital.</li>
+      <li>Some people will recover after 7 days.</li>
       <li>Others will go to the hospital</li>
       <li>If you go to the hospital you will probably have Pneumonia.</li>
       <li>Days 12-14 if people die this is most times. </li>
