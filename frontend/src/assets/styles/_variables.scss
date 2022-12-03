@@ -1,0 +1,39 @@
+// Create your own map
+
+$shoutout:#f0783b; //for the shoutout texts
+// First override some or all individual color variables
+$primary:#02718f; // #25408f;
+// $secondary: #8f5325;
+// $success: #3e8d63;
+// $info: #13101c;
+// $warning: #945707;
+// $danger: #d62518;
+// $light: #f8f9fa;
+// $dark: #343a40;
+
+$callout: $info;
+$error: $danger;
+// Then add them to your custom theme-colors map, together with any additional colors you might need
+$theme-colors:map-merge($theme-colors,
+   (primary: $primary,
+  //   secondary: $secondary,
+  //   success: $success,
+  //   info: $info,
+  //   warning: $warning,
+  //   danger: $danger,
+  //   light: $light,
+  //   dark: $dark,
+    // add any additional color below
+    shoutout:$shoutout, //for the shoutout texts
+    callout: $info,
+    error: $danger,
+  ));
+
+
+$spacers:map-merge((6: $spacer * 6, ),
+  $spacers);
+// $default-font: "Lato", Verdana, Arial, sans-serif;
+
+// $link-color: #ef899e;
+// $body-bg: #f0f0f0;
+// $text-color: #666;
