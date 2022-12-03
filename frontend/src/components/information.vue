@@ -111,7 +111,7 @@
 </template>
 <script>
     export default {
-        name: 'Information.vue',
+        name: 'InformationBar.vue',
         props: {
             msg: String
         }
