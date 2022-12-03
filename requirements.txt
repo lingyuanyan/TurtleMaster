@@ -1,3 +1,4 @@
+gunicorn
 django
 djangorestframework
 psycopg2
