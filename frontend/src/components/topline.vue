@@ -221,7 +221,7 @@ export default {
 .topline-subtitle {
   @extend .d-flex;
   @extend .justify-content-start;
-  width: 80%;
+  width: 90%;
   @extend .mx-auto;
 }
 
@@ -291,7 +291,7 @@ export default {
 .information-board {
   @extend .d-flex;
   @extend .justify-content-center;
-  width: 80%;
+  width: 90%;
   @extend .mx-auto;
   @extend .my-2;
 }
