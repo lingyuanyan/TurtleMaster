@@ -76,7 +76,7 @@
       </div>
       <div class="information-board-2-box-right">
         <div class="information-board-1-title-box">
-          <p class="information-board-1-title-text">If you think you maybe infected.</p>
+          <p class="information-board-1-title-text">If You Are Infected.</p>
         </div>
         <div class="information-board-1-text-box">
           <ul class="how-to-avoid-infection-list">
