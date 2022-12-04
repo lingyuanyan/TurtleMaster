@@ -380,7 +380,7 @@ def parser_world_data(fname, drop_table):
             '''
 
         update_sql_stat='''UPDATE INFECTION_DATA_WORLD_STATISTICS 
-        SET (
+        SET
             FIPS = %s,
             admin2  = %s,
             province_state  = %s,
@@ -392,10 +392,9 @@ def parser_world_data(fname, drop_table):
             longitude = %s,
             recovered = recovered + %s,
             active = active + %s
-           )
-            WHERE combined_Key = %s and last_update < %s::date + '1 day'::interval
-            RETURNING last_update
-            '''
+        WHERE combined_Key = %s and last_update < %s::date + '1 day'::interval
+        RETURNING last_update
+        '''
         update_val=(
             FIPS,
             admin2,
