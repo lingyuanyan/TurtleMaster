@@ -182,14 +182,14 @@ def parser_us_data(fname, drop_table):
                 recovered = recovered + %s,
                 active = active + %s,
                 FIPS = %s,
-                incident_rate = ((incident_rate * num_line) + %s) / (num_line + 1),
+                incident_rate =  %s,
                 people_tested = people_tested + %s,
                 people_hospitalized = people_hospitalized + %s,
-                mortality_rate = ((mortality_rate * num_line) + %s) / (num_line + 1),
+                mortality_rate =  %s,
                 UID = %s,
                 ISO3 = %s,
-                testing_rate= ((testing_rate * num_line) + %s) / (num_line + 1),
-                hospitalization_rate = ((hospitalization_rate * num_line) + %s) / (num_line + 1)
+                testing_rate=  %s,
+                hospitalization_rate =  %s
             WHERE province_state = %s and last_update < %s::date + '1 day'::interval
             RETURNING last_update
             '''
