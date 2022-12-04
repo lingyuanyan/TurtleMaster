@@ -93,8 +93,8 @@ export default {
       this.topline_json.forEach((element) => {
         if (element.country_region == this.current_live_tracker) {
           this.total_confirmed = element.confirmed;
-          this.total_recovered = element.deaths,
-            this.total_dead = element.recovered
+          this.total_recovered = element.recovered,
+            this.total_dead = element.deaths
         }
       })
     },
