@@ -177,19 +177,19 @@ def parser_us_data(fname, drop_table):
                 last_update = %s,
                 latitude = %s,
                 longitude = %s,
-                confirmed = %s,
-                deaths = %s,
-                recovered = %s,
-                active = %s,
+                confirmed = confirmed + %s,
+                deaths = deaths + %s,
+                recovered = recovered + %s,
+                active = active + %s,
                 FIPS = %s,
-                incident_rate = %s,
-                people_tested = %s,
-                people_hospitalized = %s,
-                mortality_rate = %s,
+                incident_rate = ((incident_rate * num_line) + %s) / (num_line + 1),
+                people_tested = people_tested + %s,
+                people_hospitalized = people_hospitalized + %s,
+                mortality_rate = ((mortality_rate * num_line) + %s) / (num_line + 1),
                 UID = %s,
                 ISO3 = %s,
-                testing_rate= %s,
-                hospitalization_rate = %s
+                testing_rate= ((testing_rate * num_line) + %s) / (num_line + 1),
+                hospitalization_rate = ((hospitalization_rate * num_line) + %s) / (num_line + 1)
             WHERE province_state = %s and last_update < %s::date + '1 day'::interval
             RETURNING last_update
             '''
@@ -379,20 +379,20 @@ def parser_world_data(fname, drop_table):
             ON CONFLICT (combined_Key) DO NOTHING
             '''
 
-        update_sql_stat='''UPDATE INFECTION_DATA_WORLD_STATISTICS SET (
-            FIPS,
-            admin2,
-            province_state,
-            country_region,
-            last_update,
-            confirmed,
-            deaths,
-            latitude,
-            longitude,
-            recovered,
-            active
+        update_sql_stat='''UPDATE INFECTION_DATA_WORLD_STATISTICS 
+        SET (
+            FIPS = %s,
+            admin2  = %s,
+            province_state  = %s,
+            country_region  = %s,
+            last_update  = %s,
+            confirmed = confirmed + %s,
+            deaths = deaths + %s,
+            latitude = %s,
+            longitude = %s,
+            recovered = recovered + %s,
+            active = active + %s
            )
-            = (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             WHERE combined_Key = %s and last_update < %s::date + '1 day'::interval
             RETURNING last_update
             '''
