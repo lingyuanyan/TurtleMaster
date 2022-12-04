@@ -1,53 +1,50 @@
 <template>
-<div id="data-table" class="datalist">
-  <table>
-    <tr id="us">
-      <th class="th">Location</th>
-      <th class="th">Confirmed</th>
-      <th class="th">Deaths</th>
-      <th class="th">Recovered</th>
-      <th class="th">Last Update</th>
-    </tr>
-    <tr>
-      <th>US</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    <tr v-for="record in us_satistics_json" :key="record.province_state">
-      <td>{{ record.province_state }}-</td>
-      <td>confirmed {{record.confirmed}},</td>
-      <td>deaths {{record.deaths}},</td>
-      <td>recovered {{record.recovered}}</td>
-      <td>Last Update {{record.last_update}}</td>
-    </tr>
-    <tr id="ch">
-      <th>China</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    <tr>
-
-    </tr>
-    <tr id="world">
-      <th>World</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    <tr v-for="(record, i) in world_statistics_json" :key="i">
-      <td>{{ record.country_region }}-{{ record.province_state }}</td>
-      <td>confirmed {{record.confirmed}},</td>
-      <td>deaths {{record.deaths}}</td>
-      <td>recovered {{record.recovered}}</td>
-      <td>Last Update {{record.last_update}}</td>
-    </tr>
-  </table>
-</div>
+  <div id="data-table" class="datalist">
+    <div class="data-subtitle">
+      <label for="data-table-select" class="data-subtitle-text">Data</label>
+      <select name="data-table-select" id="data-table-select" class="data-table-select" v-model="current_data_source"
+        @change="onCurrentDataSource">
+        <option class="data-table-select-option" v-for="(option, i) in data_table_options" v-bind:value="option"
+          :key="i">{{ option }}</option>
+      </select>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="data-table-first-row">
+          Location
+        </div>
+        <div class="data-table-first-row">
+          Confirmed
+        </div>
+        <div class="data-table-first-row">
+          Deaths
+        </div>
+        <div class="data-table-first-row">
+          Recovered
+        </div>
+        <div class="data-table-first-row">
+          Last Update
+        </div>
+      </div>
+      <div class="row" v-for="record in us_satistics_json" :key="record.province_state">
+        <div class="data-table-first-col">
+          {{ record.province_state }}
+        </div>
+        <div class="data-table-col">
+          {{ record.confirmed }}
+        </div>
+        <div class="data-table-col">
+          {{ record.deaths }}
+        </div>
+        <div class="data-table-col">
+          {{ record.recovered }}
+        </div>
+        <div class="data-table-col">
+          {{ record.last_update }}
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -60,13 +57,15 @@ export default {
   },
   data() {
     return {
+      data_table_options: ["US"],
+      current_data_source: "US",
       us_satistics_json: "",
       world_statistics_json: ""
     };
   },
   created() {
     this.fetchUsStatics();
-    this.fetchWorldStatics();
+    //this.fetchWorldStatics();
   },
   methods: {
     fetchUsStatics() {
@@ -86,22 +85,143 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-do_statistics_view_data {
-  right: 0%;
+<style scoped lang="scss">
+.data-table {
+  width: 90%;
+  @extend .mx-auto;
+  /* Neutral/Background */
+
+  background: #F5F7F9;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0;
 }
-table {
-  background-color: #c4dbaa;
-  top: 50px;
-  margin: auto;
+
+.data-subtitle {
+  @extend .d-flex;
+
+  @extend .justify-content-start;
+  width: 90%;
+  @extend .mx-auto;
 }
-.th{
-  font-size: 20px;
+
+.data-subtitle-text {
+
+  /* Title 1 | Bold */
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  /* identical to box height */
+
+  text-transform: capitalize;
+
+  /* Neutral/Charcoal */
+
+  color: #222222;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
-td, th{
-  border: 1px solid #70b024;
+
+.data-table-select {
+
+  @extend .mx-3;
+  @extend .my-1;
+  background: #1CB0F6;
+  box-shadow: 2px 2px 22px rgba(229, 229, 229, 0.5);
+  border-radius: 50px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
 }
-tr:hover{
-  background-color:#bccd12;
+
+.data-table-select-option {
+
+  /* Global */
+  /* Title 4 | Bold */
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-transform: uppercase;
+
+  /* Neutral/White */
+
+  color: #FFFFFF;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.data-table-first-row {
+  @extend .col;
+
+  /* Title 3 | Bold */
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: capitalize;
+
+  /* Neutral/Charcoal */
+
+  color: #222222;
+
+
+  /* Inside auto layout */
+
+  order: 0;
+  @extend .my-3;
+}
+
+.data-table-first-col {
+
+  @extend .col;
+
+  /* Title 3 | Bold */
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: capitalize;
+
+  /* Neutral/Charcoal */
+
+  color: #222222;
+
+
+  /* Inside auto layout */
+  order: 0;
+}
+
+.data-table-col {
+
+  @extend .col;
 }
 </style>
