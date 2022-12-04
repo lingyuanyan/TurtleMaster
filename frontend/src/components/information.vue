@@ -1,6 +1,6 @@
 <template>
 
-  <div id="information.vue">
+  <div id="information">
     <h3>Symptoms of Covid-19</h3>
    <ul>
      <li>Fever</li>

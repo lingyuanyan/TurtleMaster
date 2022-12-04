@@ -1,5 +1,5 @@
 <template>
-<div class="datalist">
+<div id="data-table" class="datalist">
   <table>
     <tr id="us">
       <th class="th">Location</th>

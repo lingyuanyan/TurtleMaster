@@ -3,14 +3,18 @@
     <div class="title" id="title">
       <h1>CovidHub</h1>
     </div>
-    <div class="menu-bar">
-
+    <div class="linkBox">
+      <router-link class="routerLink" to="#" v-scroll-to="'#topline'">Home</router-link>
+      <router-link class="routerLink" to="#" v-scroll-to="'#information'">Information</router-link>
+      <router-link class="routerLink" to="#" v-scroll-to="'#data-table'">Data</router-link>
     </div>
     <div class="icon-bar">
-      <img src="../assets/lmc_logo.jpg" alt="Little Master's Club Logo" width="50px" height="50px"
-        class="little_masters_logo" />
-      <img src="../assets/TurtleMaster_Logo.png" alt="TurtleMaster Logo" width="50px" height="50px"
-        class="turtle_master_logo" />
+      <div class="icon-container">
+        <img src="../assets/lmc_logo.jpg" alt="Little Master's Club Logo" class="little_masters_logo" />
+      </div>
+      <div class="icon-container">
+        <img src="../assets/TurtleMaster_Logo.png" alt="TurtleMaster Logo" class="turtle_master_logo" />
+      </div>
     </div>
   </div>
 </template>
@@ -23,27 +27,16 @@ export default {
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.little_masters_logo {
-  position: fixed;
-  right: 15px;
-  top: 15px;
-}
-
-.turtle_master_logo {
-  position: fixed;
-  left: 15px;
-  top: 15px;
-}
-
+<style scoped lang="scss">
 .banner {
   /* nav */
 
 
   /* Auto layout */
 
-  display: flex;
-  flex-direction: row;
+  @extend .d-flex;
+  @extend .justify-content-between;
+
   align-items: center;
   padding: 32px 88px;
   gap: 54px;
@@ -62,16 +55,54 @@ export default {
   flex-grow: 0;
 
   width: 100%;
-  top: 0px;
-  left: 0px;
-  height: 75px;
+  height: 108px;
 }
+
+.linkBox {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  width: 25%;
+  @extend .mx-auto;
+}
+
+a {
+
+  /* Title3 | Black */
+
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 21px;
+  line-height: 36px;
+  text-decoration: none;
+
+
+  /* identical to box height, or 150% */
+  text-align: center;
+
+  /*padding*/
+  @extend .mx-3;
+  /* White */
+  color: #FFFFFF;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+a:hover {
+  color: #2B70C9;
+}
+
 
 .title {
   /* CovidHub */
 
 
-  width: 156px;
+  width: 15%;
   height: 39px;
 
   /* Display | Bold */
@@ -97,5 +128,28 @@ export default {
   flex-grow: 0;
 }
 
-.mene-bar {}
+.icon-bar {
+  @extend .d-flex;
+  @extend .justify-content-end;
+  width: 15%;
+}
+
+.icon-container {
+  width: 40%;
+  margin: auto;
+}
+
+.little_masters_logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.turtle_master_logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
 </style>
