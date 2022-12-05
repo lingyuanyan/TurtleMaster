@@ -2,3 +2,4 @@ gunicorn
 django
 djangorestframework
 psycopg2
+python-dateutil

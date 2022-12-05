@@ -2,7 +2,8 @@ import sqlite3
 import psycopg2
 from django.conf import settings
 import os
-from datetime import date
+from datetime import date,datetime
+from dateutil.parser import parse
 import time
 import sys
 import csv
@@ -80,6 +81,7 @@ def parser_us_data(fname, drop_table):
     num_line = 0
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
+    lastest_update='01/01/2020  01:01:01 AM'
     for line in csv_reader:
         pieces = line
         if(pieces[0] == 'Province_State'): continue
@@ -87,6 +89,7 @@ def parser_us_data(fname, drop_table):
         province_state = pieces[0]
         country_region = pieces[1]
         last_update = pieces[2] or date.today().strftime("%m/%d/%Y %H:%M:%S")
+        lastest_update = last_update if parse(last_update, fuzzy_with_tokens=True)  > parse(lastest_update, fuzzy_with_tokens=True) else lastest_update
         latitude = pieces[3] or '0.0'
         longitude = pieces[4] or '0.0'
         confirmed = pieces[5] or '0'
@@ -190,13 +193,13 @@ def parser_us_data(fname, drop_table):
                 ISO3 = %s,
                 testing_rate=  %s,
                 hospitalization_rate =  %s
-            WHERE province_state = %s and last_update < %s::date + '1 day'::interval
+            WHERE province_state = %s
             RETURNING last_update
             '''
 
         update_val_stat = (
             country_region,
-            last_update,
+            lastest_update,
             latitude,
             longitude,
             confirmed,
@@ -212,8 +215,7 @@ def parser_us_data(fname, drop_table):
             ISO3,
             testing_rate,
             hospitalization_rate,
-            province_state,
-            last_update
+            province_state
             )
 
         cur.execute(insert_sql, insert_val)
@@ -295,6 +297,7 @@ def parser_world_data(fname, drop_table):
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
     key_pos_dic = {}
+    lastest_update='01/01/2020  01:01:01 AM'
     for line in csv_reader:
         pieces = line
         if(pieces[0].endswith('FIPS') or pieces[0].endswith('Province/State')):
@@ -317,6 +320,7 @@ def parser_world_data(fname, drop_table):
         country_region = pieces[key_pos_dic["country_region"]]
         province_state = pieces[key_pos_dic["province_state"]] or country_region
         last_update = pieces[key_pos_dic["last_update"]] or date.today().strftime("%m/%d/%Y %H:%M:%S")
+        lastest_update = last_update if parse(last_update, fuzzy_with_tokens=True)  > parse(lastest_update, fuzzy_with_tokens=True) else lastest_update
         latitude = pieces[key_pos_dic["latitude"]] or '0.0' if "latitude" in key_pos_dic else '0.0'
         longitude = pieces[key_pos_dic["longitude"]] or '0.0' if "longitude" in key_pos_dic else '0.0'
         confirmed = pieces[key_pos_dic["confirmed"]] or '0' if "confirmed" in key_pos_dic else '0'
@@ -392,7 +396,7 @@ def parser_world_data(fname, drop_table):
             longitude = %s,
             recovered = recovered + %s,
             active = active + %s
-        WHERE combined_Key = %s and last_update < %s::date + '1 day'::interval
+        WHERE combined_Key = %s 
         RETURNING last_update
         '''
         update_val=(
@@ -400,15 +404,14 @@ def parser_world_data(fname, drop_table):
             admin2,
             province_state,
             country_region,
-            last_update,
+            lastest_update,
             confirmed,
             deaths,
             latitude,
             longitude,
             recovered,
             active,
-            combined_key,
-            last_update
+            combined_key
            )
 
         cur.execute(insert_sql_stat, insert_val)
