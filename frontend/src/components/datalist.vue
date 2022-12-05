@@ -31,13 +31,13 @@
           {{ record.province_state }}
         </div>
         <div class="data-table-col">
-          {{ record.confirmed }}
+          {{ Number(record.confirmed).toLocaleString() }}
         </div>
         <div class="data-table-col">
-          {{ record.deaths }}
+          {{ Number(record.deaths).toLocaleString() }}
         </div>
         <div class="data-table-col">
-          {{ record.recovered }}
+          {{ Number(record.recovered).toLocaleString() }}
         </div>
         <div class="data-table-col">
           {{ record.last_update }}
