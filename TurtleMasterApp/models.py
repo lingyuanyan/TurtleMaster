@@ -4,16 +4,16 @@ class InfectionDataUs(models.Model):
     province_state = models.TextField(blank=True, null=True)
     country_region = models.TextField(blank=True, null=True)
     last_update = models.DateField(blank=True, null=True)
-    confirmed = models.IntegerField(blank=True, null=True)
-    deaths = models.IntegerField(blank=True, null=True)
+    confirmed = models.BigIntegerField(blank=True, null=True)
+    deaths = models.BigIntegerField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
-    recovered = models.IntegerField(blank=True, null=True)
-    active = models.IntegerField(blank=True, null=True)
-    fips = models.IntegerField(blank=True, null=True)
+    recovered = models.BigIntegerField(blank=True, null=True)
+    active = models.BigIntegerField(blank=True, null=True)
+    fips = models.BigIntegerField(blank=True, null=True)
     incident_rate = models.FloatField(blank=True, null=True)
-    people_tested = models.IntegerField(blank=True, null=True)
-    people_hospitalized = models.IntegerField(blank=True, null=True)
+    people_tested = models.BigIntegerField(blank=True, null=True)
+    people_hospitalized = models.BigIntegerField(blank=True, null=True)
     mortality_rate = models.FloatField(blank=True, null=True)
     uid = models.BigIntegerField(blank=True, null=True)
     iso3 = models.TextField(blank=True, null=True)
@@ -30,16 +30,16 @@ class InfectionDataUsStatistics(models.Model):
     province_state = models.TextField(unique=True, blank=True, null=True)
     country_region = models.TextField(blank=True, null=True)
     last_update = models.DateField(blank=True, null=True)
-    confirmed = models.IntegerField(blank=True, null=True)
-    deaths = models.IntegerField(blank=True, null=True)
+    confirmed = models.BigIntegerField(blank=True, null=True)
+    deaths = models.BigIntegerField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
-    recovered = models.IntegerField(blank=True, null=True)
-    active = models.IntegerField(blank=True, null=True)
-    fips = models.IntegerField(blank=True, null=True)
+    recovered = models.BigIntegerField(blank=True, null=True)
+    active = models.BigIntegerField(blank=True, null=True)
+    fips = models.BigIntegerField(blank=True, null=True)
     incident_rate = models.FloatField(blank=True, null=True)
-    people_tested = models.IntegerField(blank=True, null=True)
-    people_hospitalized = models.IntegerField(blank=True, null=True)
+    people_tested = models.BigIntegerField(blank=True, null=True)
+    people_hospitalized = models.BigIntegerField(blank=True, null=True)
     mortality_rate = models.FloatField(blank=True, null=True)
     uid = models.BigIntegerField(blank=True, null=True)
     iso3 = models.TextField(blank=True, null=True)
@@ -53,17 +53,17 @@ class InfectionDataUsStatistics(models.Model):
 
 
 class InfectionDataWorld(models.Model):
-    fips = models.IntegerField(blank=True, null=True)
+    fips = models.BigIntegerField(blank=True, null=True)
     admin2 = models.TextField(blank=True, null=True)
     province_state = models.TextField(blank=True, null=True)
     country_region = models.TextField(blank=True, null=True)
     last_update = models.DateField(blank=True, null=True)
-    confirmed = models.IntegerField(blank=True, null=True)
-    deaths = models.IntegerField(blank=True, null=True)
+    confirmed = models.BigIntegerField(blank=True, null=True)
+    deaths = models.BigIntegerField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
-    recovered = models.IntegerField(blank=True, null=True)
-    active = models.IntegerField(blank=True, null=True)
+    recovered = models.BigIntegerField(blank=True, null=True)
+    active = models.BigIntegerField(blank=True, null=True)
     combined_key = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(blank=True, null=True)
 
@@ -74,17 +74,17 @@ class InfectionDataWorld(models.Model):
 
 
 class InfectionDataWorldStatistics(models.Model):
-    fips = models.IntegerField(blank=True, null=True)
+    fips = models.BigIntegerField(blank=True, null=True)
     admin2 = models.TextField(blank=True, null=True)
     province_state = models.TextField(unique=True, blank=True, null=True)
     country_region = models.TextField(blank=True, null=True)
     last_update = models.DateField(blank=True, null=True)
-    confirmed = models.IntegerField(blank=True, null=True)
-    deaths = models.IntegerField(blank=True, null=True)
+    confirmed = models.BigIntegerField(blank=True, null=True)
+    deaths = models.BigIntegerField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
-    recovered = models.IntegerField(blank=True, null=True)
-    active = models.IntegerField(blank=True, null=True)
+    recovered = models.BigIntegerField(blank=True, null=True)
+    active = models.BigIntegerField(blank=True, null=True)
     combined_key = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(blank=True, null=True)
 
@@ -93,10 +93,10 @@ class InfectionDataWorldStatistics(models.Model):
         db_table = 'infection_data_world_statistics'
 
 class TimeSeriesDataUs(models.Model):
-    uid = models.IntegerField(blank=True, null=True)
+    uid = models.BigIntegerField(blank=True, null=True)
     iso2 = models.TextField(blank=True, null=True)
     iso3 = models.TextField(blank=True, null=True)
-    code3 = models.IntegerField(blank=True, null=True)
+    code3 = models.BigIntegerField(blank=True, null=True)
     admin2 = models.TextField(blank=True, null=True)
     combined_key = models.TextField(blank=True, null=True)
     province_state = models.TextField(blank=True, null=True)
@@ -104,8 +104,8 @@ class TimeSeriesDataUs(models.Model):
     last_update = models.DateField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
-    confirmed = models.IntegerField(blank=True, null=True)
-    deaths = models.IntegerField(blank=True, null=True)
+    confirmed = models.BigIntegerField(blank=True, null=True)
+    deaths = models.BigIntegerField(blank=True, null=True)
     timestamp = models.DateTimeField(blank=True, null=True)
 
     class Meta:
@@ -116,8 +116,8 @@ class TimeSeriesDataUs(models.Model):
 class TimeSeriesDataUsByState(models.Model):
     province_state = models.TextField(blank=True, null=True)
     last_update = models.DateField(blank=True, null=True)
-    confirmed = models.IntegerField(blank=True, null=True)
-    deaths = models.IntegerField(blank=True, null=True)
+    confirmed = models.BigIntegerField(blank=True, null=True)
+    deaths = models.BigIntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -130,9 +130,9 @@ class TimeSeriesDataWorld(models.Model):
     province_state = models.TextField(blank=True, null=True)
     country_region = models.TextField(blank=True, null=True)
     last_update = models.DateField(blank=True, null=True)
-    confirmed = models.IntegerField(blank=True, null=True)
-    deaths = models.IntegerField(blank=True, null=True)
-    recovered = models.IntegerField(blank=True, null=True)
+    confirmed = models.BigIntegerField(blank=True, null=True)
+    deaths = models.BigIntegerField(blank=True, null=True)
+    recovered = models.BigIntegerField(blank=True, null=True)
     timestamp = models.DateTimeField(blank=True, null=True)
 
     class Meta:
@@ -144,9 +144,9 @@ class TimeSeriesDataWorld(models.Model):
 class ViewStatisticsData(models.Model):
     country_region = models.TextField(unique=True, blank=True, null=True)
     last_update = models.DateField(blank=True, null=True)
-    confirmed = models.IntegerField(blank=True, null=True)
-    deaths = models.IntegerField(blank=True, null=True)
-    recovered = models.IntegerField(blank=True, null=True)
+    confirmed = models.BigIntegerField(blank=True, null=True)
+    deaths = models.BigIntegerField(blank=True, null=True)
+    recovered = models.BigIntegerField(blank=True, null=True)
     timestamp = models.DateTimeField(blank=True, null=True)
 
     class Meta:
