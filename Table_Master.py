@@ -10,7 +10,45 @@ import csv
 import re
 import traceback
 
-def parser_us_data(fname, drop_table):
+def drop_us_data_tables():
+    print("drop us data table:")
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
+    # conn = sqlite3.connect('WC.db.sqlite')]
+    dbsettings = settings.DATABASES['default']
+
+    conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
+                            user=dbsettings["USER"], password=dbsettings["PASSWORD"])
+    cur = conn.cursor()
+    cur.execute('''
+    DROP TABLE IF EXISTS INFECTION_DATA_US
+    ''')
+    cur.execute('''
+    DROP TABLE IF EXISTS INFECTION_DATA_US_STATISTICS
+    ''')
+
+    cur.close()
+    print("done")
+
+def drop_world_data_tables():
+    print("drop world data table:")
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
+    # conn = sqlite3.connect('WC.db.sqlite')]
+    dbsettings = settings.DATABASES['default']
+
+    conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
+                            user=dbsettings["USER"], password=dbsettings["PASSWORD"])
+    cur = conn.cursor()
+    cur.execute('''
+    DROP TABLE IF EXISTS INFECTION_DATA_WORLD
+    ''')
+    cur.execute('''
+    DROP TABLE IF EXISTS INFECTION_DATA_WORLD_STATISTICS
+    ''')
+
+    cur.close()
+    print("done")
+    
+def parser_us_data(fname, latest_update):
     print("parse us data in file:", fname)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
@@ -19,14 +57,6 @@ def parser_us_data(fname, drop_table):
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
-    if(drop_table == 'yes') :
-        cur.execute('''
-        DROP TABLE IF EXISTS INFECTION_DATA_US
-        ''')
-        cur.execute('''
-        DROP TABLE IF EXISTS INFECTION_DATA_US_STATISTICS
-        ''')
-
     cur.execute('''
     CREATE TABLE IF NOT EXISTS INFECTION_DATA_US (
         id SERIAL PRIMARY KEY,
@@ -81,7 +111,6 @@ def parser_us_data(fname, drop_table):
     num_line = 0
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
-    lastest_update='01/01/2020  01:01:01 AM'
     for line in csv_reader:
         pieces = line
         if(pieces[0] == 'Province_State'): continue
@@ -89,7 +118,8 @@ def parser_us_data(fname, drop_table):
         province_state = pieces[0]
         country_region = pieces[1]
         last_update = pieces[2] or date.today().strftime("%m/%d/%Y %H:%M:%S")
-        lastest_update = last_update if parse(last_update, fuzzy_with_tokens=True)  > parse(lastest_update, fuzzy_with_tokens=True) else lastest_update
+        if parse(last_update, fuzzy_with_tokens=True)  > parse(latest_update, fuzzy_with_tokens=True):
+            latest_update = last_update 
         latitude = pieces[3] or '0.0'
         longitude = pieces[4] or '0.0'
         confirmed = pieces[5] or '0'
@@ -199,7 +229,7 @@ def parser_us_data(fname, drop_table):
 
         update_val_stat = (
             country_region,
-            lastest_update,
+            latest_update,
             latitude,
             longitude,
             confirmed,
@@ -227,7 +257,6 @@ def parser_us_data(fname, drop_table):
         conn.commit()
         num_line+=1
         print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
-
  #   cur.execute('''SELECT * FROM INFECTION_DATA_US''')
  #   rows = cur.fetchall()
  #   print(rows.)
@@ -235,8 +264,9 @@ def parser_us_data(fname, drop_table):
  #       print(row)
     cur.close()
     print(num_line, " of lines has been processed")
+    return latest_update
 
-def parser_world_data(fname, drop_table):
+def parser_world_data(fname, latest_update):
     print("parse world data in file:", fname)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
     # conn = sqlite3.connect('WC.db.sqlite')]
@@ -245,14 +275,6 @@ def parser_world_data(fname, drop_table):
     conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
-
-    if(drop_table == 'yes') :
-        cur.execute('''
-        DROP TABLE IF EXISTS INFECTION_DATA_WORLD
-        ''')
-        cur.execute('''
-        DROP TABLE IF EXISTS INFECTION_DATA_WORLD_STATISTICS
-        ''')
 
     cur.execute('''
     CREATE TABLE IF NOT EXISTS INFECTION_DATA_WORLD (
@@ -297,7 +319,6 @@ def parser_world_data(fname, drop_table):
     fh = open(fname, 'r')
     csv_reader = csv.reader(fh)
     key_pos_dic = {}
-    lastest_update='01/01/2020  01:01:01 AM'
     for line in csv_reader:
         pieces = line
         if(pieces[0].endswith('FIPS') or pieces[0].endswith('Province/State')):
@@ -320,7 +341,8 @@ def parser_world_data(fname, drop_table):
         country_region = pieces[key_pos_dic["country_region"]]
         province_state = pieces[key_pos_dic["province_state"]] or country_region
         last_update = pieces[key_pos_dic["last_update"]] or date.today().strftime("%m/%d/%Y %H:%M:%S")
-        lastest_update = last_update if parse(last_update, fuzzy_with_tokens=True)  > parse(lastest_update, fuzzy_with_tokens=True) else lastest_update
+        if parse(last_update, fuzzy_with_tokens=True)  > parse(latest_update, fuzzy_with_tokens=True):
+            latest_update = last_update 
         latitude = pieces[key_pos_dic["latitude"]] or '0.0' if "latitude" in key_pos_dic else '0.0'
         longitude = pieces[key_pos_dic["longitude"]] or '0.0' if "longitude" in key_pos_dic else '0.0'
         confirmed = pieces[key_pos_dic["confirmed"]] or '0' if "confirmed" in key_pos_dic else '0'
@@ -404,7 +426,7 @@ def parser_world_data(fname, drop_table):
             admin2,
             province_state,
             country_region,
-            lastest_update,
+            latest_update,
             confirmed,
             deaths,
             latitude,
@@ -421,7 +443,6 @@ def parser_world_data(fname, drop_table):
         conn.commit()
         num_line += 1
         print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
-
  #   cur.execute('''SELECT * FROM INFECTION_DATA_US''')
  #   rows = cur.fetchall()
  #   print(rows.)
@@ -430,6 +451,7 @@ def parser_world_data(fname, drop_table):
     cur.close()
     print(num_line, " of lines has been processed")
 
+    return latest_update
 
 def parser_time_series_data_us(fname, drop_table):
     print("parser_time_series_data_us: ", fname)
@@ -801,17 +823,24 @@ def do_statistics_view_data(drop_table):
 
 def iterate_files(folder_path, data_type, drop_table):
     print("Iterate in  ", folder_path)
+    if drop_table:
+        if data_type == 'us':
+            drop_us_data_tables()
+        if data_type == 'world':
+            drop_world_data_tables()
+    
+    latest_update = '01/01/2020  01:01:01 AM' 
     for filename in sorted(os.listdir(folder_path)):
         fullpath=os.path.join(folder_path, filename)
         if not filename.startswith("_") and not filename.startswith(".") and filename.endswith(".csv"):
             try:
-                if(data_type == "us"):
-                    parser_us_data(fullpath, drop_table)
+                if(data_type == "us"):                    
+                    latest_update = parser_us_data(fullpath, latest_update)
                 if (data_type == "world"):
-                    parser_world_data(fullpath, drop_table)
-                if(data_type == "time_series"):
-                    parser_time_series_data_us(fullpath, if_drop_table)
-                    parser_time_series_data_global(fullpath, if_drop_table)
+                    latest_update = parser_world_data(fullpath, latest_update)
+                # if(data_type == "time_series"):
+                #     parser_time_series_data_us(fullpath, if_drop_table)
+                #     parser_time_series_data_global(fullpath, if_drop_table)
 
             except:
                 track = traceback.format_exc()
@@ -836,7 +865,7 @@ time_series_data_full_path = os.path.join(root_directory, time_series_folder)
 start_time = time.time()
 iterate_files(us_data_full_path, "us", if_drop_table)
 iterate_files(world_data_full_path, "world", if_drop_table)
-iterate_files(time_series_data_full_path, "time_series", if_drop_table)
+#iterate_files(time_series_data_full_path, "time_series", if_drop_table)
 do_statistics_view_data(if_drop_table)
 elapsed_time = time.time() - start_time
 print("elapsed_time:", time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))
