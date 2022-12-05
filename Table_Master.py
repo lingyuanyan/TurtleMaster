@@ -118,8 +118,6 @@ def parser_us_data(fname, latest_update):
         province_state = pieces[0]
         country_region = pieces[1]
         last_update = pieces[2] or date.today().strftime("%m/%d/%Y %H:%M:%S")
-        if parse(last_update, fuzzy_with_tokens=True)  > parse(latest_update, fuzzy_with_tokens=True):
-            latest_update = last_update 
         latitude = pieces[3] or '0.0'
         longitude = pieces[4] or '0.0'
         confirmed = pieces[5] or '0'
@@ -203,56 +201,60 @@ def parser_us_data(fname, latest_update):
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (province_state) DO NOTHING
             '''
-        update_sql_stat = '''
-            UPDATE INFECTION_DATA_US_STATISTICS
-            SET
-                country_region = %s,
-                last_update = %s,
-                latitude = %s,
-                longitude = %s,
-                confirmed = confirmed + %s,
-                deaths = deaths + %s,
-                recovered = recovered + %s,
-                active = active + %s,
-                FIPS = %s,
-                incident_rate =  %s,
-                people_tested = people_tested + %s,
-                people_hospitalized = people_hospitalized + %s,
-                mortality_rate =  %s,
-                UID = %s,
-                ISO3 = %s,
-                testing_rate=  %s,
-                hospitalization_rate =  %s
-            WHERE province_state = %s
-            RETURNING last_update
-            '''
-
-        update_val_stat = (
-            country_region,
-            latest_update,
-            latitude,
-            longitude,
-            confirmed,
-            deaths,
-            recovered,
-            active,
-            FIPS,
-            incident_rate,
-            people_tested,
-            people_hospitalized,
-            mortality_rate,
-            UID,
-            ISO3,
-            testing_rate,
-            hospitalization_rate,
-            province_state
-            )
 
         cur.execute(insert_sql, insert_val)
         cur.execute(insert_sql_stat, insert_val)
 
-        if cur.rowcount == 0 :
-            cur.execute(update_sql_stat, update_val_stat)
+        if parse(last_update, fuzzy_with_tokens=True)  > parse(latest_update, fuzzy_with_tokens=True):
+            latest_update = last_update 
+            
+            update_sql_stat = '''
+                UPDATE INFECTION_DATA_US_STATISTICS
+                SET
+                    country_region = %s,
+                    last_update = %s,
+                    latitude = %s,
+                    longitude = %s,
+                    confirmed =  %s,
+                    deaths =  %s,
+                    recovered =  %s,
+                    active =  %s,
+                    FIPS = %s,
+                    incident_rate =  %s,
+                    people_tested =  %s,
+                    people_hospitalized =  %s,
+                    mortality_rate =  %s,
+                    UID = %s,
+                    ISO3 = %s,
+                    testing_rate=  %s,
+                    hospitalization_rate =  %s
+                WHERE province_state = %s
+                RETURNING last_update
+                '''
+
+            update_val_stat = (
+                country_region,
+                latest_update,
+                latitude,
+                longitude,
+                confirmed,
+                deaths,
+                recovered,
+                active,
+                FIPS,
+                incident_rate,
+                people_tested,
+                people_hospitalized,
+                mortality_rate,
+                UID,
+                ISO3,
+                testing_rate,
+                hospitalization_rate,
+                province_state
+                )
+
+            if cur.rowcount == 0 :
+                cur.execute(update_sql_stat, update_val_stat)
 
         conn.commit()
         num_line+=1
@@ -341,8 +343,6 @@ def parser_world_data(fname, latest_update):
         country_region = pieces[key_pos_dic["country_region"]]
         province_state = pieces[key_pos_dic["province_state"]] or country_region
         last_update = pieces[key_pos_dic["last_update"]] or date.today().strftime("%m/%d/%Y %H:%M:%S")
-        if parse(last_update, fuzzy_with_tokens=True)  > parse(latest_update, fuzzy_with_tokens=True):
-            latest_update = last_update 
         latitude = pieces[key_pos_dic["latitude"]] or '0.0' if "latitude" in key_pos_dic else '0.0'
         longitude = pieces[key_pos_dic["longitude"]] or '0.0' if "longitude" in key_pos_dic else '0.0'
         confirmed = pieces[key_pos_dic["confirmed"]] or '0' if "confirmed" in key_pos_dic else '0'
@@ -404,42 +404,46 @@ def parser_world_data(fname, latest_update):
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (combined_Key) DO NOTHING
             '''
-
-        update_sql_stat='''UPDATE INFECTION_DATA_WORLD_STATISTICS 
-        SET
-            FIPS = %s,
-            admin2  = %s,
-            province_state  = %s,
-            country_region  = %s,
-            last_update  = %s,
-            confirmed = confirmed + %s,
-            deaths = deaths + %s,
-            latitude = %s,
-            longitude = %s,
-            recovered = recovered + %s,
-            active = active + %s
-        WHERE combined_Key = %s 
-        RETURNING last_update
-        '''
-        update_val=(
-            FIPS,
-            admin2,
-            province_state,
-            country_region,
-            latest_update,
-            confirmed,
-            deaths,
-            latitude,
-            longitude,
-            recovered,
-            active,
-            combined_key
-           )
-
         cur.execute(insert_sql_stat, insert_val)
+        
+        if parse(last_update, fuzzy_with_tokens=True)  > parse(latest_update, fuzzy_with_tokens=True):
+            
+            latest_update = last_update 
 
-        if cur.rowcount == 0 :
-           cur.execute(update_sql_stat, update_val)
+            update_sql_stat='''UPDATE INFECTION_DATA_WORLD_STATISTICS 
+            SET
+                FIPS = %s,
+                admin2  = %s,
+                province_state  = %s,
+                country_region  = %s,
+                last_update  = %s,
+                confirmed =  %s,
+                deaths =  %s,
+                latitude = %s,
+                longitude = %s,
+                recovered =  %s,
+                active =  %s
+            WHERE combined_Key = %s 
+            RETURNING last_update
+            '''
+            update_val=(
+                FIPS,
+                admin2,
+                province_state,
+                country_region,
+                latest_update,
+                confirmed,
+                deaths,
+                latitude,
+                longitude,
+                recovered,
+                active,
+                combined_key
+            )
+
+
+            if cur.rowcount == 0 :
+                cur.execute(update_sql_stat, update_val)
         conn.commit()
         num_line += 1
         print(num_line, " of lines has been processed", num_line, end='\r', flush=True)
