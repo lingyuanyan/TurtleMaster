@@ -8,14 +8,10 @@
           :key="i">{{ option }}</option>
       </select>
     </div>
-    <div id="chart" class="chart-container">
+    <div id="chart-container" class="chart-container">
       <svg>
         <path id="deaths" />
       </svg>
-      <select name="state" id="states" v-model="current_state" @change="onStateSelected">
-        <option v-for="(option, i) in time_serise_us_states" v-bind:value="option" :key="i">{{ option }}</option>
-      </select>
-      <span>Selected: {{ current_state }}</span>
     </div>
 
     <div class="container">
@@ -71,12 +67,14 @@ export default {
       data_table_options: ["US"],
       current_data_source: "US",
       us_satistics_json: "",
-      world_statistics_json: ""
+      world_statistics_json: "",
+      time_series_json:""
     };
   },
   created() {
     this.fetchUsStatics();
     //this.fetchWorldStatics();
+    this.fetchTimeSeriesByRegion(this.current_data_source)
   },
   methods: {
     fetchUsStatics() {
@@ -92,27 +90,13 @@ export default {
         .catch(error => console.log(error));
     },
 
-    fetchTimeSeriesUs(province_state) {
+    fetchTimeSeriesByRegion(country_region) {
       covidhubAxios
-        .get("/api/TimeSeriesDataUsByState/?province_state=" + province_state)
+        .get("/api/ViewTimeSeriesStatisticsData/?country_region=" + country_region)
         .then(
           (response) => (
-            (this.time_series_us_json = response.data.results),
+            (this.time_series_json = response.data.results),
             this.buildTrendingChart()
-          )
-        )
-        .catch((error) => console.log(error));
-    },
-
-    fetchTimeSeriesUsStates() {
-      covidhubAxios
-        .get("/api/TimeSeriesDataUs/?distinct_on=province_state")
-        .then(
-          (response) => (
-            response.data.results.forEach((element) => {
-              this.time_serise_us_states.push(element.province_state);
-            }),
-            this.fetchTimeSeriesUs(this.current_state)
           )
         )
         .catch((error) => console.log(error));
@@ -122,9 +106,9 @@ export default {
       var w = this.trending_chart_width;
       var h = this.trending_chart_height;
 
-      var data = this.time_series_us_json;
+      var data = this.time_series_json;
       var n = data.length;
-      var containerId = "#toplineContainer";
+      var containerId = "chart-container";
 
       var xScale = d3.scaleLinear().domain([0, n]).range([10, w]);
       var yScale = d3.scaleLinear().domain([0, 50000]).range([h, 0]);
@@ -180,8 +164,8 @@ export default {
         .attr("stroke-width", 2)
         .attr("fill", "none");
     },
-    onStateSelected() {
-      this.fetchTimeSeriesUs(this.current_state);
+    onCurrentDataSource() {
+      this.fetchTimeSeriesByRegion(this.current_data_source)
     },
   }
 };

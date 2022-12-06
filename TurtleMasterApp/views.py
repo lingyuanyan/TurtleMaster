@@ -168,3 +168,20 @@ class ViewTimeSeriesStatisticsDataViewSet(viewsets.ModelViewSet):
     queryset = ViewTimeSeriesStatisticsData.objects.all().order_by('last_update')
     serializer_class = ViewStatisticsDataSerializer
     permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `province_state` query parameter in the URL.
+        """
+        distinct_on = self.request.query_params.get('distinct_on', None)
+        country_region = self.request.query_params.get('country_region', None)
+        if distinct_on is not None:
+            queryset = TimeSeriesDataUs.objects.all().order_by(distinct_on).distinct(distinct_on)
+        else:
+            queryset = TimeSeriesDataUs.objects.all().order_by('timestamp')
+
+        if country_region is not None:
+            queryset = queryset.filter(country_region = country_region)
+
+        return queryset
