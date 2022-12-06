@@ -25,7 +25,7 @@ def drop_us_data_tables():
     cur.execute('''
     DROP TABLE IF EXISTS INFECTION_DATA_US_STATISTICS
     ''')
-
+    cur.commit()
     cur.close()
     print("done")
 
@@ -44,7 +44,42 @@ def drop_world_data_tables():
     cur.execute('''
     DROP TABLE IF EXISTS INFECTION_DATA_WORLD_STATISTICS
     ''')
+    
+    cur.commit()
+    cur.close()
+    print("done")
 
+def drop_time_series_table_us():
+    print("drop us time series data table:")
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
+    # conn = sqlite3.connect('WC.db.sqlite')]
+    dbsettings = settings.DATABASES['default']
+
+    conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
+                            user=dbsettings["USER"], password=dbsettings["PASSWORD"])
+    cur = conn.cursor()
+    cur.execute('''
+    DROP TABLE IF EXISTS TIME_SERIES_DATA_US
+    ''')
+
+    cur.commit()
+    cur.close()
+    print("done")
+    
+def drop_time_series_table_global():
+    print("drop global time series data table:")
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
+    # conn = sqlite3.connect('WC.db.sqlite')]
+    dbsettings = settings.DATABASES['default']
+
+    conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
+                            user=dbsettings["USER"], password=dbsettings["PASSWORD"])
+    cur = conn.cursor()
+    cur.execute('''
+    DROP TABLE IF EXISTS TIME_SERIES_DATA_WORLD
+    ''')
+
+    cur.commit()
     cur.close()
     print("done")
     
@@ -476,11 +511,6 @@ def parser_time_series_data_us(fname, drop_table):
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
 
-    if(drop_table == 'yes' and update_key == 'confirmed') :
-        cur.execute('''
-        DROP TABLE IF EXISTS TIME_SERIES_DATA_US
-        ''')
-
     cur.execute('''
     CREATE TABLE IF NOT EXISTS TIME_SERIES_DATA_US (
         id SERIAL PRIMARY KEY,
@@ -540,6 +570,9 @@ def parser_time_series_data_us(fname, drop_table):
         for date_key in date_key_dic :
             last_update = date_key
             updte_value = pieces[date_key_dic[date_key]]
+            
+            if parse(last_update).day != 1:
+                continue #only log the first day of a month to save data space
             insert_sql='''INSERT INTO TIME_SERIES_DATA_US (
                 uid,
                 iso2,
@@ -618,11 +651,6 @@ def parser_time_series_data_global(fname, drop_table):
                             user=dbsettings["USER"], password=dbsettings["PASSWORD"])
     cur = conn.cursor()
 
-    if(drop_table == 'yes') :
-        cur.execute('''
-        DROP TABLE IF EXISTS TIME_SERIES_DATA_WORLD
-        ''')
-
     cur.execute('''
     CREATE TABLE IF NOT EXISTS TIME_SERIES_DATA_WORLD (
         id SERIAL PRIMARY KEY,
@@ -668,6 +696,9 @@ def parser_time_series_data_global(fname, drop_table):
         for date_key in date_key_dic :
             last_update = date_key
             update_value = pieces[date_key_dic[date_key]]
+            if parse(last_update).day != 1:
+                continue #only log the first day of a month to save data space
+
             insert_sql='''INSERT INTO TIME_SERIES_DATA_WORLD (
             province_state,
             country_region,
@@ -709,6 +740,117 @@ def parser_time_series_data_global(fname, drop_table):
     conn.commit()
     cur.close()
     print(num_line, " of lines has been processed")
+
+def do_statistics_time_series_data(drop_table):
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
+    # conn = sqlite3.connect('WC.db.sqlite')]
+    dbsettings = settings.DATABASES['default']
+
+    country_region_list = {
+        "US" : '''
+            SELECT
+            last_update,
+            sum(confirmed),
+            sum(deaths)
+            FROM TIME_SERIES_DATA_US
+            WHERE country_region = %s
+            GROUP BY last_update
+            ORDER BY last_update''',
+
+        "China" : '''
+            SELECT
+            last_update,
+            sum(confirmed),
+            sum(deaths)
+            FROM TIME_SERIES_DATA_WORLD
+            WHERE country_region = %s
+            GROUP BY last_update
+            ORDER BY last_update''',
+
+        "World" : '''
+            SELECT
+            last_update,
+            sum(confirmed),
+            sum(deaths)
+            FROM TIME_SERIES_DATA_WORLD
+            GROUP BY last_update
+            ORDER BY last_update
+            ''',
+
+    }
+
+    conn = psycopg2.connect(host=dbsettings["HOST"], database=dbsettings["NAME"],
+                            user=dbsettings["USER"], password=dbsettings["PASSWORD"])
+    cur = conn.cursor()
+    if(drop_table == 'yes') :
+        cur.execute('''
+        DROP TABLE IF EXISTS VIEW_STATISTICS_TIME_SERIES_DATA
+        ''')
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS VIEW_STATISTICS_TIME_SERIES_DATA (
+        id SERIAL PRIMARY KEY,
+        country_region  TEXT,
+        last_update  DATE,
+        confirmed  BIGINT,
+        deaths  BIGINT,
+        timestamp timestamp default current_timestamp
+        )
+    ''')
+
+    insert_query = '''
+    INSERT INTO VIEW_STATISTICS_TIME_SERIES_DATA (
+            country_region,
+            last_update,
+            confirmed,
+            deaths
+           )
+            VALUES (%s, %s, %s, %s)'''
+
+    update_query = '''
+    UPDATE VIEW_STATISTICS_TIME_SERIES_DATA SET (
+            last_update,
+            confirmed,
+            deaths
+            ) = (%s, %s, %s)
+            WHERE country_region = %s and last_update = %s
+
+    '''
+    for country_region in country_region_list:
+        last_update = date.today().strftime("%m/%d/%Y %H:%M:%S")
+        confirmed = 0
+        deaths = 0
+        select_query = country_region_list[country_region]
+        select_value = (
+        country_region,
+        )
+        cur.execute(select_query,select_value)
+
+        rows = cur.fetchall()
+        for row in rows:
+            last_update = row[0]
+            confirmed = (int(row[1]) if row[1] is not None else 0)
+            deaths = (int(row[2]) if row[2] is not None else 0)
+            insert_value = (
+                country_region,
+                last_update,
+                confirmed,
+                deaths
+            )
+            update_value = (
+                last_update,
+                confirmed,
+                deaths,
+                country_region,
+                last_update
+            )
+            if drop_table == 'yes':
+                cur.execute(insert_query,insert_value)
+            else:
+                print(update_value)
+                cur.execute(update_query, update_value)
+        conn.commit()
+
+    cur.close()
 
 def do_statistics_view_data(drop_table):
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TurtleMaster.settings')
@@ -832,6 +974,9 @@ def iterate_files(folder_path, data_type, drop_table):
             drop_us_data_tables()
         if data_type == 'world':
             drop_world_data_tables()
+        if data_type == "time_series":
+            drop_time_series_table_us()
+            drop_time_series_table_global()
     
     latest_update = '01/01/2020  01:01:01 AM' 
     for filename in sorted(os.listdir(folder_path)):
@@ -842,9 +987,9 @@ def iterate_files(folder_path, data_type, drop_table):
                     latest_update = parser_us_data(fullpath, latest_update)
                 if (data_type == "world"):
                     latest_update = parser_world_data(fullpath, latest_update)
-                # if(data_type == "time_series"):
-                #     parser_time_series_data_us(fullpath, if_drop_table)
-                #     parser_time_series_data_global(fullpath, if_drop_table)
+                if(data_type == "time_series"):
+                     parser_time_series_data_us(fullpath, if_drop_table)
+                     parser_time_series_data_global(fullpath, if_drop_table)
 
             except:
                 track = traceback.format_exc()
@@ -867,9 +1012,10 @@ us_data_full_path=os.path.join(root_directory, us_data_folder)
 world_data_full_path = os.path.join(root_directory, world_data_folder)
 time_series_data_full_path = os.path.join(root_directory, time_series_folder)
 start_time = time.time()
-iterate_files(us_data_full_path, "us", if_drop_table)
-iterate_files(world_data_full_path, "world", if_drop_table)
-#iterate_files(time_series_data_full_path, "time_series", if_drop_table)
-do_statistics_view_data(if_drop_table)
+#iterate_files(us_data_full_path, "us", if_drop_table)
+#iterate_files(world_data_full_path, "world", if_drop_table)
+iterate_files(time_series_data_full_path, "time_series", if_drop_table)
+#do_statistics_view_data(if_drop_table)
+do_statistics_time_series_data(if_drop_table)
 elapsed_time = time.time() - start_time
 print("elapsed_time:", time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))

@@ -27,6 +27,7 @@ router.register(r'TimeSeriesDataUs', views.TimeSeriesDataUsViewSet)
 router.register(r'TimeSeriesDataUsByState', views.TimeSeriesDataUsByStateViewSet)
 router.register(r'TimeSeriesDataWorld', views.TimeSeriesDataWorldViewSet)
 router.register(r'ViewStatisticsData', views.ViewStatisticsDataViewSet)
+router.register(r'ViewTimeSeriesStatisticsData', views.ViewTimeSeriesStatisticsDataViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

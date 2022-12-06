@@ -5,6 +5,8 @@ from TurtleMasterApp.models import InfectionDataWorldStatistics
 from TurtleMasterApp.models import TimeSeriesDataUs
 from TurtleMasterApp.models import TimeSeriesDataWorld
 from TurtleMasterApp.models import ViewStatisticsData
+from TurtleMasterApp.models import ViewTimeSeriesStatisticsData
+
 from rest_framework import serializers
 
 
@@ -131,3 +133,11 @@ class ViewStatisticsDataSerializer(serializers.HyperlinkedModelSerializer):
         'confirmed', 
         'deaths', 
         'recovered']
+        
+class ViewTimeSeriesStatisticsDataSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ViewTimeSeriesStatisticsData
+        fields = ['country_region', 
+        'last_update', 
+        'confirmed', 
+        'deaths']

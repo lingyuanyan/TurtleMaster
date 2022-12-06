@@ -19,6 +19,7 @@ from TurtleMasterApp.models import InfectionDataWorldStatistics
 from TurtleMasterApp.models import TimeSeriesDataUs,TimeSeriesDataUsByState
 from TurtleMasterApp.models import TimeSeriesDataWorld
 from TurtleMasterApp.models import ViewStatisticsData
+from TurtleMasterApp.models import ViewTimeSeriesStatisticsData
 from django.http import JsonResponse
 from django.db.models import Sum
 
@@ -156,5 +157,14 @@ class ViewStatisticsDataViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     queryset = ViewStatisticsData.objects.all().order_by('timestamp')
+    serializer_class = ViewStatisticsDataSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class ViewTimeSeriesStatisticsDataViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = ViewTimeSeriesStatisticsData.objects.all().order_by('last_update')
     serializer_class = ViewStatisticsDataSerializer
     permission_classes = [permissions.AllowAny]

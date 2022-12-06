@@ -152,3 +152,13 @@ class ViewStatisticsData(models.Model):
     class Meta:
         managed = False
         db_table = 'view_statistics_data'
+
+class ViewTimeSeriesStatisticsData(models.Model):
+    country_region = models.TextField(unique=True, blank=True, null=True)
+    last_update = models.DateField(blank=True, null=True)
+    confirmed = models.BigIntegerField(blank=True, null=True)
+    deaths = models.BigIntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'view_statistics_time_series_data'
