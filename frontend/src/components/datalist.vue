@@ -8,8 +8,8 @@
           :key="i">{{ option }}</option>
       </select>
     </div>
-    <div id="chart-container" class="chart-container">
-      <svg>
+    <div id="chart-container" ref="chartContainer" class="chart-container">
+      <svg view-box="0,0,100,100">
         <path id="deaths" />
       </svg>
     </div>
@@ -68,7 +68,10 @@ export default {
       current_data_source: "US",
       us_satistics_json: "",
       world_statistics_json: "",
-      time_series_json:""
+      time_series_json: "",
+      trending_chart_width: 300,
+      trending_chart_height: 300
+
     };
   },
   created() {
@@ -103,22 +106,44 @@ export default {
     },
 
     buildTrendingChart() {
-      var w = this.trending_chart_width;
+      var w = this.$refs.chartContainer.clientWidth;
       var h = this.trending_chart_height;
-
       var data = this.time_series_json;
       var n = data.length;
-      var containerId = "chart-container";
+      var containerId = "#chart-container";
+
+      var maxConfirmed = 0;
+      var minConfirmed = Infinity;
+      var maxDeaths = 0;
+      var minDeaths = Infinity;
+
+      var len = data.length;
+      while (len--) {
+        if (data[len].confirmed < minConfirmed) {
+          minConfirmed = data[len].confirmed;
+        }
+        if (data[len].deaths < minDeaths) {
+          minDeaths = data[len].deaths;
+        }
+        if (data[len].confirmed > maxConfirmed) {
+          maxConfirmed = data[len].confirmed;
+        }
+        if (data[len].deaths > maxDeaths) {
+          maxDeaths = data[len].deaths;
+        }
+      }
+
 
       var xScale = d3.scaleLinear().domain([0, n]).range([10, w]);
-      var yScale = d3.scaleLinear().domain([0, 50000]).range([h, 0]);
+      var yScaleConfirmed = d3.scaleLinear().domain([minConfirmed, maxConfirmed]).range([h, 0]);
+      var yScaleDeaths = d3.scaleLinear().domain([minDeaths, maxDeaths]).range([h, 0]);
       var lineConfirmed = d3
         .line()
         .x((d, i) => {
           return xScale(i);
         })
         .y((d) => {
-          return yScale(d.confirmed);
+          return yScaleConfirmed(Number(d.confirmed));
         })
         .curve(d3.curveLinear);
 
@@ -128,7 +153,7 @@ export default {
           return xScale(i);
         })
         .y((d) => {
-          return yScale(d.deaths);
+          return yScaleDeaths(Number(d.deaths));
         })
         .curve(d3.curveLinear);
 
@@ -145,12 +170,13 @@ export default {
         confirmedVix = svg.append("path");
         confirmedVix.attr("id", "confirmed");
       }
-      confirmedVix
-        .attr("d", lineConfirmed(data))
-        .attr("stroke", "blue")
-        .attr("stroke-width", 2)
-        .attr("fill", "none");
-
+      if (!confirmedVix.empty()) {
+        confirmedVix
+          .attr("d", lineConfirmed(data))
+          .attr("stroke", "blue")
+          .attr("stroke-width", 2)
+          .attr("fill", "none");
+      }
       // eslint-disable-next-line no-unused-vars
       var deathsVix = svg.select("#deaths");
       if (deathsVix.empty()) {
@@ -158,12 +184,15 @@ export default {
         deathsVix.attr("id", "deaths");
       }
 
-      deathsVix
-        .attr("d", lineDeaths(data))
-        .attr("stroke", "red")
-        .attr("stroke-width", 2)
-        .attr("fill", "none");
+      if (!deathsVix.empty()) {
+        deathsVix
+          .attr("d", lineDeaths(data))
+          .attr("stroke", "red")
+          .attr("stroke-width", 2)
+          .attr("fill", "none");
+      }
     },
+
     onCurrentDataSource() {
       this.fetchTimeSeriesByRegion(this.current_data_source)
     },

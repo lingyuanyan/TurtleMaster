@@ -12,6 +12,8 @@ from TurtleMasterApp.serializers import InfectionDataWorldStatisticsSerializer
 from TurtleMasterApp.serializers import TimeSeriesDataUsSerializer, TimeSeriesDataUsByStateSerializer
 from TurtleMasterApp.serializers import TimeSeriesDataWorldSerializer
 from TurtleMasterApp.serializers import ViewStatisticsDataSerializer
+from TurtleMasterApp.serializers import ViewTimeSeriesStatisticsDataSerializer
+
 from TurtleMasterApp.models import InfectionDataUs
 from TurtleMasterApp.models import InfectionDataUsStatistics
 from TurtleMasterApp.models import InfectionDataWorld
@@ -166,7 +168,7 @@ class ViewTimeSeriesStatisticsDataViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     queryset = ViewTimeSeriesStatisticsData.objects.all().order_by('last_update')
-    serializer_class = ViewStatisticsDataSerializer
+    serializer_class = ViewTimeSeriesStatisticsDataSerializer
     permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
@@ -177,9 +179,9 @@ class ViewTimeSeriesStatisticsDataViewSet(viewsets.ModelViewSet):
         distinct_on = self.request.query_params.get('distinct_on', None)
         country_region = self.request.query_params.get('country_region', None)
         if distinct_on is not None:
-            queryset = TimeSeriesDataUs.objects.all().order_by(distinct_on).distinct(distinct_on)
+            queryset = ViewTimeSeriesStatisticsData.objects.all().order_by(distinct_on).distinct(distinct_on)
         else:
-            queryset = TimeSeriesDataUs.objects.all().order_by('timestamp')
+            queryset = ViewTimeSeriesStatisticsData.objects.all().order_by('last_update')
 
         if country_region is not None:
             queryset = queryset.filter(country_region = country_region)
