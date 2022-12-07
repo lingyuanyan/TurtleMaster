@@ -25,7 +25,7 @@ def drop_us_data_tables():
     cur.execute('''
     DROP TABLE IF EXISTS INFECTION_DATA_US_STATISTICS
     ''')
-    cur.commit()
+    conn.commit()
     cur.close()
     print("done")
 
@@ -45,7 +45,7 @@ def drop_world_data_tables():
     DROP TABLE IF EXISTS INFECTION_DATA_WORLD_STATISTICS
     ''')
     
-    cur.commit()
+    conn.commit()
     cur.close()
     print("done")
 
@@ -62,7 +62,7 @@ def drop_time_series_table_us():
     DROP TABLE IF EXISTS TIME_SERIES_DATA_US
     ''')
 
-    cur.commit()
+    conn.commit()
     cur.close()
     print("done")
     
@@ -79,7 +79,7 @@ def drop_time_series_table_global():
     DROP TABLE IF EXISTS TIME_SERIES_DATA_WORLD
     ''')
 
-    cur.commit()
+    conn.commit()
     cur.close()
     print("done")
     
