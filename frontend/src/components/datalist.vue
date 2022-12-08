@@ -133,10 +133,12 @@ export default {
         }
       }
 
-
       var xScale = d3.scaleLinear().domain([0, n]).range([10, w]);
       var yScaleConfirmed = d3.scaleLinear().domain([minConfirmed, maxConfirmed]).range([h, 0]);
       var yScaleDeaths = d3.scaleLinear().domain([minDeaths, maxDeaths]).range([h, 0]);
+      // var xAxisScale = d3.svg.axis().scale(xScale).orient("bottom");
+      // var yAxisScaleConfirmed = d3.svg.axis().scale(yScaleConfirmed).orient("left");
+      // var yAxisScaleDeaths = d3.svg.axis().scale(yScaleDeaths).orient("right");
       var lineConfirmed = d3
         .line()
         .x((d, i) => {
@@ -163,7 +165,12 @@ export default {
         .select("svg")
         .attr("width", w)
         .attr("height", h);
-
+      // var xAxis = svg.append('g').call(xAxisScale).att("class", "axis").att("transform", "translate(" + w + ",0)");
+      // var yAxisConfirmed = svg.append('g').call(yAxisScaleConfirmed).att("class", "axis").att("transform", "translate(0," + h + ")");
+      // var yAxisDeaths = svg.append('g').call(yAxisScaleDeaths).att("class", "axis").att("transform", "translate(0," + h + ")");
+      // xAxis;
+      // yAxisConfirmed;
+      // yAxisDeaths;
       // eslint-disable-next-line no-unused-vars
       var confirmedVix = svg.select("#confirmed");
       if (confirmedVix.empty()) {
