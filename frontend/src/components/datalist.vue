@@ -133,12 +133,11 @@ export default {
         }
       }
 
-      var xScale = d3.scaleLinear().domain([0, n]).range([10, w]);
-      var yScaleConfirmed = d3.scaleLinear().domain([minConfirmed, maxConfirmed]).range([h, 0]);
-      var yScaleDeaths = d3.scaleLinear().domain([minDeaths, maxDeaths]).range([h, 0]);
-      // var xAxisScale = d3.svg.axis().scale(xScale).orient("bottom");
-      // var yAxisScaleConfirmed = d3.svg.axis().scale(yScaleConfirmed).orient("left");
-      // var yAxisScaleDeaths = d3.svg.axis().scale(yScaleDeaths).orient("right");
+      const axisMargin = { left: 50, top: 10, right: w - 50, bottom: h - 20 }; // Make some empty space around your x axis using margin
+
+      var xScale = d3.scaleLinear().domain([0, n]).range([axisMargin.left, axisMargin.right]);
+      var yScaleConfirmed = d3.scaleLinear().domain([minConfirmed, maxConfirmed]).range([axisMargin.bottom, axisMargin.top]);
+      var yScaleDeaths = d3.scaleLinear().domain([minDeaths, maxDeaths]).range([axisMargin.bottom, axisMargin.top]);
       var lineConfirmed = d3
         .line()
         .x((d, i) => {
@@ -165,12 +164,7 @@ export default {
         .select("svg")
         .attr("width", w)
         .attr("height", h);
-      // var xAxis = svg.append('g').call(xAxisScale).att("class", "axis").att("transform", "translate(" + w + ",0)");
-      // var yAxisConfirmed = svg.append('g').call(yAxisScaleConfirmed).att("class", "axis").att("transform", "translate(0," + h + ")");
-      // var yAxisDeaths = svg.append('g').call(yAxisScaleDeaths).att("class", "axis").att("transform", "translate(0," + h + ")");
-      // xAxis;
-      // yAxisConfirmed;
-      // yAxisDeaths;
+
       // eslint-disable-next-line no-unused-vars
       var confirmedVix = svg.select("#confirmed");
       if (confirmedVix.empty()) {
@@ -197,6 +191,29 @@ export default {
           .attr("stroke", "red")
           .attr("stroke-width", 2)
           .attr("fill", "none");
+      }
+
+
+      var xAxis = svg.append('g').call(d3.axisBottom(xScale));
+      if (!xAxis.empty()) {
+        xAxis
+          .attr("class", "axis")
+          .attr("transform", "translate(0," + axisMargin.bottom + ")");
+
+      }
+
+      var yAxisConfirmed = svg.append('g').call(d3.axisLeft(yScaleConfirmed));
+      if (!yAxisConfirmed.empty()) {
+        yAxisConfirmed
+          .attr("class", "axis")
+          .attr("transform", "translate(" + axisMargin.left + ",0)");
+      }
+
+      var yAxisDeaths = svg.append('g').call(d3.axisRight(yScaleDeaths));
+      if (!yAxisDeaths.empty()) {
+        yAxisDeaths
+          .attr("class", "axis")
+          .attr("transform", "translate(" + axisMargin.right + ",0)");
       }
     },
 
