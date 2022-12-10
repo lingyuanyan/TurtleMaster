@@ -105,6 +105,10 @@ export default {
         .catch((error) => console.log(error));
     },
 
+    formatYAxixTick(d) {
+      const s = (d / 1e6).toFixed(1);
+      return `${s} M`;
+    },
     buildTrendingChart() {
       var w = this.$refs.chartContainer.clientWidth;
       var h = this.trending_chart_height;
@@ -116,6 +120,8 @@ export default {
       var minConfirmed = Infinity;
       var maxDeaths = 0;
       var minDeaths = Infinity;
+      var minDate = new Date(); // the current time
+      var maxDate = new Date(2000, 1, 1); // the date earler than 2020,1,1 will be fine
 
       var len = data.length;
       while (len--) {
@@ -131,11 +137,21 @@ export default {
         if (data[len].deaths > maxDeaths) {
           maxDeaths = data[len].deaths;
         }
+        var last_update = new Date(data[len].last_update);
+        if (last_update < minDate) {
+          minDate = last_update;
+        }
+        if (last_update > maxDate) {
+          maxDate = last_update;
+        }
       }
 
       const axisMargin = { left: 50, top: 10, right: w - 50, bottom: h - 20 }; // Make some empty space around your x axis using margin
+      const colorOfConfirmed = '#6FDC8C';
+      const colorOfDeath = '#AFAFAF';
 
-      var xScale = d3.scaleLinear().domain([0, n]).range([axisMargin.left, axisMargin.right]);
+      var xScale = d3.scaleTime().domain([0, n]).range([axisMargin.left, axisMargin.right]);
+      var xAxiScale = d3.scaleTime().domain([minDate, maxDate]).range([axisMargin.left, axisMargin.right]);
       var yScaleConfirmed = d3.scaleLinear().domain([minConfirmed, maxConfirmed]).range([axisMargin.bottom, axisMargin.top]);
       var yScaleDeaths = d3.scaleLinear().domain([minDeaths, maxDeaths]).range([axisMargin.bottom, axisMargin.top]);
       var lineConfirmed = d3
@@ -174,7 +190,7 @@ export default {
       if (!confirmedVix.empty()) {
         confirmedVix
           .attr("d", lineConfirmed(data))
-          .attr("stroke", "blue")
+          .attr("stroke", colorOfConfirmed)
           .attr("stroke-width", 2)
           .attr("fill", "none");
       }
@@ -188,13 +204,13 @@ export default {
       if (!deathsVix.empty()) {
         deathsVix
           .attr("d", lineDeaths(data))
-          .attr("stroke", "red")
+          .attr("stroke", colorOfDeath)
           .attr("stroke-width", 2)
           .attr("fill", "none");
       }
 
 
-      var xAxis = svg.append('g').call(d3.axisBottom(xScale));
+      var xAxis = svg.append('g').call(d3.axisBottom(xAxiScale));
       if (!xAxis.empty()) {
         xAxis
           .attr("class", "axis")
@@ -202,18 +218,24 @@ export default {
 
       }
 
-      var yAxisConfirmed = svg.append('g').call(d3.axisLeft(yScaleConfirmed));
+      var yAxisConfirmed = svg.append('g').call(d3.axisLeft(yScaleConfirmed).ticks(5).tickFormat(this.formatYAxixTick));
       if (!yAxisConfirmed.empty()) {
         yAxisConfirmed
           .attr("class", "axis")
-          .attr("transform", "translate(" + axisMargin.left + ",0)");
+          .attr("transform", "translate(" + axisMargin.left + ",0)")
+          .attr("stroke", colorOfConfirmed)
+          .attr("stroke-width", 1)
+          .attr("fill", "none");
       }
 
-      var yAxisDeaths = svg.append('g').call(d3.axisRight(yScaleDeaths));
+      var yAxisDeaths = svg.append('g').call(d3.axisRight(yScaleDeaths).ticks(5).tickFormat(this.formatYAxixTick));
       if (!yAxisDeaths.empty()) {
         yAxisDeaths
           .attr("class", "axis")
-          .attr("transform", "translate(" + axisMargin.right + ",0)");
+          .attr("transform", "translate(" + axisMargin.right + ",0)")
+          .attr("stroke", colorOfDeath)
+          .attr("stroke-width", 1)
+          .attr("fill", "none");
       }
     },
 
