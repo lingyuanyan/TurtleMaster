@@ -146,7 +146,12 @@ export default {
         }
       }
 
-      const axisMargin = { left: 50, top: 10, right: w - 50, bottom: h - 20 }; // Make some empty space around your x axis using margin
+      const axisMargin = {
+        left: Math.max(50, w * 0.10),
+        top: Math.max(10, h * 0.1),
+        right: Math.min(w - 50, w * 0.9),
+        bottom: Math.min(h - 20, h * 0.9)
+      }; // Make some empty space around your x axis using margin
       const colorOfConfirmed = '#6FDC8C';
       const colorOfDeath = '#AFAFAF';
 
