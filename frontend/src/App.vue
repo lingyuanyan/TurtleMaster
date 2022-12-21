@@ -3,6 +3,9 @@
     <header class="body-header">
       <router-view name="header"></router-view>
     </header>
+    <div class="warning">
+      All the data for the Recovered Sections are empty since we have not not found a suitable source to gather that data. We apoligize if this causes any inconvienence,
+    </div>
     <main class="body-main">
       <router-view></router-view>
     </main>
@@ -23,6 +26,11 @@ export default {
 };
 </script>
 <style lang="scss">
+.warning {
+  width: 100%;
+  background-color: rgb(235, 95, 95);
+  border: 3px rgb(253, 155, 155);
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -33,17 +41,14 @@ export default {
 }
 .body-header {
   width: 100%;
-  height: 5vmax;
   background: #1CB0F6;
 }
 .body-main {
   margin-top: 0px;
   width: 100%;
-  min-height: calc(100vh - 1vmax);
 }
 .body-footer {
   width: 100%;
-  height: 5vmax;
   background: #222222;
 }
 .app-body {

@@ -13,8 +13,8 @@
           <li>Limit outside activity.</li>
           <li>Wear a mask whenever you go outside or when you are going to be around infected people.</li>
           <li>Try to social distance with as many people as possible. (6ft away ,2 yards. 1.8288 meters)</li>
-          <li>stay away from large groups of people and minimize the amount of time you are spending outside.</li>
-          <li>WASH YOUR HANDS using soap and water, or hand sanitizer.</li>
+          <li>Stay away from large groups of people and minimize the amount of time you are spending outside.</li>
+          <li>Wash your hands using soap and water, or hand sanitizer.</li>
           <li>Travel as little as possible.</li>
           <li>Wear a facemask as they are proven to help reduce the amount of infected air particles when you cough or
             sneeze.</li>
@@ -22,26 +22,27 @@
             area has covid they can spread covid to you through the air.</li>
           <li>Wash your hands often with soap and water for at least 20 seconds, especially after blowing your nose,
             coughing, sneezing, going to the bathroom, before eating or when preparing food.</li>
-          <li>Avoid touching your face to stop the Covid particles from reaching your face.</li>
+          <li>Avoid touching your face to stop the infected particles from reaching your face.</li>
           <li>Use 2 layers of cotton face masks because it is the most effective.</li>
-          <li>cover your mouth or nose whenever you sneeze or cough.</li>
-          <li>avid touching surfaces outside.</li>
-          <li>clean everything as many times as possible to keep germs from sticking onto them</li>
+          <li>Cover your mouth or nose whenever you sneeze or cough.</li>
+          <li>Avoid touching surfaces outside.</li>
+          <li>Clean everything as many times as possible to keep germs from sticking onto them</li>
         </ul>
       </div>
     </div>
     <div class="information-board-2">
       <div class="information-board-2-box-left">
         <div class="information-board-1-title-box">
-          <p class="information-board-1-title-text">Isolate yourself if ...</p>
+          <p class="information-board-1-title-text">Isolate yourself if you ...</p>
         </div>
         <div class="information-board-1-text-box">
           <ul class="how-to-avoid-infection-list">
-            <li>Isolate yourself were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.</li>
-            <li>Isolate yourself provided care at home to someone who is sick with COVID-19</li>
-            <li>Isolate yourself had direct physical contact with the person (hugged or kissed them)</li>
-            <li>Isolate yourself shared eating or drinking utensils</li>
-            <li>Isolate yourself sneezed, coughed, or somehow got respiratory droplets on you</li>
+            <li>were within 6 feet of someone who has COVID-19 for a total of 15 minutes or more.</li>
+            <li>provided care at home to someone who is sick with COVID-19</li>
+            <li>had direct physical contact with the person (hugged or kissed them)</li>
+            <li>shared eating or drinking utensils with an infected person</li>
+            <li>sneezed, coughed, or somehow got respiratory droplets on you</li>
+            <li>are very sick, have multiple symptoms, or received a positive on a COVID-19 test.</li>
           </ul>
         </div>
       </div>
@@ -57,7 +58,7 @@
             <li>Coughs</li>
             <li>Shortness of breath or difficulty breathing</li>
             <li>Fatigue</li>
-            <li>if Muscle or body aches</li>
+            <li>If Muscle or body aches</li>
             <li>Headache</li>
             <li>loss of taste or smell</li>
             <li>Sore throat</li>
@@ -93,34 +94,17 @@
         </div>
         <div class="information-board-1-text-box">
           <div class="inner-container">
-            <a href="https://www.youtube.com/watch?v=U8r3oTVMtQ0">https://www.youtube.com/watch?v=U8r3oTVMtQ0</a>
-
-
-            What is better soap or hand santizer. In general soap is better. This is because they keep the cell
-            completely
-            apart
-
-            disinfect you and objects
-
-            <a href="https://www.youtube.com/watch?v=x7KKkElpyKQ">https://www.youtube.com/watch?v=x7KKkElpyKQ</a>
-
-            soap is better because it also gets rid of dirt that could be hiding
-
-            When on the go use hand sanitizer for a long as possible rubbing it over the whole hand.
-
-            When using soap and water also cover your whole hand. Do both for about 20 seconds.
-
-            When using hand sanitizer use it until your hand are dry.
-            While Soap and Water can get rid of all dirt that might hide viruses it is not as effective against other
-            viruses
-            called Rhinoviruses that don't have as many weak points that the soap and take advantage of while the Hand
-            sanatizer
-            will still work in destabilizing the virus. So when possibel use sanitizer and then use soap and water to
-            get
-            rid
-            of
-            dirt.
-
+            What is better soap or hand santizer. In general soap is better. This is 
+            because they keep the cell completely apart disinfect you and objects soap 
+            is better because it also gets rid of dirt that could be hiding on your hand. 
+            When on the go use hand sanitizer for a long as possible rubbing it over the 
+            whole hand. When using soap and water also cover your whole hand. Do both for 
+            about 20 seconds. When using hand sanitizer use it until your hand are dry.
+            While Soap and Water can get rid of all dirt that might hide viruses it is not 
+            as effective against other viruses called Rhinoviruses that don't have as many 
+            weak points that the soap and take advantage of while the hand sanatizer will 
+            still work in destabilizing the virus. So when possible use hand sanitizer and 
+            then use soap and water to get rid of the excess dirt or grime.
             <h3>What happens after you have been infected.</h3>
             <ul class="how-to-avoid-infection-list">
               <li>First day feels like the flu.</li>
@@ -141,6 +125,9 @@
                 not
                 mean that you are getting covid. </li>
             </ul>
+            <a href="https://www.youtube.com/watch?v=x7KKkElpyKQ">Video Source #2</a>
+            <br>
+            <a href="https://www.youtube.com/watch?v=U8r3oTVMtQ0">Video Source #1</a>
           </div>
         </div>
       </div>
@@ -151,25 +138,16 @@
 
         <div class="information-board-1-text-box">
           <ul class="how-to-avoid-infection-list">
-            <li>When indoors and eating avoid sitting next to the air conditioning as this will keep the Covid in the
-              air.
-            </li>
-            <li>To when know that the pandemic is mostly over is when the infection can no longer be spread not when a
-              vaccine
-              comes out.</li>
-            <li>The other health way for a pandemic to end is when most people die from it and other people that don't
-              die
-              have immunity hopefully this is not the way Covid ends.</li>
-            <li>Covid could also "end" with people getting sick of staying home and going outside because there got
-              tired
-              of
-              quarintine. </li>
+            <li>When indoors and eating avoid sitting next to the air conditioning as this will further expose you to the infected particles in the air.</li>
+            <li>The pandemic is mostly over is when the infection can no longer be spread quickly, not when a vaccine comes out.</li>
+            <li>The other health way for a pandemic to end is when most people die from it and other people that don't die have immunity hopefully this is not the way Covid ends.</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: 'InformationBar.vue',

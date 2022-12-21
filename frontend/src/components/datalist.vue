@@ -28,9 +28,6 @@
         <div class="data-table-first-row">
           Recovered
         </div>
-        <div class="data-table-first-row">
-          Last Update
-        </div>
       </div>
       <div class="row" v-for="record in us_satistics_json" :key="record.province_state">
         <div class="data-table-first-col">
@@ -44,9 +41,6 @@
         </div>
         <div class="data-table-col">
           {{ Number(record.recovered).toLocaleString() }}
-        </div>
-        <div class="data-table-col">
-          {{ record.last_update }}
         </div>
       </div>
     </div>
